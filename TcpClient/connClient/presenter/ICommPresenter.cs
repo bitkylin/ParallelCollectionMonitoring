@@ -31,7 +31,10 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// </summary>
         void DeviceGatherStart(OperateType type);
 
-        void ControlMsg();
+        /// <summary>
+        /// 开启工作流程
+        /// </summary>
+        void StartWork();
         void InsertDataIntoDb(List<Electrode> electrodes);
         void InsertDataIntoDbComplete();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 using bitkyFlashresUniversal.connClient.model;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.view;
@@ -17,8 +18,9 @@ namespace bitkyFlashresUniversal.connClient.presenter
         private readonly PoleDetectPresenter _poleDetectPresenter;
         private readonly ISqlPresenter _sqlPresenter;
         private readonly IViewCommStatus _view;
+        private bool _connConnected;
         private FrameData _currentFrameData;
-        private bool ConnConnected;
+        private List<Electrode> _electrodes;
 
         public CommPresenter(IViewCommStatus view)
         {
@@ -33,10 +35,9 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// </summary>
         public void GetSocketSuccess()
         {
-            ConnConnected = true;
+            _connConnected = true;
             _view.ConnConnected();
             Debug.WriteLine("获取Socket成功！");
-            _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayOpen));
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// </summary>
         public void FrontConnClosed()
         {
-            ConnConnected = false;
+            _connConnected = false;
             _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayClose));
             _commucationFacade.TcpClientFailed("UserCloseConn");
         }
@@ -90,12 +91,15 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// </summary>
         public void ConnFailed(string evenType)
         {
-            ConnConnected = false;
+            _connConnected = false;
             _view.ConnDisconnected();
             _view.ControlMessageShow("连接失效:" + evenType);
         }
 
-        public void ControlMsg()
+        /// <summary>
+        ///     开启工作流程
+        /// </summary>
+        public void StartWork()
         {
             switch (PresetInfo.CurrentOperateType)
             {
@@ -141,7 +145,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                                 }
                                 //第二轮检测初始化
                                 _poleDetectPresenter.SetSecondRoundData(electrodeInspect);
-                                ControlMsg();
+                                StartWork();
                             }
                             break;
                         default:
@@ -165,6 +169,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
 
         public void InsertDataIntoDb(List<Electrode> electrodes)
         {
+            _electrodes = electrodes;
             switch (PresetInfo.CurrentOperateType)
             {
                 case OperateType.Gather:
@@ -193,13 +198,13 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// </summary>
         public void InsertDataIntoDbComplete()
         {
-            _commucationFacade.FrameReceiveTimeoutClear();
+            _view.BitkyPoleShow(_electrodes);
             if (PresetInfo.CurrentOperateType == OperateType.Gather)
-                ControlMsg();
+                StartWork();
             else
             {
                 _poleDetectPresenter.OnceOperateComplete();
-                ControlMsg();
+                StartWork();
             }
         }
 
@@ -223,30 +228,36 @@ namespace bitkyFlashresUniversal.connClient.presenter
 
         public void DeviceGatherStart(OperateType type)
         {
-            PresetInfo.CurrentOperateType = type;
+            if (!_connConnected)
+                return;
+
             switch (type)
             {
-                case OperateType.Gather:
-                    if (!ConnConnected)
-                        return;
+                case OperateType.Handshake:
                     if (CheckTable())
+                    {
+                        _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayOpen));
+                        Thread.Sleep(400);
                         _commucationFacade.SendDataFrame(new FrameData(FrameType.HandshakeSwitchWifi));
+                    }
+                    else
+                        _view.ControlMessageShow("数据库初始化检查出错");
+                    break;
+                case OperateType.Gather:
+
+                    if (CheckTable())
+                    {
+                        PresetInfo.CurrentOperateType = type;
+                        StartWork();
+                    }
                     else
                         _view.ControlMessageShow("数据库初始化检查出错");
                     break;
 
                 case OperateType.Detect:
-
-                    _commucationFacade.SendDataFrame(new FrameData(FrameType.HandshakeSwitchWifi));
+                    PresetInfo.CurrentOperateType = type;
+                    StartWork();
                     break;
-                //                case OperateType.DeviceReset:
-                //                    if (!ConnConnected)
-                //                    {
-                //                        return;
-                //                    }
-                //                    _view.DataOutlineShow("对下位机进行重置");
-                //                    _commucationFacade.SendDataFrame(new FrameData(FrameType.DeviceReset));
-                //                    break;
                 default:
                     _view.CommunicateMessageShow("设备运行时启动了无法识别的帧");
                     break;

@@ -1,8 +1,14 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.presenter;
 using bitkyFlashresUniversal.ElectrodeSelecter;
+using bitkyFlashresUniversal.poleInfoShow;
 
 namespace bitkyFlashresUniversal.connClient.view
 {
@@ -12,6 +18,7 @@ namespace bitkyFlashresUniversal.connClient.view
     public partial class TcpClientWindow : IViewCommStatus
     {
         private readonly ICommPresenter _commPresenter;
+        private BitkyPoleControl[] _bitkyPoleControls;
 
         public TcpClientWindow()
         {
@@ -21,7 +28,32 @@ namespace bitkyFlashresUniversal.connClient.view
             {
                 LabelDataOutlineShow.Content = "请使用电极选择器选择待测电极";
             }
-           
+
+            InitBitkyPoleShow();
+        }
+
+        /// <summary>
+        /// 初始化电极信息显示标签界面
+        /// </summary>
+        private void InitBitkyPoleShow()
+        {
+            var controls = new List<BitkyPoleControl>();
+            var id = 0;
+            for (var i = 0; i < 10; i++)
+            {
+                for (var j = 0; j < 8; j++)
+                {
+                    var bitkyPoleControl = new BitkyPoleControl();
+                    GridPoleStatusShow.Children.Add(bitkyPoleControl);
+
+                    Grid.SetRow(bitkyPoleControl, i);
+                    Grid.SetColumn(bitkyPoleControl, j);
+                    controls.Add(bitkyPoleControl);
+                    bitkyPoleControl.setContent(id);
+                    id++;
+                }
+            }
+            _bitkyPoleControls = controls.ToArray();
         }
 
         /// <summary>
@@ -99,6 +131,38 @@ namespace bitkyFlashresUniversal.connClient.view
         }
 
         /// <summary>
+        /// 在界面上显示电极完整信息
+        /// </summary>
+        /// <param name="electrodes"></param>
+        public void BitkyPoleShow(List<Electrode> electrodes)
+        {
+            var ints = new List<int>();
+            for (var i = 0; i < 63; i++)
+            {
+                ints.Add(i);
+            }
+            Dispatcher.Invoke(() =>
+            {
+                electrodes.ForEach((pole) =>
+                {
+                    var id = pole.IdOrigin;
+                    if (id >= 0 && id <= 79)
+                    {
+                        _bitkyPoleControls[id].setInfo(pole.Value);
+                        _bitkyPoleControls[id].setColor(0);
+                        ints.Remove(id);
+                        Debug.WriteLine("remove+" + id);
+                    }
+                });
+                ints.ForEach((i) =>
+                {
+                    _bitkyPoleControls[i].setInfo(-1);
+                    _bitkyPoleControls[i].setColor(1);
+                });
+            });
+        }
+
+        /// <summary>
         /// 电极信息初始化成功
         /// </summary>
         public void SetElectrodeSuccessful()
@@ -149,7 +213,6 @@ namespace bitkyFlashresUniversal.connClient.view
 
         private void btnElectrodeDetect_Click(object sender, RoutedEventArgs e)
         {
-
             _commPresenter.DeviceGatherStart(OperateType.Detect);
         }
 
@@ -166,6 +229,16 @@ namespace bitkyFlashresUniversal.connClient.view
         private void btnGatherDataClear_Click(object sender, RoutedEventArgs e)
         {
             _commPresenter.GatherDataClear();
+        }
+
+        private void BtnHandshakeStart_Click(object sender, RoutedEventArgs e)
+        {
+            _commPresenter.DeviceGatherStart(OperateType.Handshake);
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

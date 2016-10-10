@@ -44,21 +44,5 @@ namespace bitkyFlashresUniversal.connClient.model
         /// <param name="frameData">指定的帧格式</param>
         void SendDataFrame(FrameData frameData);
 
-        //--------------------------保持模式----------------------------------
-
-        /// <summary>
-        /// 收集子帧完成回调方法
-        /// </summary>
-        void GetsubframeComplete(FrameType type);
-
-        /// <summary>
-        /// 帧接收超时状态清零
-        /// </summary>
-        void FrameReceiveTimeoutClear();
-
-        /// <summary>
-        /// 下位机接收数据超时
-        /// </summary>
-        void FrameReceiveTimeout();
     }
 }

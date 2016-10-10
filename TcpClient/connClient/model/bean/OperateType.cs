@@ -5,8 +5,10 @@
     /// </summary>
     public enum OperateType
     {
+        Handshake,
         Gather,
         Detect,
         Detect2,
+        Null
     }
 }

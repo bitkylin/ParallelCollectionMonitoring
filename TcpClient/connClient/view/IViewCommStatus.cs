@@ -1,4 +1,7 @@
-﻿namespace bitkyFlashresUniversal.connClient.view
+﻿using System.Collections.Generic;
+using bitkyFlashresUniversal.connClient.model.bean;
+
+namespace bitkyFlashresUniversal.connClient.view
 {
     internal interface IViewCommStatus
     {
@@ -36,8 +39,9 @@
         void ConnDisconnected();
 
         /// <summary>
-        ///     电极信息初始化成功
+        /// 在界面上显示电极完整信息
         /// </summary>
-        void SetElectrodeSuccessful();
+        /// <param name="electrodes"></param>
+        void BitkyPoleShow(List<Electrode> electrodes);
     }
 }

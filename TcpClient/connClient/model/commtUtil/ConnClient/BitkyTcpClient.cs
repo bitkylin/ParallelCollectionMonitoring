@@ -7,19 +7,17 @@ using System.Threading;
 
 namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
 {
-    internal class BitkyTcpClient : BitkyClient
+    internal class BitkyTcpClient
     {
         private readonly ICommucationFacade _commucationFacade;
-        private readonly SendHolder _sendHolder;
         private TcpClient _client;
         private IPEndPoint _ipEndPoint; //ip & port
         private Socket _socketTcp;
 
 
-        public BitkyTcpClient(ICommucationFacade commucationFacade) : base()
+        public BitkyTcpClient(ICommucationFacade commucationFacade) 
         {
             _commucationFacade = commucationFacade;
-            _sendHolder = new SendHolder(this);
         }
 
         /// <summary>
@@ -37,7 +35,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
             }
         }
 
-        public override void Send(byte[] bytes)
+        public  void Send(byte[] bytes)
         {
             try
             {
@@ -54,21 +52,6 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
             {
                 _commucationFacade.TcpClientFailed("connDisconnect");
             }
-        }
-
-        public override void Send(byte[] bytes, int timeInterval)
-        {
-            _sendHolder.Send(bytes, timeInterval);
-        }
-
-        public void SendDelayed(byte[] bytes, int timeInterval)
-        {
-            _sendHolder.SendDelayed(bytes, timeInterval);
-        }
-
-        public override void GetCallback()
-        {
-            _sendHolder.GetCallback();
         }
 
         /// <summary>
@@ -123,9 +106,8 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
             new Thread(ReceiveData).Start(); //新建接收数据线程
         }
 
-        public override void Close()
+        public  void Close()
         {
-            _sendHolder.GetCallback();
             _socketTcp?.Close();
             _client?.Close();
             _client = null;

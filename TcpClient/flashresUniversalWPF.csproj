@@ -88,16 +88,10 @@
     <Compile Include="connClient\model\bean\OperateType.cs" />
     <Compile Include="connClient\model\bean\PoleMode.cs" />
     <Compile Include="connClient\model\bean\PresetInfo.cs" />
-    <Compile Include="connClient\model\commtUtil\ConnClient\BitkyClient.cs" />
-    <Compile Include="connClient\model\commtUtil\ConnClient\SerialPortClient.cs" />
-    <Compile Include="connClient\model\commtUtil\FrameCollect.cs" />
     <Compile Include="connClient\model\commtUtil\FrameProvider.cs" />
     <Compile Include="connClient\model\commtUtil\ControlFrameBuilder.cs" />
     <Compile Include="connClient\model\bean\Electrode.cs" />
-    <Compile Include="connClient\model\commtUtil\SendHolderThread.cs" />
-    <Compile Include="connClient\model\commtUtil\TimeoutStopThread.cs" />
     <Compile Include="connClient\model\ICommucationFacade.cs" />
-    <Compile Include="connClient\model\commtUtil\SendHolder.cs" />
     <Compile Include="connClient\model\CommucationFacade.cs" />
     <Compile Include="connClient\presenter\CommPresenter.cs" />
     <Compile Include="connClient\presenter\ICommPresenter.cs" />
@@ -114,6 +108,10 @@
       <DependentUpon>TCPClientWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="poleInfoShow\BitkyPoleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="databaseUtil\presenter\ISqlPresenter.cs" />
@@ -128,6 +126,9 @@
       <DependentUpon>ElectrodeSelecterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ElectrodeSelecter\ProcessPresenter.cs" />
+    <Compile Include="poleInfoShow\BitkyPoleControl.xaml.cs">
+      <DependentUpon>BitkyPoleControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

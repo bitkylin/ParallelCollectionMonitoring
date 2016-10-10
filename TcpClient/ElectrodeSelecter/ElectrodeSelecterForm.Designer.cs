@@ -584,7 +584,7 @@
             this.textBoxCheckedBoxEnd.MinimumSize = new System.Drawing.Size(28, 28);
             this.textBoxCheckedBoxEnd.MouseBack = null;
             this.textBoxCheckedBoxEnd.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.textBoxCheckedBoxEnd.Multiline = false;
+            this.textBoxCheckedBoxEnd.Multiline = true;
             this.textBoxCheckedBoxEnd.Name = "textBoxCheckedBoxEnd";
             this.textBoxCheckedBoxEnd.NormlBack = null;
             this.textBoxCheckedBoxEnd.Padding = new System.Windows.Forms.Padding(5);
@@ -598,8 +598,9 @@
             this.textBoxCheckedBoxEnd.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxCheckedBoxEnd.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
             this.textBoxCheckedBoxEnd.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.textBoxCheckedBoxEnd.SkinTxt.Multiline = true;
             this.textBoxCheckedBoxEnd.SkinTxt.Name = "BaseText";
-            this.textBoxCheckedBoxEnd.SkinTxt.Size = new System.Drawing.Size(120, 22);
+            this.textBoxCheckedBoxEnd.SkinTxt.Size = new System.Drawing.Size(120, 25);
             this.textBoxCheckedBoxEnd.SkinTxt.TabIndex = 1;
             this.textBoxCheckedBoxEnd.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.textBoxCheckedBoxEnd.SkinTxt.WaterText = "";
@@ -626,7 +627,7 @@
             this.textBoxCheckedBoxBegin.MinimumSize = new System.Drawing.Size(28, 28);
             this.textBoxCheckedBoxBegin.MouseBack = null;
             this.textBoxCheckedBoxBegin.MouseState = CCWin.SkinClass.ControlState.Normal;
-            this.textBoxCheckedBoxBegin.Multiline = false;
+            this.textBoxCheckedBoxBegin.Multiline = true;
             this.textBoxCheckedBoxBegin.Name = "textBoxCheckedBoxBegin";
             this.textBoxCheckedBoxBegin.NormlBack = null;
             this.textBoxCheckedBoxBegin.Padding = new System.Windows.Forms.Padding(5);
@@ -640,8 +641,9 @@
             this.textBoxCheckedBoxBegin.SkinTxt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxCheckedBoxBegin.SkinTxt.Font = new System.Drawing.Font("微软雅黑", 9.75F);
             this.textBoxCheckedBoxBegin.SkinTxt.Location = new System.Drawing.Point(5, 5);
+            this.textBoxCheckedBoxBegin.SkinTxt.Multiline = true;
             this.textBoxCheckedBoxBegin.SkinTxt.Name = "BaseText";
-            this.textBoxCheckedBoxBegin.SkinTxt.Size = new System.Drawing.Size(120, 22);
+            this.textBoxCheckedBoxBegin.SkinTxt.Size = new System.Drawing.Size(120, 25);
             this.textBoxCheckedBoxBegin.SkinTxt.TabIndex = 0;
             this.textBoxCheckedBoxBegin.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.textBoxCheckedBoxBegin.SkinTxt.WaterText = "";
@@ -1723,12 +1725,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CanResize = false;
             this.CaptionBackColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.CaptionBackColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(897, 772);
             this.Controls.Add(this.skinGroupBox1);
             this.Controls.Add(this.btnProcess);
             this.Controls.Add(this.groupBoxPoleSelect);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ElectrodeSelecterForm";
             this.Text = "电极选择器";
             this.skinGroupBox1.ResumeLayout(false);

@@ -4,22 +4,59 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="491.375" Width="758.2">
-    <Grid RenderTransformOrigin="0.485,0.498">
-        <Label x:Name="Label" Content="IP地址：" HorizontalAlignment="Left" Margin="92,64,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label x:Name="Label1" Content="端口号：" HorizontalAlignment="Left" Margin="92,124,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TextBoxIp" HorizontalAlignment="Left" Height="25" Margin="155,64,0,0" TextWrapping="Wrap" Text="16.7.30.254" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TextBoxPort" HorizontalAlignment="Left" Height="26" Margin="155,124,0,0" TextWrapping="Wrap" Text="49000" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="BtnConnect" Content="连接" HorizontalAlignment="Left" Margin="135,175,0,0" VerticalAlignment="Top" Width="90" Height="29" Click="btnConnect_Click"/>
-        <Button x:Name="BtnHandshake" Content="开始工作" HorizontalAlignment="Left" Margin="245,237,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnHandshake_Click"/>
-        <ListBox x:Name="ListBoxControlText" HorizontalAlignment="Left" Height="200" Margin="371,240,0,0" VerticalAlignment="Top" Width="354"/>
-        <ListBox x:Name="ListBoxCommunicationText" HorizontalAlignment="Left" Height="190" Margin="371,30,0,0" VerticalAlignment="Top" Width="354"/>
-        <Button x:Name="BtnSendStopGather" Content="打开电极选择器" HorizontalAlignment="Left" Margin="125,237,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnOpenElectrodeSelectForm_Click"/>
-        <Label x:Name="LabelDataOutlineShow" Content="Label" HorizontalAlignment="Left" Margin="10,414,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.62,0.852"/>
-        <Button x:Name="btnElectrodeDetect" Content="检测电极状态" HorizontalAlignment="Left" Margin="10,237,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnElectrodeDetect_Click"/>
-        <Button x:Name="btnCommunicateClear" Content="清空通信信息" HorizontalAlignment="Left" Margin="125,295,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnCommunicateClear_Click"/>
-        <Button x:Name="btnControlClear" Content="清空控制信息" HorizontalAlignment="Left" Margin="245,295,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnControlClear_Click"/>
-        <Button x:Name="btnGatherDataClear" Content="清空已采数据" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnGatherDataClear_Click"/>
-
+        Title="MainWindow" Height="625" Width="1000" MinWidth="1000" MinHeight="625" Closed="Window_Closed" WindowState="Maximized">
+    <!---->
+<!--    <Viewbox Stretch="Uniform" Margin="0,0,4.2,4.4">-->
+    <!--        <Canvas Width="756" Height="489">-->
+    <Grid>
+        <Label x:Name="LabelDataOutlineShow" Content="Label" Margin="0,0,0,0.4" RenderTransformOrigin="1.62,0.852" HorizontalAlignment="Left" Width="375" Height="31" VerticalAlignment="Bottom"/>
+        <TabControl x:Name="tabControl" Margin="0,0,0.4,36.4">
+            <TabItem Header="软件设置" Width="200" Height="30">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="ListBoxControlText" HorizontalAlignment="Right" Margin="0,0,10,10" Width="354" Height="237" VerticalAlignment="Bottom"/>
+                    <ListBox x:Name="ListBoxCommunicationText" HorizontalAlignment="Right" Margin="0,10,10,0" Width="354" Height="262" VerticalAlignment="Top"/>
+                    <Label x:Name="Label" Content="IP地址：" HorizontalAlignment="Left" Margin="17,25,0,0" VerticalAlignment="Top" Height="25"/>
+                    <Label x:Name="Label1" Content="端口号：" HorizontalAlignment="Left" Margin="17,85,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TextBoxIp" HorizontalAlignment="Left" Height="25" Margin="80,26,0,0" TextWrapping="Wrap" Text="192.168.90.1" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TextBoxPort" HorizontalAlignment="Left" Height="26" Margin="80,85,0,0" TextWrapping="Wrap" Text="4321" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="BtnConnect" Content="连接" HorizontalAlignment="Left" Margin="60,136,0,0" VerticalAlignment="Top" Width="90" Height="29" Click="btnConnect_Click"/>
+                    <Button x:Name="BtnHandshake" Content="开始工作" HorizontalAlignment="Left" Margin="132,243,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnHandshake_Click"/>
+                    <Button x:Name="BtnSendStopGather" Content="打开电极选择器" HorizontalAlignment="Left" Margin="17,209,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnOpenElectrodeSelectForm_Click"/>
+                    <Button x:Name="btnElectrodeDetect" Content="检测电极状态" HorizontalAlignment="Left" Margin="17,243,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnElectrodeDetect_Click"/>
+                    <Button x:Name="btnCommunicateClear" Content="清空通信信息" HorizontalAlignment="Left" Margin="17,277,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnCommunicateClear_Click"/>
+                    <Button x:Name="btnControlClear" Content="清空控制信息" HorizontalAlignment="Left" Margin="132,277,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnControlClear_Click"/>
+                    <Button x:Name="btnGatherDataClear" Content="清空已采数据" HorizontalAlignment="Left" Margin="80,371,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnGatherDataClear_Click"/>
+                    <Button x:Name="BtnHandshakeStart" Content="握手" HorizontalAlignment="Left" Margin="132,209,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="BtnHandshakeStart_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="电极状态显示" Height="30" Width="200">
+                <Grid x:Name="GridPoleStatusShow" Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="row0" MinHeight="50"/>
+                        <RowDefinition MinHeight="50"/>
+                        <RowDefinition MinHeight="50"/>
+                        <RowDefinition MinHeight="50"/>
+                        <RowDefinition MinHeight="50"/>
+                        <RowDefinition MinHeight="50"/>
+                        <RowDefinition MinHeight="50"/>
+                        <RowDefinition MinHeight="50"/>
+                        <RowDefinition MinHeight="50"/>
+                        <RowDefinition x:Name="row1" MinHeight="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="50"/>
+                        <ColumnDefinition MinWidth="50"/>
+                        <ColumnDefinition MinWidth="50"/>
+                        <ColumnDefinition MinWidth="50"/>
+                        <ColumnDefinition MinWidth="50"/>
+                        <ColumnDefinition MinWidth="50"/>
+                        <ColumnDefinition MinWidth="50"/>
+                        <ColumnDefinition MinWidth="50"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
+    <!--        </Canvas>-->
+    <!--    </Viewbox>-->
 </Window>

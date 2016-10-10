@@ -27,7 +27,7 @@
         public const int FrameReceiveTimeoutMaxCount = 5;
 
         //---------系统当前运行模式----------
-        public static OperateType CurrentOperateType = OperateType.Gather;
+        public static OperateType CurrentOperateType = OperateType.Null;
 
         //---------电极检测模式-------------
         public const int ElectricThreshold = 2000;
