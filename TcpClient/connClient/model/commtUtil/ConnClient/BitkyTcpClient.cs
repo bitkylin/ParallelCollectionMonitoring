@@ -43,6 +43,8 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
                 var stringbuilder = new StringBuilder();
                 foreach (var b in bytes)
                     stringbuilder.Append(Convert.ToString(b, 16) + " ");
+                _commucationFacade.SendDataShow("已发送:" + stringbuilder);
+
                 Debug.WriteLine("当前发送的数据:" + stringbuilder);
 
 

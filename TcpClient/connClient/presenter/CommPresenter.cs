@@ -167,6 +167,23 @@ namespace bitkyFlashresUniversal.connClient.presenter
             _view.CommunicateMessageShow(message);
         }
 
+        /// <summary>
+        ///     发送帧信息的显示
+        /// </summary>
+        /// <param name="message">输入所需显示的信息</param>
+        public void SendDataShow(string message)
+        {
+           _view.SendDataShow(message);
+        }
+        /// <summary>
+        ///     接收帧信息的显示
+        /// </summary>
+        /// <param name="message">输入所需显示的信息</param>
+        public void ReceiveDataShow(string message)
+        {
+           _view.ReceiveDataShow(message);
+        }
+
         public void InsertDataIntoDb(List<Electrode> electrodes)
         {
             _electrodes = electrodes;

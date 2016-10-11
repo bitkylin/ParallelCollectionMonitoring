@@ -31,7 +31,7 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                     oddList.Add(pole);
                 else throw new Exception("电极当前值异常");
             });
-            
+
             //遍历奇数集合和偶数集合
             oddList.ForEach(oddPole =>
             {
@@ -45,7 +45,7 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                     Electrode a = null;
                     Electrode b = null;
                     Electrode m = null;
-                
+
                     //根据A,B,M的值得到电极
                     _list.ForEach(pole =>
                     {

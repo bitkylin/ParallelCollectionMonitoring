@@ -20,12 +20,6 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
         /// <param name="dataBytes"></param>
         public FrameData ObtainData(byte[] dataBytes)
         {
-            //仅仅用于显示调试信息
-            var stringbuilder = new StringBuilder();
-            foreach (var b in dataBytes)
-                stringbuilder.Append(Convert.ToString(b, 16) + " ");
-            Debug.WriteLine("当前收到数据:" + stringbuilder);
-
             //开始程序
             _dataList.AddRange(dataBytes);
             var dataCount = _dataList.Count;

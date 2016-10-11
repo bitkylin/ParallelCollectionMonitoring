@@ -18,6 +18,18 @@ namespace bitkyFlashresUniversal.connClient.view
         void CommunicateMessageShow(string message);
 
         /// <summary>
+        ///     发送帧信息的显示
+        /// </summary>
+        /// <param name="message">输入所需显示的信息</param>
+        void SendDataShow(string message);
+
+        /// <summary>
+        ///     接收帧信息的显示
+        /// </summary>
+        /// <param name="message">输入所需显示的信息</param>
+        void ReceiveDataShow(string message);
+
+        /// <summary>
         ///     数据库数据轮廓信息显示
         /// </summary>
         /// <param name="message"></param>

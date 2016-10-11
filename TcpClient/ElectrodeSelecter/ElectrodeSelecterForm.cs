@@ -5,6 +5,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using bitkyFlashresUniversal.connClient.model.bean;
+using bitkyFlashresUniversal.connClient.model.commtUtil;
 using bitkyFlashresUniversal.connClient.view;
 using CCWin;
 using CCWin.SkinControl;
@@ -16,11 +17,13 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
         private readonly List<SkinCheckBox> _listCheckBox = new List<SkinCheckBox>();
         private ProcessPresenter _processPresenter;
         private TcpClientWindow _window;
+        private ControlFrameBuilder _controlFrameBuilder;
 
         public ElectrodeSelecterForm(TcpClientWindow window)
         {
             InitializeComponent();
             _window = window;
+            _controlFrameBuilder=new ControlFrameBuilder();
 
             foreach (Control c in groupBoxPoleSelect.Controls)
                 _listCheckBox.Add((SkinCheckBox) c);
@@ -40,10 +43,12 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
             //新建数据处理类
             _processPresenter = new ProcessPresenter(list);
             var listReturn = _processPresenter.Process();
+            var fileStream=new FileStream("lmlPoleWrite", FileMode.Create,FileAccess.Write);
+            var binaryWriter=new BinaryWriter(fileStream);
 
             var conn = new SQLiteConnection("Data Source = " + PresetInfo.DatabasePath + "; Version = 3;");
-
             conn.Open();
+
             var trans = conn.BeginTransaction();
             var cmd = conn.CreateCommand();
             try
@@ -58,6 +63,7 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                 cmd.ExecuteNonQuery();
                 listReturn.ForEach(list2 =>
                 {
+                    binaryWriter.Write( _controlFrameBuilder.DataFrameBuild(  new FrameData(FrameType.ControlGather, list2)));
                     var poleGroup = new ElectrodeGroup();
                     list2.ForEach(pole =>
                     {
@@ -95,6 +101,9 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
             conn.Close();
             this.Close();
             _window.SetElectrodeSuccessful();
+
+            binaryWriter.Close();
+            fileStream.Close();
         }
 
         private string GetTypeFromMode(PoleMode mode)

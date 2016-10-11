@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 using System.Timers;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.model.commtUtil;
@@ -35,9 +36,9 @@ namespace bitkyFlashresUniversal.connClient.model
             _frameProvider = new FrameProvider();
 
             //子帧收集计时器
-            _timerFrameCollect = new Timer(5000) {AutoReset = false};
+            _timerFrameCollect = new Timer(2000) {AutoReset = false};
             _timerFrameCollect.Elapsed += FrameCollect;
-            _timerActivate = new Timer(2000) {AutoReset = false};
+            _timerActivate = new Timer(400) {AutoReset = false};
             _timerActivate.Elapsed += FrameCollectActivate;
         }
 
@@ -76,6 +77,13 @@ namespace bitkyFlashresUniversal.connClient.model
         /// <param name="data">获取的远程数据</param>
         public void GetReceivedData(byte[] data)
         {
+            //接收到的数据显示
+            var stringbuilder = new StringBuilder();
+            for (var i = 0; i < data.Length; i++)
+                stringbuilder.Append(Convert.ToString(data[i], 16) + " ");
+            _presenter.ReceiveDataShow("已接收:"+stringbuilder.ToString());
+            Debug.WriteLine("当前收到数据:" + stringbuilder);
+
             var frameData = _frameProvider.ObtainData(data);
             SetFrameData(frameData);
         }
@@ -135,6 +143,15 @@ namespace bitkyFlashresUniversal.connClient.model
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        /// <summary>
+        ///     发送帧信息的显示
+        /// </summary>
+        /// <param name="message">输入所需显示的信息</param>
+        public void SendDataShow(string message)
+        {
+            _presenter.SendDataShow(message);
         }
 
         /// <summary>

@@ -93,7 +93,30 @@ namespace bitkyFlashresUniversal.connClient.view
                     ListBoxCommunicationText.Items[ListBoxCommunicationText.Items.Count - 1]);
             });
         }
-
+        /// <summary>
+        ///     发送帧信息的显示
+        /// </summary>
+        /// <param name="message">输入所需显示的信息</param>
+        public void SendDataShow(string message)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                listBoxSendData.Items.Add(message);
+                listBoxSendData.SelectedIndex = listBoxSendData.Items.Count - 1;
+            });
+        }
+        /// <summary>
+        ///     接收帧信息的显示
+        /// </summary>
+        /// <param name="message">输入所需显示的信息</param>
+        public void ReceiveDataShow(string message)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                listBoxReceiveData.Items.Add(message);
+                listBoxReceiveData.SelectedIndex = listBoxReceiveData.Items.Count - 1;
+            });
+        }
         /// <summary>
         ///     网络连接正在建立中
         /// </summary>
@@ -225,7 +248,15 @@ namespace bitkyFlashresUniversal.connClient.view
         {
             ListBoxControlText.Items.Clear();
         }
+        private void btnSendDataClear_Click(object sender, RoutedEventArgs e)
+        {
+            listBoxSendData.Items.Clear();
+        }
 
+        private void btnReceiveDataClear_Click(object sender, RoutedEventArgs e)
+        {
+            listBoxReceiveData.Items.Clear();
+        }
         private void btnGatherDataClear_Click(object sender, RoutedEventArgs e)
         {
             _commPresenter.GatherDataClear();
@@ -240,5 +271,7 @@ namespace bitkyFlashresUniversal.connClient.view
         {
             Environment.Exit(0);
         }
+
+     
     }
 }

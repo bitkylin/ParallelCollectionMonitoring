@@ -43,6 +43,10 @@ namespace bitkyFlashresUniversal.connClient.model
         /// </summary>
         /// <param name="frameData">指定的帧格式</param>
         void SendDataFrame(FrameData frameData);
-
+        /// <summary>
+        ///     发送帧信息的显示
+        /// </summary>
+        /// <param name="message">输入所需显示的信息</param>
+        void SendDataShow(string message);
     }
 }
