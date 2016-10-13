@@ -64,7 +64,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     _view.ControlMessageShow("收到启动子帧的帧头");
                     break;
                 case FrameType.ReturnDataGather:
-                    _view.ControlMessageShow("收到数据子帧,编号:" + frameData.Note);
+                    _view.ControlMessageShow("收到数据子帧,编号:" + frameData.FrameId);
                     break;
                 case FrameType.HvRelayOpen:
                     _view.ControlMessageShow("收到高压继电器控制子帧的帧头");
@@ -74,6 +74,10 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     _view.ControlMessageShow("收到错误的信息");
                     break;
             }
+        }
+
+        public void bitkyDebug()
+        {
         }
 
         /// <summary>
@@ -119,6 +123,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     }
                     break;
                 case OperateType.Detect:
+                case OperateType.Detect2:
                     _currentFrameData = _poleDetectPresenter.GetPoleList();
                     switch (_currentFrameData.Type)
                     {
@@ -145,6 +150,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                                 }
                                 //第二轮检测初始化
                                 _poleDetectPresenter.SetSecondRoundData(electrodeInspect);
+                                PresetInfo.CurrentOperateType = OperateType.Detect2;
                                 StartWork();
                             }
                             break;
@@ -152,6 +158,9 @@ namespace bitkyFlashresUniversal.connClient.presenter
                             _view.ControlMessageShow("未知错误");
                             break;
                     }
+                    break;
+
+                    case OperateType.Debug:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -173,15 +182,16 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// <param name="message">输入所需显示的信息</param>
         public void SendDataShow(string message)
         {
-           _view.SendDataShow(message);
+            _view.SendDataShow(message);
         }
+
         /// <summary>
         ///     接收帧信息的显示
         /// </summary>
         /// <param name="message">输入所需显示的信息</param>
         public void ReceiveDataShow(string message)
         {
-           _view.ReceiveDataShow(message);
+            _view.ReceiveDataShow(message);
         }
 
         public void InsertDataIntoDb(List<Electrode> electrodes)
@@ -198,6 +208,12 @@ namespace bitkyFlashresUniversal.connClient.presenter
                 case OperateType.Detect2:
                     _sqlPresenter.InsertResultDataToDb(electrodes, _poleDetectPresenter.badId);
                     break;
+                    case OperateType.Debug:
+                    Debug.WriteLine("一次电极调试完成");
+                    _view.BitkyPoleShow(_electrodes);
+                    DeviceGatherStart(OperateType.Debug);
+                    break;
+
             }
         }
 
@@ -215,6 +231,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// </summary>
         public void InsertDataIntoDbComplete()
         {
+            Debug.WriteLine("插入数据库完成");
             _view.BitkyPoleShow(_electrodes);
             if (PresetInfo.CurrentOperateType == OperateType.Gather)
                 StartWork();
@@ -248,14 +265,15 @@ namespace bitkyFlashresUniversal.connClient.presenter
             if (!_connConnected)
                 return;
 
+            PresetInfo.CurrentOperateType = type;
             switch (type)
             {
                 case OperateType.Handshake:
                     if (CheckTable())
                     {
-                        _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayOpen));
-                        Thread.Sleep(400);
                         _commucationFacade.SendDataFrame(new FrameData(FrameType.HandshakeSwitchWifi));
+                        Thread.Sleep(400);
+                        _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayOpen));
                     }
                     else
                         _view.ControlMessageShow("数据库初始化检查出错");
@@ -264,7 +282,6 @@ namespace bitkyFlashresUniversal.connClient.presenter
 
                     if (CheckTable())
                     {
-                        PresetInfo.CurrentOperateType = type;
                         StartWork();
                     }
                     else
@@ -272,8 +289,14 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     break;
 
                 case OperateType.Detect:
-                    PresetInfo.CurrentOperateType = type;
+                    _poleDetectPresenter.Init();
+                    _sqlPresenter.ElectrodDetectInit();
+                    CheckTable();
                     StartWork();
+                    break;
+
+                    case OperateType.Debug:
+                    _commucationFacade.SendDataFrame(_currentFrameData);
                     break;
                 default:
                     _view.CommunicateMessageShow("设备运行时启动了无法识别的帧");
@@ -290,6 +313,12 @@ namespace bitkyFlashresUniversal.connClient.presenter
             _sqlPresenter.ElectrodDetectInit();
             _sqlPresenter.GatherDataClear();
             CheckTable();
+        }
+
+        public void DebugPole(FrameData frameData)
+        {
+            _currentFrameData = frameData;
+            DeviceGatherStart(OperateType.Debug);
         }
     }
 }

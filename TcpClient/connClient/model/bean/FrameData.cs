@@ -32,6 +32,6 @@ namespace bitkyFlashresUniversal.connClient.model.bean
         /// <summary>
         /// 帧的备注
         /// </summary>
-        public string Note { set; get; }
+        public int FrameId { set; get; }
     }
 }

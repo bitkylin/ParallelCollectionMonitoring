@@ -42,12 +42,10 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
                 //仅仅用于显示调试信息
                 var stringbuilder = new StringBuilder();
                 foreach (var b in bytes)
-                    stringbuilder.Append(Convert.ToString(b, 16) + " ");
+                    stringbuilder.Append($"{b:X2} " + " ");
                 _commucationFacade.SendDataShow("已发送:" + stringbuilder);
-
-                Debug.WriteLine("当前发送的数据:" + stringbuilder);
-
-
+                Debug.WriteLine("已发送:" + stringbuilder);
+               
                 _socketTcp?.Send(bytes);
             }
             catch (SocketException)
@@ -65,7 +63,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
             //根据收听到的客户端套接字向客户端发送信息
             while (true)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(50);
                 //在套接字上接收客户端发送的信息
                 int bufLen;
                 try

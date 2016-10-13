@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="model\FrameBuilder.cs" />
     <Compile Include="model\SendHolder.cs" />
     <Compile Include="util\BitkyTcpServer.cs" />
     <Compile Include="accessPresenter\IServerPresenter.cs" />

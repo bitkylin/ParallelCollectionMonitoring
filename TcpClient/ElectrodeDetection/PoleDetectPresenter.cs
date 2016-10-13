@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using bitkyFlashresUniversal.connClient.model.bean;
 
 namespace bitkyFlashresUniversal.ElectrodeDetection
@@ -34,9 +35,10 @@ namespace bitkyFlashresUniversal.ElectrodeDetection
 
         public FrameData GetPoleList()
         {
+            Debug.WriteLine("电极检测模式：" + "start:" + StartId + " end:" + _endId);
             if (_roundNum == 1)
             {
-                if (StartId >= _endId - 1)
+                if (StartId >= _endId)
                 {
                     return new FrameData(FrameType.None);
                 }
@@ -45,7 +47,7 @@ namespace bitkyFlashresUniversal.ElectrodeDetection
                     new Electrode(StartId, PoleMode.A),
                     new Electrode(StartId + 1, PoleMode.B)
                 };
-                
+
                 return new FrameData(FrameType.ControlGather, electrodes);
             }
             if (_roundNum == 2)
@@ -59,7 +61,7 @@ namespace bitkyFlashresUniversal.ElectrodeDetection
                     new Electrode(_niceId, PoleMode.A),
                     new Electrode(badId, PoleMode.B)
                 };
-                
+
                 return new FrameData(FrameType.ControlGather, electrodes);
             }
             throw new Exception("第二轮检测数据获取程序有误");

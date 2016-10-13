@@ -31,7 +31,11 @@
         public int IdCurrent { get; set; }
 
         public PoleMode Mode { get; private set; } = PoleMode.N;
-        public int Value { get; set; }
+
+        /// <summary>
+        /// 值
+        /// </summary>
+        public double Value { get; set; }     
 
         /// <summary>
         ///     克隆当前对象的原始值和当前值，并指定电极的类型

@@ -101,8 +101,7 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
                     sqlTextValueBuilder.Append("')");
 
                     var sqlText = sqlTextNameBuilder.ToString() + sqlTextValueBuilder;
-                    Debug.WriteLine("插入用SQL语句:" + sqlText);
-
+               Debug.WriteLine(sqlText);
                     if (_sqliteBitky.InsertResultDataToDb(sqlText))
                     {
                         SetTableOutline(_sumNum, _currentNum + 1);
@@ -113,7 +112,7 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
                     break;
                 case OperateType.Detect:
                     var count = 0;
-                    var valueSum = 0;
+                    double valueSum = 0;
                     electrodes.ForEach(pole =>
                     {
                         if ((pole.IdOrigin >= 64) && (pole.IdOrigin <= 79))
@@ -151,7 +150,7 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
                     break;
                 case OperateType.Detect2: //第二轮检测结果更新到数据库
                     var count2 = 0;
-                    var valueSum2 = 0;
+                    double valueSum2 = 0;
                     electrodes.ForEach(pole =>
                     {
                         if ((pole.IdOrigin >= 64) && (pole.IdOrigin <= 79))
@@ -168,6 +167,7 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
                     var valueMean2 = valueSum2/count2;
                     var sqlTextDetect3 = "UPDATE " + PresetInfo.ElectrodeDetectionTable + " SET value = '" + valueMean2 +
                                          "' WHERE poleid = '" + id + "'";
+
                     if (_sqliteBitky.InsertResultDataToDb(sqlTextDetect3))
                         _commPresenter.InsertDataIntoDbComplete();
                     else

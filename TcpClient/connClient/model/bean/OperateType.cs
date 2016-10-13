@@ -9,6 +9,7 @@
         Gather,
         Detect,
         Detect2,
+        Debug,
         Null
     }
 }

@@ -22,7 +22,10 @@
         /// </summary>
         public static readonly byte[] ActivateGatherFrameHeader = {0x5F, 0x00, 0x00, 0xA0};
 
-
+        /// <summary>
+        ///     继电器控制命令帧的返回数据子帧头
+        /// </summary>
+        public static readonly byte[] ControlGatherFrameHeaderReturn = { 0xF3, 0x00, 0x00, 0x0C };
         /// <summary>
         ///     继电器控制命令帧的子帧头
         /// </summary>

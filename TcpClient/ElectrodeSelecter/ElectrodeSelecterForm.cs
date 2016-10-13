@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.model.commtUtil;
 using bitkyFlashresUniversal.connClient.view;
+using bitkyFlashresUniversal.view;
 using CCWin;
 using CCWin.SkinControl;
 
@@ -16,10 +17,10 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
     {
         private readonly List<SkinCheckBox> _listCheckBox = new List<SkinCheckBox>();
         private ProcessPresenter _processPresenter;
-        private TcpClientWindow _window;
+        private BitkyMainWindow _window;
         private ControlFrameBuilder _controlFrameBuilder;
 
-        public ElectrodeSelecterForm(TcpClientWindow window)
+        public ElectrodeSelecterForm(BitkyMainWindow window)
         {
             InitializeComponent();
             _window = window;
@@ -106,22 +107,6 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
             fileStream.Close();
         }
 
-        private string GetTypeFromMode(PoleMode mode)
-        {
-            switch (mode)
-            {
-                case PoleMode.A:
-                    return "A";
-                case PoleMode.B:
-                    return "B";
-                case PoleMode.M:
-                    return "M";
-                case PoleMode.N:
-                    return "N";
-                default:
-                    return "ERROR";
-            }
-        }
 
 
         /// <summary>

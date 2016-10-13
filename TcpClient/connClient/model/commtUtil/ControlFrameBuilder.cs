@@ -19,9 +19,10 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
             //   var poleList = BuildElectrodesDemo(); //演示用，演示完毕放回成员变量
             var frame = new List<byte>();
             frame.AddRange(CommMsg.DataFrameHeader);
-            frame.AddRange(IntToBytes(272));
+            frame.AddRange(IntToBytes(340));
             foreach (var bytes in Build(frameData.Type, frameData.PoleList))
                 frame.AddRange(bytes);
+            frame.AddRange(CommMsg.ActivateGatherFrameSubFrame);
             var checkBytes = CheckFrame(frame);
             frame.AddRange(checkBytes);
             return frame.ToArray();
@@ -88,7 +89,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
 
 
         /// <summary>
-        ///     将int数值转换为占两个字节的byte数组，本方法适用于(低位在前，高位在后)的顺序。 和bytesToInt（）配套使用
+        ///     将int数值转换为占两个字节的byte数组，本方法适用于(int数字低位在前，高位在后)的顺序。 和bytesToInt（）配套使用
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -101,7 +102,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
         }
 
         /// <summary>
-        ///     byte数组中取int数值，本方法适用于(低位在前，高位在后)的顺序，和和intToBytes（）配套使用
+        ///     byte数组中取int数值，本方法适用于(int数字低位在前，高位在后)的顺序，和和intToBytes（）配套使用
         /// </summary>
         /// <param name="src">byte数组</param>
         /// <returns>int数值</returns>
@@ -113,7 +114,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
         }
 
         /// <summary>
-        ///     byte数组中取int数值，本方法适用于(低位在后，高位在前)的顺序，和和intToBytes（）配套使用
+        ///     byte数组中取int数值，本方法适用于(int数字低位在后，高位在前)的顺序，和和intToBytes（）配套使用
         /// </summary>
         /// <param name="src">byte数组</param>
         /// <returns>int数值</returns>

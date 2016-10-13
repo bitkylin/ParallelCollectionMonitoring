@@ -31,13 +31,9 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// </summary>
         void DeviceGatherStart(OperateType type);
 
-        /// <summary>
-        /// 开启工作流程
-        /// </summary>
-        void StartWork();
         void InsertDataIntoDb(List<Electrode> electrodes);
         void InsertDataIntoDbComplete();
-
+        void bitkyDebug();
         /// <summary>
         ///     从前端关闭连接
         /// </summary>
@@ -74,5 +70,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
         ///     清空已采集的数据
         /// </summary>
         void GatherDataClear();
+
+        void DebugPole(FrameData frameData);
     }
 }

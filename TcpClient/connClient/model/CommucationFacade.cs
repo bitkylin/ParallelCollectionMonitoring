@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 using System.Timers;
 using bitkyFlashresUniversal.connClient.model.bean;
@@ -16,17 +15,16 @@ namespace bitkyFlashresUniversal.connClient.model
     public class CommucationFacade : ICommucationFacade
     {
         private readonly ControlFrameBuilder _controlFrameBuilder; //控制帧构建器
+        private readonly List<Electrode> _electrodes = new List<Electrode>();
 
         private readonly FrameProvider _frameProvider; //远程数据初步解析器，解析为数据帧
         private readonly BitkyTcpClient _myTcpClient; //TCP客户端
         private readonly ICommPresenter _presenter; //通信接口表现层
 
-        private byte[] _controlMsgCurrent;
-        private FrameType _frameTypeCurrent = FrameType.None;
+        private readonly Timer _timerFrameCollect;
 
-        private Timer _timerFrameCollect;
-        private Timer _timerActivate;
-        private readonly List<Electrode> _electrodes = new List<Electrode>();
+        private FrameData _currentframeData;
+        private FrameType _frameTypeCurrent = FrameType.None;
 
         public CommucationFacade(ICommPresenter presenter)
         {
@@ -36,12 +34,9 @@ namespace bitkyFlashresUniversal.connClient.model
             _frameProvider = new FrameProvider();
 
             //子帧收集计时器
-            _timerFrameCollect = new Timer(2000) {AutoReset = false};
+            _timerFrameCollect = new Timer(2500) {AutoReset = false};
             _timerFrameCollect.Elapsed += FrameCollect;
-            _timerActivate = new Timer(400) {AutoReset = false};
-            _timerActivate.Elapsed += FrameCollectActivate;
         }
-
 
         /// <summary>
         ///     使用指定的IP地址和端口号构建TCP客户端
@@ -80,9 +75,8 @@ namespace bitkyFlashresUniversal.connClient.model
             //接收到的数据显示
             var stringbuilder = new StringBuilder();
             for (var i = 0; i < data.Length; i++)
-                stringbuilder.Append(Convert.ToString(data[i], 16) + " ");
-            _presenter.ReceiveDataShow("已接收:"+stringbuilder.ToString());
-            Debug.WriteLine("当前收到数据:" + stringbuilder);
+                stringbuilder.Append($"{data[i]:X2} " + " ");
+            _presenter.ReceiveDataShow("已接收:" + stringbuilder);
 
             var frameData = _frameProvider.ObtainData(data);
             SetFrameData(frameData);
@@ -96,9 +90,7 @@ namespace bitkyFlashresUniversal.connClient.model
         {
             //维护帧类型：握手帧、数据帧头、返回数据帧头
             if (frameData.Type != FrameType.None)
-            {
                 _frameTypeCurrent = FrameType.None;
-            }
             _presenter.SetFrameData(frameData);
             switch (frameData.Type)
             {
@@ -107,8 +99,19 @@ namespace bitkyFlashresUniversal.connClient.model
                     break;
 
                 case FrameType.ReturnDataGather:
+                    _timerFrameCollect.Stop();
+
+                    frameData.PoleList.ForEach(pole =>
+                    {
+                        if (pole.IdOrigin <= 63)
+                            pole.Value = (pole.Value*5/16777216 - 2.5)*2000;
+                        if (pole.IdOrigin > 63)
+                            pole.Value = Math.Abs((pole.Value*5/16777216 - 2.5)*100/1.25);
+                    });
+
+
                     _electrodes.AddRange(frameData.PoleList);
-                    Debug.WriteLine("已接收到并解析成功数据子帧");
+                    _presenter.InsertDataIntoDb(_electrodes);
                     break;
 
                 case FrameType.HvRelayOpen:
@@ -123,6 +126,7 @@ namespace bitkyFlashresUniversal.connClient.model
         /// <param name="frameData">指定的帧格式</param>
         public void SendDataFrame(FrameData frameData)
         {
+            _currentframeData = frameData;
             switch (frameData.Type)
             {
                 case FrameType.HvRelayOpen:
@@ -135,10 +139,9 @@ namespace bitkyFlashresUniversal.connClient.model
                     _myTcpClient.Send(CommMsg.HandshakeSwitchWifiFrameHeader);
                     break;
                 case FrameType.ControlGather:
-                    _controlMsgCurrent = _controlFrameBuilder.DataFrameBuild(frameData);
-                    _myTcpClient.Send(_controlMsgCurrent);
-                    _timerActivate.Start();
-
+                    _myTcpClient.Send(_controlFrameBuilder.DataFrameBuild(_currentframeData));
+                    _electrodes.Clear();
+                    _timerFrameCollect.Start();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -155,26 +158,13 @@ namespace bitkyFlashresUniversal.connClient.model
         }
 
         /// <summary>
-        /// 子帧采集完成事件回调
+        ///     子帧采集没有完成事件的回调
         /// </summary>
-        void FrameCollect(object source, ElapsedEventArgs e)
+        private void FrameCollect(object source, ElapsedEventArgs e)
         {
-            if (_electrodes.Count >= 79)
-                _presenter.InsertDataIntoDb(_electrodes);
-            else
-            {
-                _presenter.CommunicateMessageShow("未接收到正确的子帧数据");
-            }
-        }
-
-        /// <summary>
-        /// 启动帧发送激活事件回调
-        /// </summary>
-        void FrameCollectActivate(object source, ElapsedEventArgs e)
-        {
-            _myTcpClient.Send(CommMsg.ActivateGatherFrameFill);
-            _electrodes.Clear();
-            _timerFrameCollect.Start();
+            _presenter.CommunicateMessageShow("未接收到正确的子帧数据,程序继续");
+            // _presenter.DeviceGatherStart(PresetInfo.CurrentOperateType);
+            SendDataFrame(_currentframeData);
         }
     }
 }

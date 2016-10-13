@@ -50,30 +50,30 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
                         break;
                 }
 
-            if (_dataList.Count >= 68)
+            if (_dataList.Count == 340)
             {
-                var dataList = _dataList.GetRange(0, 68);
+                var subFrame0 = _dataList.GetRange(0 + 4, 64);
+                var subFrame1 = _dataList.GetRange(68 + 4, 64);
+                var subFrame2 = _dataList.GetRange(136 + 4, 64);
+                var subFrame3 = _dataList.GetRange(204 + 4, 64);
+                var subFrame4 = _dataList.GetRange(272 + 4, 64);
+
+                var poleList = new List<Electrode>();
+                var list = new List<FrameData>();
+                list.Add(ParseConnData(subFrame0));
+                list.Add(ParseConnData(subFrame1));
+                list.Add(ParseConnData(subFrame2));
+                list.Add(ParseConnData(subFrame3));
+                list.Add(ParseConnData(subFrame4));
+
+                list.ForEach(subFrame => { poleList.AddRange(subFrame.PoleList); });
                 _dataList.Clear();
-                switch (FrameTypeGather(dataList.GetRange(0, 4).ToArray())) //获取帧头，并判断帧头类型
-                {
-                    case FrameType.ControlGather:
-                        Debug.WriteLine("当前帧类型:控制帧");
-                        return new FrameData(FrameType.ControlGather);
-
-                    case FrameType.ActivateGather:
-                        Debug.WriteLine("当前帧类型:启动帧");
-                        return new FrameData(FrameType.ActivateGather);
-
-                    case FrameType.ReturnDataGather:
-                        Debug.WriteLine("当前帧类型:接收到的数据子帧");
-                        return ParseConnData(dataList.GetRange(4, 64));
-
-                    case FrameType.HvRelayOpen:
-                        Debug.WriteLine("当前帧类型:高压继电器控制子帧");
-                        return new FrameData(FrameType.HvRelayOpen);
-
-                }
+                return new FrameData(FrameType.ReturnDataGather) {PoleList = poleList, FrameId = -1};
             }
+
+            if (_dataList.Count > 340)
+                _dataList.Clear();
+
             return new FrameData(FrameType.None);
         }
 
@@ -99,9 +99,8 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
                 poleList.Add(new Electrode(id) {Value = value});
             }
 
-            var note = dataBytes[0]/16;
-            Debug.WriteLine("数据子帧解析成功,编号:" + note);
-            return new FrameData(FrameType.ReturnDataGather) {PoleList = poleList, Note = note.ToString()};
+            var note = dataBytes[0]/16; //数据子帧的编号
+            return new FrameData(FrameType.ReturnDataGather) {PoleList = poleList, FrameId = note};
         }
 
 

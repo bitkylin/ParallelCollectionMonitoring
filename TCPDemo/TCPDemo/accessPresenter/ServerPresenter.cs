@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using TCPDemo.model;
 using TCPDemo.util;
 using TCPDemo.view;
 
@@ -11,6 +12,7 @@ namespace TCPDemo.accessPresenter
     {
         private readonly BitkyTcpServer _bitkyTcpServer;
         private readonly ISetView _view;
+        FrameBuilder _frameBuilder = new FrameBuilder();
 
         public ServerPresenter(ISetView view)
         {
@@ -25,7 +27,6 @@ namespace TCPDemo.accessPresenter
 
         public void StopListening()
         {
-
             _bitkyTcpServer.StopListening();
         }
 
@@ -48,16 +49,9 @@ namespace TCPDemo.accessPresenter
             //接收到数据帧
             if (CompareByte(bytes, CommMsg.DataFrameHeader))
             {
-                var bytes2 = byteslist.GetRange(6, 4).ToArray();
-                if (CompareByte(bytes2, CommMsg.ControlGatherFrameHeader))
-                {
-                    SendControlGatherFrame();
-                    return;
-                }
-
-
-                if (CompareByte(bytes2, CommMsg.ActivateGatherFrameHeader))
-                    SendActivateGatherFrame();
+                var count = byteslist.Count;
+                SendActivateGatherFrame();
+                _view.ControlMessageShow("接收到数据帧的长度："+count);
             }
         }
 
@@ -65,25 +59,15 @@ namespace TCPDemo.accessPresenter
         {
             _view.ControlMessageShow(data);
         }
-
-        private void SendControlGatherFrame()
-        {
-            _view.ControlMessageShow("反馈控制帧");
-
-            _bitkyTcpServer.SendDelayed(CommMsg.DataFrameHeader, 50);
-          
-        }
-
         private void SendActivateGatherFrame()
         {
-            _view.ControlMessageShow("反馈启动帧");
-            _bitkyTcpServer.SendDelayed(CommMsg.DataFrameHeader, 50);
-         
-            _bitkyTcpServer.SendDelayed(CommMsg.Data1Subframe, 250);
-            _bitkyTcpServer.SendDelayed(CommMsg.Data2Subframe, 450);
-            _bitkyTcpServer.SendDelayed(CommMsg.Data3Subframe, 650);
-            _bitkyTcpServer.SendDelayed(CommMsg.Data4Subframe, 850);
-            _bitkyTcpServer.SendDelayed(CommMsg.Data5Subframe, 1050);
+            var list = new List<byte>();
+            list.AddRange(_frameBuilder.Build(0));
+            list.AddRange(_frameBuilder.Build(1));
+            list.AddRange(_frameBuilder.Build(2));
+            list.AddRange(_frameBuilder.Build(3));
+            list.AddRange(_frameBuilder.Build(4));
+            _bitkyTcpServer.SendDelayed(list.ToArray(), 50);
         }
 
         /// <summary>
