@@ -78,12 +78,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="connClient\model\bean\CommType.cs" />
     <Compile Include="connClient\model\bean\ElectrodeGroup.cs" />
     <Compile Include="connClient\model\bean\FrameData.cs" />
     <Compile Include="connClient\model\bean\FrameType.cs" />
     <Compile Include="connClient\model\bean\OperateType.cs" />
     <Compile Include="connClient\model\bean\PoleMode.cs" />
     <Compile Include="connClient\model\bean\PresetInfo.cs" />
+    <Compile Include="connClient\model\commtUtil\ConnClient\SerialPortClient.cs" />
     <Compile Include="connClient\model\commtUtil\FrameProvider.cs" />
     <Compile Include="connClient\model\commtUtil\ControlFrameBuilder.cs" />
     <Compile Include="connClient\model\bean\Electrode.cs" />

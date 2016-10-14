@@ -23,6 +23,7 @@ namespace bitkyFlashresUniversal.connClient.model
 
         private readonly FrameProvider _frameProvider; //远程数据初步解析器，解析为数据帧
         private readonly BitkyTcpClient _myTcpClient; //TCP客户端
+        private readonly SerialPortClient _myPortClient; //串口客户端
         private readonly ICommPresenter _presenter; //通信接口表现层
 
         private readonly Timer _timerFrameCollect;
@@ -34,6 +35,7 @@ namespace bitkyFlashresUniversal.connClient.model
         {
             _presenter = presenter;
             _myTcpClient = new BitkyTcpClient(this);
+            _myPortClient = new SerialPortClient(this);
             _controlFrameBuilder = new ControlFrameBuilder();
             _frameProvider = new FrameProvider();
 
@@ -44,21 +46,54 @@ namespace bitkyFlashresUniversal.connClient.model
 
         /// <summary>
         ///     使用指定的IP地址和端口号构建TCP客户端
+        /// 或  使用指定的串口名和波特率构建串口客户端
         /// </summary>
-        /// <param name="ip"></param>
-        /// <param name="port"></param>
-        public void InitTcpClient(string ip, int port)
+        /// <param name="str"></param>
+        /// <param name="num"></param>
+        public void InitCommClient(string str, int num)
         {
-            _myTcpClient.Build(ip, port);
+            CommMsg.SwitchReveiveFrame();
+            switch (PresetInfo.CurrentCommType)
+            {
+                case CommType.Wifi:
+                    _myTcpClient.Build(str, num);
+
+                    break;
+                case CommType.SerialPort:
+                    _myPortClient.Open(str, num);
+
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
+
         /// <summary>
-        ///     TCP连接失效
+        ///     通信连接失效
         /// </summary>
-        public void TcpClientFailed(string evenType)
+        public void CommClientFailed(string str)
         {
-            _myTcpClient.Close();
-            _presenter.ConnFailed(evenType);
+            MessageBeep(0x00000030);
+            _timerFrameCollect.Stop();
+            switch (PresetInfo.CurrentCommType)
+            {
+                case CommType.Wifi:
+                    _myTcpClient.Close();
+                    break;
+                case CommType.SerialPort:
+                    _myPortClient.Close();
+                    break;
+
+//                default:
+//                    throw new ArgumentOutOfRangeException();
+            }
+
+            _presenter.ConnFailed(str);
+
+
+            PresetInfo.CurrentCommType = CommType.Null;
             _frameTypeCurrent = FrameType.None;
         }
 
@@ -108,6 +143,11 @@ namespace bitkyFlashresUniversal.connClient.model
 
                     frameData.PoleList.ForEach(pole =>
                     {
+                        if (pole.IdOrigin > 79 || pole.IdOrigin < 0)
+                        {
+                            _presenter.CommunicateMessageShow("收到的帧通道号错误");
+                            return;
+                        }
                         if (pole.IdOrigin <= 63)
                             pole.Value = (pole.Value*5/16777216 - 2.5)*2000;
                         if (pole.IdOrigin > 63)
@@ -122,6 +162,9 @@ namespace bitkyFlashresUniversal.connClient.model
                 case FrameType.HvRelayOpen:
                     _presenter.CommunicateMessageShow("高压继电器控制成功");
                     break;
+                case FrameType.None:
+                    _presenter.CommunicateMessageShow("收到的帧错误");
+                    break;
             }
         }
 
@@ -135,21 +178,36 @@ namespace bitkyFlashresUniversal.connClient.model
             switch (frameData.Type)
             {
                 case FrameType.HvRelayOpen:
-                    _myTcpClient.Send(CommMsg.HvRelayOpen);
+                    Send(CommMsg.HvRelayOpen);
                     break;
                 case FrameType.HvRelayClose:
-                    _myTcpClient.Send(CommMsg.HvRelayClose);
+                    Send(CommMsg.HvRelayClose);
                     break;
                 case FrameType.HandshakeSwitchWifi:
-                    _myTcpClient.Send(CommMsg.HandshakeSwitchWifiFrameHeader);
+                    Send(CommMsg.CurrentReceiveSwitchFrame);
                     break;
                 case FrameType.ControlGather:
-                    _myTcpClient.Send(_controlFrameBuilder.DataFrameBuild(_currentframeData));
+                    Send(_controlFrameBuilder.DataFrameBuild(_currentframeData));
                     _electrodes.Clear();
                     _timerFrameCollect.Start();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void Send(byte[] data)
+        {
+            switch (PresetInfo.CurrentCommType)
+            {
+                case CommType.Wifi:
+                    _myTcpClient.Send(data);
+                    break;
+                case CommType.SerialPort:
+                    _myPortClient.Send(data);
+                    break;
+//                default:
+//                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -168,13 +226,13 @@ namespace bitkyFlashresUniversal.connClient.model
         private void FrameCollect(object source, ElapsedEventArgs e)
         {
             MessageBeep(0x00000030);
-            MessageBox.Show("确认后继续");
+            //  MessageBox.Show("确认后继续");
             _presenter.CommunicateMessageShow("未接收到正确的子帧数据,程序继续");
             // _presenter.DeviceGatherStart(PresetInfo.CurrentOperateType);
             SendDataFrame(_currentframeData);
         }
 
         [DllImport("user32.dll ")]
-        public static extern int MessageBeep(uint n);
+        private static extern int MessageBeep(uint n);
     }
 }

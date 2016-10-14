@@ -50,7 +50,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
             }
             catch (SocketException)
             {
-                _commucationFacade.TcpClientFailed("connDisconnect");
+                _commucationFacade.CommClientFailed("connDisconnect");
             }
         }
 
@@ -75,6 +75,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
                 }
                 catch (Exception ex)
                 {
+                    _commucationFacade.CommClientFailed("Socket接收数据异常");
                     Debug.WriteLine("已与TCP客户端断开连接");
                     Debug.WriteLine("服务端接收链接中断：" + ex.Message);
                     return;
@@ -98,7 +99,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
             }
             catch (SocketException)
             {
-                _commucationFacade.TcpClientFailed("UnobtainableSocket");
+                _commucationFacade.CommClientFailed("UnobtainableSocket");
                 return;
             }
 

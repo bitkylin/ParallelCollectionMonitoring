@@ -36,11 +36,6 @@ namespace bitkyFlashresUniversal.connClient.view
         void DataOutlineShow(string message);
 
         /// <summary>
-        ///     连接正在建立中
-        /// </summary>
-        void ConnConnecting();
-
-        /// <summary>
         ///     网络连接已建立
         /// </summary>
         void ConnConnected();

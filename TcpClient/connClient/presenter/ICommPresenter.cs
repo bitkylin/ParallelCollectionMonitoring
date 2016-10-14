@@ -22,9 +22,12 @@ namespace bitkyFlashresUniversal.connClient.presenter
         void ConnFailed(string evenType);
 
         /// <summary>
-        /// 根据预设的IP及端口号初始化TCP客户端
+        ///     使用指定的IP地址和端口号构建TCP客户端
+        /// 或  使用指定的串口名和波特率构建串口客户端
         /// </summary>
-        void InitTcpClient(string ip, int port);
+        /// <param name="str"></param>
+        /// <param name="num"></param>
+        void InitCommClient(string str, int num);
 
         /// <summary>
         /// 开始启动持续采集模式

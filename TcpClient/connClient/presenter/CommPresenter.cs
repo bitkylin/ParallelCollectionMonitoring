@@ -86,9 +86,8 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// </summary>
         public void FrontConnClosed()
         {
-            _connConnected = false;
             _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayClose));
-            _commucationFacade.TcpClientFailed("UserCloseConn");
+            _commucationFacade.CommClientFailed("UserCloseConn");
         }
 
         /// <summary>
@@ -116,7 +115,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                             _view.ControlMessageShow("数据库检索已完成");
                             break;
                         case FrameType.ControlGather:
-                            Thread.Sleep(200);
+                            Thread.Sleep(PresetInfo.FrameSendDelay);
                             _commucationFacade.SendDataFrame(_currentFrameData);
                             break;
                         default:
@@ -245,12 +244,14 @@ namespace bitkyFlashresUniversal.connClient.presenter
         }
 
         /// <summary>
-        ///     根据预设的IP及端口号初始化TCP客户端
+        ///     使用指定的IP地址和端口号构建TCP客户端
+        /// 或  使用指定的串口名和波特率构建串口客户端
         /// </summary>
-        public void InitTcpClient(string ip, int port)
+        /// <param name="str"></param>
+        /// <param name="num"></param>
+        public void InitCommClient(string str, int num)
         {
-            _view.ConnConnecting();
-            _commucationFacade.InitTcpClient(ip, port);
+            _commucationFacade.InitCommClient(str, num);
         }
 
         /// <summary>

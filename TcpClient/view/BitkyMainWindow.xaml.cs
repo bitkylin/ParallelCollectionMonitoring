@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,7 @@ namespace bitkyFlashresUniversal.view
 
             InitBitkyPoleShow();
             InitSettingFragment();
+            InitSerialPortShow();
         }
 
         /// <summary>
@@ -95,26 +97,29 @@ namespace bitkyFlashresUniversal.view
         }
 
         /// <summary>
-        ///     网络连接正在建立中
-        /// </summary>
-        public void ConnConnecting()
-        {
-            Dispatcher.Invoke(() =>
-            {
-                BtnConnect.Content = "正在连接";
-                BtnConnect.IsEnabled = false;
-            });
-        }
-
-        /// <summary>
         ///     网络连接已建立
         /// </summary>
         public void ConnConnected()
         {
             Dispatcher.Invoke(() =>
             {
-                BtnConnect.Content = "断开";
-                BtnConnect.IsEnabled = true;
+                switch (PresetInfo.CurrentCommType)
+                {
+                    case CommType.Wifi:
+                        BtnConnect.Content = "断开";
+                        BtnConnect.IsEnabled = true;
+                        btnPort.IsEnabled = false;
+
+                        break;
+                    case CommType.SerialPort:
+                        btnPort.Content = "关闭串口";
+                        btnPort.IsEnabled = true;
+                        BtnConnect.IsEnabled = false;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             });
         }
 
@@ -125,8 +130,20 @@ namespace bitkyFlashresUniversal.view
         {
             Dispatcher.Invoke(() =>
             {
-                BtnConnect.Content = "连接";
                 BtnConnect.IsEnabled = true;
+                btnPort.IsEnabled = true;
+                switch (PresetInfo.CurrentCommType)
+                {
+                    case CommType.Wifi:
+                        BtnConnect.Content = "连接";
+                        break;
+                    case CommType.SerialPort:
+                        btnPort.Content = "打开串口";
+                        break;
+
+//                    default:
+//                        throw new ArgumentOutOfRangeException();
+                }
             });
         }
 
@@ -192,6 +209,22 @@ namespace bitkyFlashresUniversal.view
         private void InitSettingFragment()
         {
             textBoxElectricThreshold.Text = PresetInfo.ElectricThreshold.ToString();
+            textBoxFrameReceiveTimeout.Text = PresetInfo.FrameReceiveTimeout.ToString();
+            textBoxFrameSendDelay.Text = PresetInfo.FrameSendDelay.ToString();
+        }
+
+        private void InitSerialPortShow()
+        {
+            var ports = SerialPort.GetPortNames();
+            Array.Sort(ports);
+            //初始化串口名称下拉列表框
+            foreach (var port in ports)
+            {
+                comboPortName.Items.Add(port);
+            }
+            //初始化波特率下拉列表框
+            comboPortName.SelectedIndex = comboPortName.Items.Count > 0 ? 0 : -1;
+            comboBaudrate.SelectedIndex = comboBaudrate.Items.Count - 1;
         }
 
         /// <summary>
@@ -207,10 +240,10 @@ namespace bitkyFlashresUniversal.view
         /// </summary>
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
+            PresetInfo.CurrentCommType = CommType.Wifi;
             if (BtnConnect.Content.ToString().Equals("断开"))
             {
                 _commPresenter.FrontConnClosed();
-                BtnConnect.Content = "连接";
                 return;
             }
             var ip = TextBoxIp.Text.Trim();
@@ -221,7 +254,11 @@ namespace bitkyFlashresUniversal.view
             {
                 var port = int.Parse(portStr);
                 if ((port < 65536) && (port >= 1024) && match)
-                    _commPresenter.InitTcpClient(ip, port);
+                {
+                    BtnConnect.Content = "正在连接";
+                    BtnConnect.IsEnabled = false;
+                    _commPresenter.InitCommClient(ip, port);
+                }
                 else
                     MessageBox.Show("请数入正确的IP地址和端口号!", "警告");
             }
@@ -300,6 +337,8 @@ namespace bitkyFlashresUniversal.view
         private void buttonConfirmSetting_Click(object sender, RoutedEventArgs e)
         {
             PresetInfo.ElectricThreshold = double.Parse(textBoxElectricThreshold.Text);
+            PresetInfo.FrameReceiveTimeout = int.Parse(textBoxFrameReceiveTimeout.Text);
+            PresetInfo.FrameSendDelay = int.Parse(textBoxFrameSendDelay.Text);
         }
 
         private void btnDebugPole_Click(object sender, RoutedEventArgs e)
@@ -311,6 +350,36 @@ namespace bitkyFlashresUniversal.view
             };
 
             _commPresenter.DebugPole(new FrameData(FrameType.ControlGather, electrodes));
+        }
+
+        /// <summary>
+        ///     刷新串口按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRefreshPort_Click(object sender, RoutedEventArgs e)
+        {
+            InitSerialPortShow();
+        }
+
+        /// <summary>
+        ///     串口连接按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPort_Click(object sender, RoutedEventArgs e)
+        {
+            PresetInfo.CurrentCommType = CommType.SerialPort;
+            if (btnPort.Content.ToString().Equals("打开串口"))
+            {
+                btnPort.Content = "正在连接";
+                btnPort.IsEnabled = false;
+                _commPresenter.InitCommClient(comboPortName.Text, int.Parse(comboBaudrate.Text));
+            }
+            else
+            {
+                _commPresenter.FrontConnClosed();
+            }
         }
     }
 }

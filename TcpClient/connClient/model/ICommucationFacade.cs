@@ -9,10 +9,11 @@ namespace bitkyFlashresUniversal.connClient.model
     {
         /// <summary>
         ///     使用指定的IP地址和端口号构建TCP客户端
+        /// 或  使用指定的串口名和波特率构建串口客户端
         /// </summary>
-        /// <param name="ip"></param>
-        /// <param name="port"></param>
-        void InitTcpClient(string ip, int port);
+        /// <param name="str"></param>
+        /// <param name="num"></param>
+        void InitCommClient(string str, int num);
 
         /// <summary>
         ///     建立连接成功，获取Socket成功的消息
@@ -22,7 +23,7 @@ namespace bitkyFlashresUniversal.connClient.model
         /// <summary>
         ///     TCP连接失效
         /// </summary>
-        void TcpClientFailed(string evenType);
+        void CommClientFailed(string str);
 
         //------------------------通信---------------------------
 

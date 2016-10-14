@@ -1,4 +1,6 @@
-﻿namespace bitkyFlashresUniversal.connClient.model.bean
+﻿using System;
+
+namespace bitkyFlashresUniversal.connClient.model.bean
 {
     /// <summary>
     ///     帧信息
@@ -9,6 +11,29 @@
         ///     握手帧，通讯接口选择帧，仅帧头
         /// </summary>
         public static readonly byte[] HandshakeSwitchWifiFrameHeader = {0x55, 0x7F, 0x02, 0xAA};
+        /// <summary>
+        ///     握手帧，通讯接口选择帧，仅帧头
+        /// </summary>
+        public static readonly byte[] HandshakeSwitchSerialPortFrameHeader = { 0x55, 0x7F, 0x01, 0xAA };
+
+        public static byte[] CurrentReceiveSwitchFrame;
+
+        public static void SwitchReveiveFrame()
+        {
+            switch (PresetInfo.CurrentCommType)
+            {
+                case CommType.Wifi:
+                    CurrentReceiveSwitchFrame = HandshakeSwitchWifiFrameHeader;
+                    break;
+                case CommType.SerialPort:
+                    CurrentReceiveSwitchFrame = HandshakeSwitchSerialPortFrameHeader;
+                    break;
+             
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+        }
 
         /// <summary>
         ///     下位机重置帧的帧头

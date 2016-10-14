@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Windows.Documents;
 using bitkyFlashresUniversal.connClient.model.bean;
 
 namespace bitkyFlashresUniversal.connClient.model.commtUtil
@@ -25,33 +26,42 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
             var dataCount = _dataList.Count;
             Debug.WriteLine("数量:" + dataCount);
 
-            //接收到帧头(4个字节)
-            if ((_dataList.Count >= 4) && (_dataList.Count < 68))
-                switch (FrameTypeGather(_dataList.GetRange(0, 4).ToArray())) //获取帧头，并判断帧头类型
-                {
-                    case FrameType.HandshakeSwitchWifi: //获取到握手帧的帧头
-                        Debug.WriteLine("当前帧类型:握手帧的帧头");
-                        _dataList.Clear();
-                        return new FrameData(FrameType.HandshakeSwitchWifi);
-
-                    case FrameType.DeviceReset:
-                        Debug.WriteLine("当前帧类型:下位机重置帧的帧头");
-                        _dataList.Clear();
-                        return new FrameData(FrameType.DeviceReset);
-
-
-                    case FrameType.DataHeader: //获取到数据帧的帧头
-                        Debug.WriteLine("当前帧类型:数据帧的帧头");
-                        _dataList.Clear();
-                        return new FrameData(FrameType.DataHeader);
-
-                    case FrameType.None: //当前数据不是数据帧，直接清空
-                        _dataList.Clear();
-                        break;
-                }
+//            //接收到帧头(4个字节)
+//            if ((_dataList.Count >= 4) && (_dataList.Count < 68))
+//                switch (FrameTypeGather(_dataList.GetRange(0, 4).ToArray())) //获取帧头，并判断帧头类型
+//                {
+//                    case FrameType.HandshakeSwitchWifi: //获取到握手帧的帧头
+//                        Debug.WriteLine("当前帧类型:握手帧的帧头");
+//                        _dataList.Clear();
+//                        return new FrameData(FrameType.HandshakeSwitchWifi);
+//
+//                    case FrameType.DeviceReset:
+//                        Debug.WriteLine("当前帧类型:下位机重置帧的帧头");
+//                        _dataList.Clear();
+//                        return new FrameData(FrameType.DeviceReset);
+//
+//
+//                    case FrameType.DataHeader: //获取到数据帧的帧头
+//                        Debug.WriteLine("当前帧类型:数据帧的帧头");
+//                        _dataList.Clear();
+//                        return new FrameData(FrameType.DataHeader);
+//
+//                    case FrameType.None: //当前数据不是数据帧，直接清空
+//                        _dataList.Clear();
+//                        break;
+//                }
 
             if (_dataList.Count == 340)
             {
+                for (int i = 0; i < 5; i++)
+                {
+                    if (FrameTypeGather(_dataList.GetRange(68*i, 4).ToArray()) == FrameType.None)
+                    {
+                        return new FrameData(FrameType.None);
+                    }
+                }
+
+
                 var subFrame0 = _dataList.GetRange(0 + 4, 64);
                 var subFrame1 = _dataList.GetRange(68 + 4, 64);
                 var subFrame2 = _dataList.GetRange(136 + 4, 64);
@@ -70,9 +80,10 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
                 _dataList.Clear();
                 return new FrameData(FrameType.ReturnDataGather) {PoleList = poleList, FrameId = -1};
             }
+            _dataList.Clear();
 
-            if (_dataList.Count > 340)
-                _dataList.Clear();
+//            if (_dataList.Count > 340)
+//                _dataList.Clear();
 
             return new FrameData(FrameType.None);
         }
@@ -113,7 +124,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
         {
             if (CompareByte(bytes, CommMsg.HvRelaySubframeHeader))
                 return FrameType.HvRelayOpen;
-            if (CompareByte(bytes, CommMsg.HandshakeSwitchWifiFrameHeader))
+            if (CompareByte(bytes, CommMsg.CurrentReceiveSwitchFrame))
                 return FrameType.HandshakeSwitchWifi;
             if (CompareByte(bytes, CommMsg.DeviceResetFrameHeader))
                 return FrameType.DeviceReset;
