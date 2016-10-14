@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Timers;
+using System.Windows.Forms;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.model.commtUtil;
 using bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient;
 using bitkyFlashresUniversal.connClient.presenter;
+using Timer = System.Timers.Timer;
 
 namespace bitkyFlashresUniversal.connClient.model
 {
@@ -34,7 +38,7 @@ namespace bitkyFlashresUniversal.connClient.model
             _frameProvider = new FrameProvider();
 
             //子帧收集计时器
-            _timerFrameCollect = new Timer(2500) {AutoReset = false};
+            _timerFrameCollect = new Timer(PresetInfo.FrameReceiveTimeout) {AutoReset = false};
             _timerFrameCollect.Elapsed += FrameCollect;
         }
 
@@ -77,6 +81,7 @@ namespace bitkyFlashresUniversal.connClient.model
             for (var i = 0; i < data.Length; i++)
                 stringbuilder.Append($"{data[i]:X2} " + " ");
             _presenter.ReceiveDataShow("已接收:" + stringbuilder);
+            Debug.WriteLine("已接收:" + stringbuilder);
 
             var frameData = _frameProvider.ObtainData(data);
             SetFrameData(frameData);
@@ -162,9 +167,14 @@ namespace bitkyFlashresUniversal.connClient.model
         /// </summary>
         private void FrameCollect(object source, ElapsedEventArgs e)
         {
+            MessageBeep(0x00000030);
+            MessageBox.Show("确认后继续");
             _presenter.CommunicateMessageShow("未接收到正确的子帧数据,程序继续");
             // _presenter.DeviceGatherStart(PresetInfo.CurrentOperateType);
             SendDataFrame(_currentframeData);
         }
+
+        [DllImport("user32.dll ")]
+        public static extern int MessageBeep(uint n);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading;
 using bitkyFlashresUniversal.connClient.model;
@@ -115,6 +116,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                             _view.ControlMessageShow("数据库检索已完成");
                             break;
                         case FrameType.ControlGather:
+                            Thread.Sleep(200);
                             _commucationFacade.SendDataFrame(_currentFrameData);
                             break;
                         default:
@@ -320,5 +322,6 @@ namespace bitkyFlashresUniversal.connClient.presenter
             _currentFrameData = frameData;
             DeviceGatherStart(OperateType.Debug);
         }
+
     }
 }

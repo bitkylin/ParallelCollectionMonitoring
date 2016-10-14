@@ -16,7 +16,9 @@
         //---------系统当前运行模式----------
         public static OperateType CurrentOperateType = OperateType.Null;
 
-        //---------电极检测模式-------------
+        //---------帧回复超时等待------------
+        public const int FrameReceiveTimeout = 2000;
+        //---------电极检测模式--------------
         public static double ElectricThreshold = 10;
     }
 }
