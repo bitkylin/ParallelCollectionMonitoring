@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Net;
+using System.Net.Sockets;
 using System.Windows;
 using TCPServer.accessPresenter;
 
@@ -32,7 +33,6 @@ namespace TCPServer.view
                 ListBoxControlText.Items.Add(message);
                 ListBoxControlText.SelectedIndex = ListBoxControlText.Items.Count - 1;
                 ListBoxControlText.ScrollIntoView(ListBoxControlText.Items[ListBoxControlText.Items.Count - 1]);
-
             });
         }
 
@@ -46,8 +46,8 @@ namespace TCPServer.view
             {
                 ListBoxCommunicationText.Items.Add(message);
                 ListBoxCommunicationText.SelectedIndex = ListBoxCommunicationText.Items.Count - 1;
-                ListBoxCommunicationText.ScrollIntoView(ListBoxCommunicationText.Items[ListBoxCommunicationText.Items.Count - 1]);
-
+                ListBoxCommunicationText.ScrollIntoView(
+                    ListBoxCommunicationText.Items[ListBoxCommunicationText.Items.Count - 1]);
             });
         }
 
@@ -93,15 +93,15 @@ namespace TCPServer.view
         /// </summary>
         private void SetComboBoxIpAddress()
         {
-            _addressList = Dns.GetHostByName(Dns.GetHostName()).AddressList; //会返回所有地址，包括IPv4和IPv6   
-            foreach (var address in _addressList)
-                ComboBoxIp.Items.Add(address);
+            _addressList = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+            foreach (var ipAddress in _addressList)
+                if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                    ComboBoxIp.Items.Add(ipAddress);
             ComboBoxIp.SelectedIndex = ComboBoxIp.Items.Count > 0 ? 0 : -1;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
-} 
+}
