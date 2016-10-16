@@ -11,8 +11,8 @@ namespace TCPServer.accessPresenter
     internal class ServerPresenter : IServerPresenter
     {
         private readonly BitkyTcpServer _bitkyTcpServer;
-        private readonly ISetView _view;
         private readonly FrameBuilder _frameBuilder = new FrameBuilder();
+        private readonly ISetView _view;
 
         public ServerPresenter(ISetView view)
         {
@@ -33,8 +33,8 @@ namespace TCPServer.accessPresenter
         public void GetReceivedData(byte[] data)
         {
             var stringbuilder = new StringBuilder();
-            for (var i = 0; i < data.Length; i++)
-                stringbuilder.Append(Convert.ToString(data[i], 16) + " ");
+            foreach (var b in data)
+                stringbuilder.Append(Convert.ToString(b, 16) + " ");
             _view.CommunicateMessageShow(stringbuilder.ToString()); //接收到的信息显示在view中
 
             var byteslist = new List<byte>();
@@ -51,7 +51,7 @@ namespace TCPServer.accessPresenter
             {
                 var count = byteslist.Count;
                 SendActivateGatherFrame();
-                _view.ControlMessageShow("接收到数据帧的长度："+count);
+                _view.ControlMessageShow("接收到数据帧的长度：" + count);
             }
         }
 
@@ -59,6 +59,7 @@ namespace TCPServer.accessPresenter
         {
             _view.ControlMessageShow(data);
         }
+
         private void SendActivateGatherFrame()
         {
             var list = new List<byte>();

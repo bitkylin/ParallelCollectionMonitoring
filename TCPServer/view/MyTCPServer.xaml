@@ -12,9 +12,9 @@
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <ComboBox x:Name="ComboBoxIp" HorizontalAlignment="Left" Margin="87,10,100,0" VerticalAlignment="Top"
                       Width="188" FontSize="16" Height="30" />
-            <Label x:Name="Label" Content="本机IP：" Margin="10,10,293,0" VerticalAlignment="Top" FontSize="16"
+            <Label Content="本机IP：" Margin="10,10,293,0" VerticalAlignment="Top" FontSize="16"
                    HorizontalAlignment="Left" />
-            <Label x:Name="LabelCopy" Content="端口号：" HorizontalAlignment="Left" Margin="0,74,0,0"
+            <Label Content="端口号：" HorizontalAlignment="Left" Margin="0,74,0,0"
                    VerticalAlignment="Top" FontSize="16" />
             <TextBox x:Name="TextBoxPort" HorizontalAlignment="Left" Height="30" Margin="87,74,0,0" TextWrapping="Wrap"
                      VerticalAlignment="Top" Width="188" FontSize="16" Text="4321" />

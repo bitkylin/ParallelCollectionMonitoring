@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows;
@@ -12,7 +12,7 @@ namespace TCPServer.view
     public partial class MyTcpServer : ISetView
     {
         private readonly IServerPresenter _accessPresenter;
-        private IPAddress[] _addressList; //本地IP地址集合
+        private List<IPAddress> _addresses; //本地IP地址集合
 
 
         public MyTcpServer()
@@ -51,23 +51,6 @@ namespace TCPServer.view
             });
         }
 
-        /// <summary>
-        ///     建立远程连接成功
-        /// </summary>
-        public void GetRemoteConnectSuccess()
-        {
-            Debug.WriteLine("建立远程连接成功");
-        }
-
-        /// <summary>
-        ///     远程连接断开
-        /// </summary>
-        public void GetRemoteConnectStop()
-        {
-            Debug.WriteLine("远程连接断开");
-            BtnStart.Content = "开始监听";
-        }
-
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             if (BtnStart.Content.ToString() == "开始监听")
@@ -75,7 +58,7 @@ namespace TCPServer.view
                 if ((TextBoxPort.Text != string.Empty) && (ComboBoxIp.Text != string.Empty)) //检测IP地址框和端口框是否为空
                 {
                     BtnStart.Content = "断开监听";
-                    _accessPresenter.StartListening(_addressList[ComboBoxIp.SelectedIndex],
+                    _accessPresenter.StartListening(_addresses[ComboBoxIp.SelectedIndex],
                         int.Parse(TextBoxPort.Text));
                     ControlMessageShow("准备开启TCP服务");
                 }
@@ -93,15 +76,17 @@ namespace TCPServer.view
         /// </summary>
         private void SetComboBoxIpAddress()
         {
-            _addressList = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
-            foreach (var ipAddress in _addressList)
+           _addresses = new List<IPAddress>();
+            var addressList = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+            foreach (var ipAddress in addressList)
                 if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
-                    ComboBoxIp.Items.Add(ipAddress);
+                    _addresses.Add(ipAddress);
+            _addresses.ForEach(ipAddress =>
+            {
+                ComboBoxIp.Items.Add(ipAddress);
+            });
+             
             ComboBoxIp.SelectedIndex = ComboBoxIp.Items.Count > 0 ? 0 : -1;
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
         }
     }
 }

@@ -112,10 +112,9 @@ namespace TCPServer.util
             }
         }
 
-        public bool Send(byte[] bytes)
+        public void Send(byte[] bytes)
         {
             _socketServerSub?.Send(bytes);
-            return true;
         }
 
         public void SendDelayed(byte[] bytes, int timeInterval)
