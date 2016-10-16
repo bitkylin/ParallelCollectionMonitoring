@@ -1,4 +1,4 @@
-﻿namespace TCPDemo.view
+﻿namespace TCPServer.view
 {
     public interface ISetView
     {

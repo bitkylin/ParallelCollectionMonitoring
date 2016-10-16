@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace TCPDemo.accessPresenter
+namespace TCPServer.accessPresenter
 {
     public interface IServerPresenter
     {

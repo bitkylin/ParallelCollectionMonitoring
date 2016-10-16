@@ -1,4 +1,4 @@
-﻿namespace TCPDemo
+﻿namespace TCPServer
 {
     /// <summary>
     /// App.xaml 的交互逻辑

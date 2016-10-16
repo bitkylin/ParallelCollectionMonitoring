@@ -1,7 +1,7 @@
 ﻿using System.Threading;
-using TCPDemo.util;
+using TCPServer.util;
 
-namespace TCPDemo.model
+namespace TCPServer.model
 {
     internal class SendHolder
     {

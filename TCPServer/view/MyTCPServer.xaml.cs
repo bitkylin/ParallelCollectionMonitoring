@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Net;
 using System.Windows;
-using TCPDemo.accessPresenter;
+using TCPServer.accessPresenter;
 
-namespace TCPDemo.view
+namespace TCPServer.view
 {
     /// <summary>
     ///     MainWindow.xaml 的交互逻辑

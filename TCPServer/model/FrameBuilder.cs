@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using TCPDemo.util;
+using TCPServer.util;
 
-namespace TCPDemo.model
+namespace TCPServer.model
 {
     public class FrameBuilder
     {
-        Random _random = new Random();
+        private readonly Random _random = new Random();
 
        public byte[] Build(int num)
         {
@@ -28,7 +28,6 @@ namespace TCPDemo.model
         /// <summary>
         ///     将int数值转换为占三个字节的byte数组，本方法适用于(int数字低位在后，高位在前)的顺序。 和bytesToInt（）配套使用
         /// </summary>
-        /// <param name="value"></param>
         /// <returns></returns>
         private  byte[] IntToBytes()
         {

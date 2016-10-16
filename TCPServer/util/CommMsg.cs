@@ -1,4 +1,4 @@
-﻿namespace TCPDemo.util
+﻿namespace TCPServer.util
 {
     public static class CommMsg
     {

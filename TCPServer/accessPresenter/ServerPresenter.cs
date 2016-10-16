@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
-using TCPDemo.model;
-using TCPDemo.util;
-using TCPDemo.view;
+using TCPServer.model;
+using TCPServer.util;
+using TCPServer.view;
 
-namespace TCPDemo.accessPresenter
+namespace TCPServer.accessPresenter
 {
     internal class ServerPresenter : IServerPresenter
     {
         private readonly BitkyTcpServer _bitkyTcpServer;
         private readonly ISetView _view;
-        FrameBuilder _frameBuilder = new FrameBuilder();
+        private readonly FrameBuilder _frameBuilder = new FrameBuilder();
 
         public ServerPresenter(ISetView view)
         {

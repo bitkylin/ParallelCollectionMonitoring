@@ -3,10 +3,10 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using TCPDemo.accessPresenter;
-using TCPDemo.model;
+using TCPServer.accessPresenter;
+using TCPServer.model;
 
-namespace TCPDemo.util
+namespace TCPServer.util
 {
     public class BitkyTcpServer
     {
