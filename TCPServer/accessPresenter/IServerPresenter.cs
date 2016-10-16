@@ -6,7 +6,6 @@ namespace TCPServer.accessPresenter
     {
         void StartListening(IPAddress ipAddress, int port);
         void StopListening();
-
         void GetReceivedData(byte[] data);
         void GetControlMessage(string data);
     }

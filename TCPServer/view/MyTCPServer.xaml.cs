@@ -76,16 +76,13 @@ namespace TCPServer.view
         /// </summary>
         private void SetComboBoxIpAddress()
         {
-           _addresses = new List<IPAddress>();
+            _addresses = new List<IPAddress>();
             var addressList = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
             foreach (var ipAddress in addressList)
                 if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
                     _addresses.Add(ipAddress);
-            _addresses.ForEach(ipAddress =>
-            {
-                ComboBoxIp.Items.Add(ipAddress);
-            });
-             
+            _addresses.ForEach(ipAddress => { ComboBoxIp.Items.Add(ipAddress); });
+
             ComboBoxIp.SelectedIndex = ComboBoxIp.Items.Count > 0 ? 0 : -1;
         }
     }
