@@ -318,6 +318,5 @@ namespace bitkyFlashresUniversal.connClient.presenter
             _currentFrameData = frameData;
             DeviceGatherStart(OperateType.Debug);
         }
-
     }
 }

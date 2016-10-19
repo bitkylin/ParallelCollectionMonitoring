@@ -49,7 +49,6 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                     {
                         if (pole.IdCurrent == oddNum)
                             a = pole.Clone(PoleMode.A);
-
                         if (pole.IdCurrent == evenNum)
                             b = pole.Clone(PoleMode.B);
                         if (pole.IdCurrent == mNum)
@@ -81,8 +80,7 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                     return odd + 1;
                 else
                     return even - 1;
-
-
+            
             if (odd < even)
                 if (even - odd > 1)
                     return (even + odd)/2;
