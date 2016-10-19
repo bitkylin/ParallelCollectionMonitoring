@@ -214,6 +214,7 @@ namespace bitkyFlashresUniversal.view
         {
             var ports = SerialPort.GetPortNames();
             Array.Sort(ports);
+            ComboPortName.Items.Clear();
             //初始化串口名称下拉列表框
             foreach (var port in ports)
                 ComboPortName.Items.Add(port);

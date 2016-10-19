@@ -8,7 +8,7 @@
         /// <summary>
         ///     握手帧的帧头
         /// </summary>
-        HandshakeSwitchWifi,
+        HandshakeSwitchDevice,
 
         /// <summary>
         ///     下位机重置指令

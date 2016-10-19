@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
+using System.Timers;
 using bitkyFlashresUniversal.connClient.model;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.databaseUtil.presenter;
 using bitkyFlashresUniversal.ElectrodeDetection;
 using bitkyFlashresUniversal.view;
+using Timer = System.Timers.Timer;
 
 namespace bitkyFlashresUniversal.connClient.presenter
 {
@@ -21,6 +23,8 @@ namespace bitkyFlashresUniversal.connClient.presenter
         private bool _connConnected;
         private FrameData _currentFrameData;
         private List<Electrode> _electrodes;
+        private readonly Timer _timerSendDelay;
+
 
         public CommPresenter(IViewCommStatus view)
         {
@@ -28,6 +32,10 @@ namespace bitkyFlashresUniversal.connClient.presenter
             _commucationFacade = new CommucationFacade(this);
             _sqlPresenter = new SqlPresenter(this);
             _poleDetectPresenter = new PoleDetectPresenter();
+
+            //子帧收集计时器
+            _timerSendDelay = new Timer(PresetInfo.FrameSendDelay) { AutoReset = false };
+            _timerSendDelay.Elapsed += FrameSendDelay;
         }
 
         /// <summary>
@@ -48,7 +56,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
         {
             switch (frameData.Type)
             {
-                case FrameType.HandshakeSwitchWifi:
+                case FrameType.HandshakeSwitchDevice:
                     _view.ControlMessageShow("收到握手帧的帧头");
                     break;
                 case FrameType.DeviceReset:
@@ -110,8 +118,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                             _view.ControlMessageShow("数据库检索已完成");
                             break;
                         case FrameType.ControlGather:
-                            Thread.Sleep(PresetInfo.FrameSendDelay);
-                            _commucationFacade.SendDataFrame(_currentFrameData);
+                           _timerSendDelay.Start();
                             break;
                         default:
                             _view.ControlMessageShow("未知错误");
@@ -162,7 +169,13 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     throw new ArgumentOutOfRangeException();
             }
         }
-
+        /// <summary>
+        /// 帧发送延时事件回调函数
+        /// </summary>
+        private void FrameSendDelay(object source, ElapsedEventArgs e)
+        {
+            _commucationFacade.SendDataFrame(_currentFrameData);
+        }
         /// <summary>
         ///     通信信息的显示
         /// </summary>
@@ -269,8 +282,8 @@ namespace bitkyFlashresUniversal.connClient.presenter
                 case OperateType.Handshake:
                     if (CheckTable())
                     {
-                        _commucationFacade.SendDataFrame(new FrameData(FrameType.HandshakeSwitchWifi));
-                        Thread.Sleep(1000);
+                        _commucationFacade.SendDataFrame(new FrameData(FrameType.HandshakeSwitchDevice));
+                        Thread.Sleep(200);
                         _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayOpen));
                     }
                     else

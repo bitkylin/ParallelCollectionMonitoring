@@ -26,10 +26,10 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
 //            if ((_dataList.Count >= 4) && (_dataList.Count < 68))
 //                switch (FrameTypeGather(_dataList.GetRange(0, 4).ToArray())) //获取帧头，并判断帧头类型
 //                {
-//                    case FrameType.HandshakeSwitchWifi: //获取到握手帧的帧头
+//                    case FrameType.HandshakeSwitchDevice: //获取到握手帧的帧头
 //                        Debug.WriteLine("当前帧类型:握手帧的帧头");
 //                        _dataList.Clear();
-//                        return new FrameData(FrameType.HandshakeSwitchWifi);
+//                        return new FrameData(FrameType.HandshakeSwitchDevice);
 //
 //                    case FrameType.DeviceReset:
 //                        Debug.WriteLine("当前帧类型:下位机重置帧的帧头");
@@ -123,7 +123,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
             if (CompareByte(bytes, CommMsg.HvRelaySubframeHeader))
                 return FrameType.HvRelayOpen;
             if (CompareByte(bytes, CommMsg.CurrentReceiveSwitchFrame))
-                return FrameType.HandshakeSwitchWifi;
+                return FrameType.HandshakeSwitchDevice;
             if (CompareByte(bytes, CommMsg.DeviceResetFrameHeader))
                 return FrameType.DeviceReset;
             if (CompareByte(bytes, CommMsg.DataFrameHeader))

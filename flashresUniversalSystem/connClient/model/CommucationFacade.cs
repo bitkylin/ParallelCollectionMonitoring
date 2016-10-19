@@ -26,6 +26,7 @@ namespace bitkyFlashresUniversal.connClient.model
         private readonly ICommPresenter _presenter; //通信接口表现层
 
         private readonly Timer _timerFrameCollect;
+        public bool ConnIsOpen = false;
 
         private FrameData _currentframeData;
 
@@ -73,6 +74,7 @@ namespace bitkyFlashresUniversal.connClient.model
         /// </summary>
         public void CommClientFailed(string str)
         {
+            ConnIsOpen = false;
             MessageBeep(0x00000030);
             _timerFrameCollect.Stop();
             switch (PresetInfo.CurrentCommType)
@@ -99,6 +101,7 @@ namespace bitkyFlashresUniversal.connClient.model
         /// </summary>
         public void GetSocketSuccess()
         {
+            ConnIsOpen = true;
             _presenter.GetSocketSuccess();
         }
 
@@ -129,7 +132,7 @@ namespace bitkyFlashresUniversal.connClient.model
             _presenter.SetFrameData(frameData);
             switch (frameData.Type)
             {
-                case FrameType.HandshakeSwitchWifi:
+                case FrameType.HandshakeSwitchDevice:
                     _presenter.CommunicateMessageShow("收到握手帧的回复");
                     break;
 
@@ -169,6 +172,11 @@ namespace bitkyFlashresUniversal.connClient.model
         /// <param name="frameData">指定的帧格式</param>
         public void SendDataFrame(FrameData frameData)
         {
+            if (!ConnIsOpen)
+            {
+                _presenter.CommunicateMessageShow("连接已断开");
+                return;
+            }
             _currentframeData = frameData;
             switch (frameData.Type)
             {
@@ -178,7 +186,7 @@ namespace bitkyFlashresUniversal.connClient.model
                 case FrameType.HvRelayClose:
                     Send(CommMsg.HvRelayClose);
                     break;
-                case FrameType.HandshakeSwitchWifi:
+                case FrameType.HandshakeSwitchDevice:
                     Send(CommMsg.CurrentReceiveSwitchFrame);
                     break;
                 case FrameType.ControlGather:
@@ -222,8 +230,12 @@ namespace bitkyFlashresUniversal.connClient.model
         {
             MessageBeep(0x00000030);
             //  MessageBox.Show("确认后继续");
+            if (!ConnIsOpen)
+            {
+                _presenter.CommunicateMessageShow("连接已断开，程序停止");
+                return;
+            }
             _presenter.CommunicateMessageShow("未接收到正确的子帧数据,程序继续");
-            // _presenter.DeviceGatherStart(PresetInfo.CurrentOperateType);
             SendDataFrame(_currentframeData);
         }
 
