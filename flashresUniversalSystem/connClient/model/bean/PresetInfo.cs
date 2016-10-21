@@ -15,6 +15,7 @@
         //---------系统当前运行模式----------
         public static OperateType CurrentOperateType = OperateType.Null;
         public static CommType CurrentCommType = CommType.Null;
+        public static bool StartAutoCollect = true;
 
         //---------帧回复超时等待------------
         public static int FrameReceiveTimeout = 5000;

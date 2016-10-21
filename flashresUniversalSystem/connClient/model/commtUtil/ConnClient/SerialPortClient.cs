@@ -101,11 +101,17 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
                 _commucationFacade.CommClientFailed("comm.IsOpen==false 串口断开");
         }
 
+        void CloseConn()
+        {
+            Thread.Sleep(500);
+            if (_comm != null && _comm.IsOpen)
+                _comm.Close();
+        }
+
 
         public void Close()
         {
-            if (_comm != null && _comm.IsOpen)
-                _comm.Close();
+            new Thread(CloseConn).Start();
         }
     }
 }

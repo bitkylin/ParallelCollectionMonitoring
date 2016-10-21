@@ -34,7 +34,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
             _poleDetectPresenter = new PoleDetectPresenter();
 
             //子帧收集计时器
-            _timerSendDelay = new Timer(PresetInfo.FrameSendDelay) { AutoReset = false };
+            _timerSendDelay = new Timer(PresetInfo.FrameSendDelay) {AutoReset = false};
             _timerSendDelay.Elapsed += FrameSendDelay;
         }
 
@@ -118,7 +118,8 @@ namespace bitkyFlashresUniversal.connClient.presenter
                             _view.ControlMessageShow("数据库检索已完成");
                             break;
                         case FrameType.ControlGather:
-                           _timerSendDelay.Start();
+                            _timerSendDelay.Interval = PresetInfo.FrameSendDelay;
+                            _timerSendDelay.Start();
                             break;
                         default:
                             _view.ControlMessageShow("未知错误");
@@ -163,12 +164,13 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     }
                     break;
 
-                    case OperateType.Debug:
+                case OperateType.Debug:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+
         /// <summary>
         /// 帧发送延时事件回调函数
         /// </summary>
@@ -176,6 +178,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
         {
             _commucationFacade.SendDataFrame(_currentFrameData);
         }
+
         /// <summary>
         ///     通信信息的显示
         /// </summary>
@@ -217,12 +220,11 @@ namespace bitkyFlashresUniversal.connClient.presenter
                 case OperateType.Detect2:
                     _sqlPresenter.InsertResultDataToDb(electrodes, _poleDetectPresenter.BadId);
                     break;
-                    case OperateType.Debug:
+                case OperateType.Debug:
                     Debug.WriteLine("一次电极调试完成");
                     _view.BitkyPoleShow(_electrodes);
                     DeviceGatherStart(OperateType.Debug);
                     break;
-
             }
         }
 
@@ -242,6 +244,10 @@ namespace bitkyFlashresUniversal.connClient.presenter
         {
             Debug.WriteLine("插入数据库完成");
             _view.BitkyPoleShow(_electrodes);
+            if (!PresetInfo.StartAutoCollect)
+            {
+                return;
+            }
             if (PresetInfo.CurrentOperateType == OperateType.Gather)
                 StartWork();
             else
@@ -306,7 +312,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     StartWork();
                     break;
 
-                    case OperateType.Debug:
+                case OperateType.Debug:
                     _commucationFacade.SendDataFrame(_currentFrameData);
                     break;
                 default:

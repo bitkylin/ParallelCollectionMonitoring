@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO.Ports;
 using System.Text.RegularExpressions;
@@ -376,6 +377,12 @@ namespace bitkyFlashresUniversal.view
             {
                 _commPresenter.FrontConnClosed();
             }
+        }
+
+        private void checkBox_Clicked(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("change");
+            PresetInfo.StartAutoCollect = checkBoxStartAutoCollect.IsChecked != false;
         }
     }
 }

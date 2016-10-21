@@ -192,6 +192,7 @@ namespace bitkyFlashresUniversal.connClient.model
                 case FrameType.ControlGather:
                     Send(_controlFrameBuilder.DataFrameBuild(_currentframeData));
                     _electrodes.Clear();
+                    _timerFrameCollect.Interval = PresetInfo.FrameReceiveTimeout;
                     _timerFrameCollect.Start();
                     break;
                 default:
@@ -233,6 +234,10 @@ namespace bitkyFlashresUniversal.connClient.model
             if (!ConnIsOpen)
             {
                 _presenter.CommunicateMessageShow("连接已断开，程序停止");
+                return;
+            }
+            if (!PresetInfo.StartAutoCollect)
+            {
                 return;
             }
             _presenter.CommunicateMessageShow("未接收到正确的子帧数据,程序继续");

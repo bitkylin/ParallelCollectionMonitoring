@@ -26,13 +26,13 @@
                     <Button x:Name="BtnElectrodeDetect" Content="检测电极状态" HorizontalAlignment="Left" Margin="37,210,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnElectrodeDetect_Click"/>
                     <Button x:Name="BtnCommunicateClear" Content="清空通信信息" Margin="152,271,0,0" Click="btnCommunicateClear_Click" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100"/>
                     <Button x:Name="BtnControlClear" Content="清空控制信息" HorizontalAlignment="Left" Margin="152,305,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnControlClear_Click"/>
-                    <Button x:Name="BtnGatherDataClear" Content="清空已采数据" HorizontalAlignment="Left" Margin="80,436,0,0" VerticalAlignment="Top" Width="137" Height="29" Click="btnGatherDataClear_Click"/>
+                    <Button x:Name="BtnGatherDataClear" Content="清空已采数据" HorizontalAlignment="Left" Margin="37,0,0,10" Width="137" Click="btnGatherDataClear_Click" Height="29" VerticalAlignment="Bottom"/>
                     <Button x:Name="BtnHandshakeStart" Content="握手" HorizontalAlignment="Left" Margin="152,176,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="BtnHandshakeStart_Click"/>
                     <ListBox x:Name="ListBoxSendData" Margin="332,10,370,249"/>
                     <ListBox x:Name="ListBoxReceiveData" Height="237" Margin="332,0,370,7" VerticalAlignment="Bottom"/>
                     <Button x:Name="BtnSendDataClear" Content="清空发送帧" HorizontalAlignment="Left" Margin="37,271,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnSendDataClear_Click"/>
                     <Button x:Name="BtnReceiveDataClear" Content="清空接收帧" HorizontalAlignment="Left" Margin="37,305,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnReceiveDataClear_Click"/>
-                    <Button x:Name="BtnShowClear" Content="清空显示数据" HorizontalAlignment="Left" Margin="80,360,0,0" VerticalAlignment="Top" Width="137" Height="45" Click="btnShowClear_Click"/>
+                    <Button x:Name="BtnShowClear" Content="清空显示数据" HorizontalAlignment="Left" Margin="37,355,0,0" VerticalAlignment="Top" Width="100" Height="45" Click="btnShowClear_Click"/>
                     <ComboBox x:Name="ComboPortName" HorizontalAlignment="Left" Margin="192,26,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
                     <ComboBox x:Name="ComboBaudrate" HorizontalAlignment="Left" Margin="192,56,0,0" VerticalAlignment="Top" Width="120" Height="26">
                         <ComboBoxItem Content="4800"/>
@@ -41,6 +41,16 @@
                     </ComboBox>
                     <Button x:Name="BtnPort" Content="打开串口" HorizontalAlignment="Left" Margin="192,87,0,0" VerticalAlignment="Top" Width="120" Height="29" Click="btnPort_Click"/>
                     <Button x:Name="BtnRefreshPort" Content="刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="237,121,0,0" Click="btnRefreshPort_Click"/>
+                    <CheckBox x:Name="checkBoxStartAutoCollect" Content="开启自动采集" HorizontalAlignment="Left" Margin="50,134,0,0" Width="102" IsChecked="True"  Click="checkBox_Clicked" RenderTransformOrigin="0.5,0.5" Height="21" VerticalAlignment="Top">
+                        <CheckBox.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
                 </Grid>
             </TabItem>
             <TabItem Header="通道状态显示" Height="30" Width="200">
@@ -72,9 +82,9 @@
                     <Label Content="电流阈值：" HorizontalAlignment="Left" Margin="72,65,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="TextBoxElectricThreshold" HorizontalAlignment="Left" Height="26" Margin="142,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Button x:Name="ButtonConfirmSetting" Content="确认" HorizontalAlignment="Left" Margin="117,171,0,0" VerticalAlignment="Top" Width="100" Click="buttonConfirmSetting_Click" Height="29"/>
-                    <Button x:Name="BtnDebugPole" Content="测试" HorizontalAlignment="Left" Margin="397,315,0,0" VerticalAlignment="Top" Width="75" Click="btnDebugPole_Click"/>
-                    <TextBox x:Name="TextBoxDebugPole0" HorizontalAlignment="Left" Height="23" Margin="397,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="TextBoxDebugPole1" HorizontalAlignment="Left" Height="23" Margin="397,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="BtnDebugPole" Content="测试" HorizontalAlignment="Left" Margin="542,138,0,0" VerticalAlignment="Top" Width="75" Click="btnDebugPole_Click"/>
+                    <TextBox x:Name="TextBoxDebugPole0" HorizontalAlignment="Left" Height="23" Margin="517,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TextBoxDebugPole1" HorizontalAlignment="Left" Height="23" Margin="517,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="Label1Copy" Content="帧回复超时时间：" HorizontalAlignment="Left" Margin="37,96,0,0" VerticalAlignment="Top" Width="141"/>
                     <TextBox x:Name="TextBoxFrameReceiveTimeout" HorizontalAlignment="Left" Height="26" Margin="142,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="Label1Copy1" Content="帧发送延时：" HorizontalAlignment="Left" Margin="62,126,0,0" VerticalAlignment="Top" Width="92"/>

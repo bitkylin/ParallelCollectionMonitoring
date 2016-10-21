@@ -10,8 +10,8 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
         ///     核查数据表的轮廓信息，并读取总的数据行数及当前所在行
         /// </summary>
         /// <param name="sumNun">数据总行数</param>
-        /// <param name="currentNum">当前所在行</param>
-        void SetTableOutline(int sumNun, int currentNum);
+        /// <param name="preCollectRow">当前所在行</param>
+        void SetTableOutline(int sumNun, int preCollectRow);
 
         /// <summary>
         ///     从数据库中获取当前行的数据并解析为数据帧的对象

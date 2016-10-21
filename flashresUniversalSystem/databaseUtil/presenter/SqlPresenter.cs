@@ -29,12 +29,12 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
         ///     数据表的轮廓信息显示在view中
         /// </summary>
         /// <param name="sumNun">数据总行数</param>
-        /// <param name="currentNum">当前所在行</param>
-        public void SetTableOutline(int sumNun, int currentNum)
+        /// <param name="preCollectRow">待采数据行</param>
+        public void SetTableOutline(int sumNun, int preCollectRow)
         {
-            _currentNum = currentNum;
+            _currentNum = preCollectRow;
             _sumNum = sumNun;
-            _commPresenter.DataOutlineShow("当前所在行:" + currentNum + " 总行数:" + sumNun);
+            _commPresenter.DataOutlineShow("待采集行:" + preCollectRow + " 总行数:" + sumNun);
         }
 
         /// <summary>
@@ -48,7 +48,6 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
                 var frameData = _sqliteBitky.SelectRowData(_currentNum);
                 if (frameData.Type != FrameType.None)
                 {
-                    _sqliteBitky.UpdateCurrentRowNum(_currentNum);
                     frameData.PoleList.ForEach(pole =>
                     {
                         switch (pole.Mode)
@@ -101,9 +100,10 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
                     sqlTextValueBuilder.Append("')");
 
                     var sqlText = sqlTextNameBuilder.ToString() + sqlTextValueBuilder;
-               Debug.WriteLine(sqlText);
+                    Debug.WriteLine(sqlText);
                     if (_sqliteBitky.InsertResultDataToDb(sqlText))
                     {
+                        _sqliteBitky.UpdateCurrentRowNum(_currentNum);
                         SetTableOutline(_sumNum, _currentNum + 1);
 
                         Debug.WriteLine("插入数据库成功");
@@ -213,7 +213,7 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
         {
             const string sqlElectrodDetectInit = "DELETE FROM " + PresetInfo.ElectrodeResultTable;
             const string sqlElectrodDetectInit2 =
-                "UPDATE " + PresetInfo.DataInfoTable + " SET num = '1' WHERE name = 'current'";
+                "UPDATE " + PresetInfo.DataInfoTable + " SET num = '0' WHERE name = 'current'";
             const string sqlElectrodDetectInit3 = "DELETE FROM " + PresetInfo.SqliteSequenceTable;
 
             _sqliteBitky.InsertResultDataToDb(sqlElectrodDetectInit);

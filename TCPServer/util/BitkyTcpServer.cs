@@ -18,11 +18,14 @@ namespace TCPServer.util
         private Socket _socketServerSub;
         private Thread _threadServer;
         private Thread _threadServerSub;
+        private Random _random;
 
         public BitkyTcpServer(IServerPresenter serverPresenter)
         {
             _serverPresenter = serverPresenter;
             _sendHolder = new SendHolder(this);
+            _random = new Random();
+           
         }
 
         /// <summary>
@@ -119,6 +122,11 @@ namespace TCPServer.util
 
         public void SendDelayed(byte[] bytes, int timeInterval)
         {
+            if (_random.Next(100)>80)
+            {
+                return;
+            }
+          
             _sendHolder.SendDelayed(bytes, timeInterval);
         }
     }
