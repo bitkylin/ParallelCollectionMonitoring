@@ -18,9 +18,8 @@
                     <ListBox x:Name="ListBoxCommunicationText" HorizontalAlignment="Right" Margin="0,10,10.4,248.8" Width="354"/>
                     <Label Content="IP地址：" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Height="25"/>
                     <Label Content="端口号：" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="TextBoxIp" HorizontalAlignment="Left" Height="25" Margin="68,26,0,0" TextWrapping="Wrap" Text="16.7.30.254" VerticalAlignment="Top" Width="94"/>
-                    <TextBox x:Name="TextBoxPort" HorizontalAlignment="Left" Height="26" Margin="68,56,0,0" TextWrapping="Wrap" Text="49000" VerticalAlignment="Top" Width="94"/>
-                    <Button x:Name="BtnConnect" Content="连接" HorizontalAlignment="Left" Margin="37,87,0,0" VerticalAlignment="Top" Width="125" Height="29" Click="btnConnect_Click"/>
+                    <TextBox x:Name="TextBoxPort" HorizontalAlignment="Left" Height="26" Margin="68,56,0,0" TextWrapping="Wrap" Text="49000" VerticalAlignment="Top" Width="106"/>
+                    <Button x:Name="BtnConnect" Content="连接" HorizontalAlignment="Left" Margin="37,87,0,0" VerticalAlignment="Top" Width="137" Height="29" Click="btnConnect_Click"/>
                     <Button x:Name="BtnHandshake" Content="开始工作" HorizontalAlignment="Left" Margin="152,210,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnHandshake_Click"/>
                     <Button x:Name="BtnSendStopGather" Content="打开电极选择器" HorizontalAlignment="Left" Margin="37,176,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnOpenElectrodeSelectForm_Click"/>
                     <Button x:Name="BtnElectrodeDetect" Content="检测电极状态" HorizontalAlignment="Left" Margin="37,210,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnElectrodeDetect_Click"/>
@@ -33,7 +32,7 @@
                     <Button x:Name="BtnSendDataClear" Content="清空发送帧" HorizontalAlignment="Left" Margin="37,271,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnSendDataClear_Click"/>
                     <Button x:Name="BtnReceiveDataClear" Content="清空接收帧" HorizontalAlignment="Left" Margin="37,305,0,0" VerticalAlignment="Top" Width="100" Height="29" Click="btnReceiveDataClear_Click"/>
                     <Button x:Name="BtnShowClear" Content="清空显示数据" HorizontalAlignment="Left" Margin="37,355,0,0" VerticalAlignment="Top" Width="100" Height="45" Click="btnShowClear_Click"/>
-                    <ComboBox x:Name="ComboPortName" HorizontalAlignment="Left" Margin="192,26,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
+                    <ComboBox x:Name="ComboPortName" HorizontalAlignment="Left" Margin="192,26,0,0" VerticalAlignment="Top" Width="120" Height="25" IsEditable="True"/>
                     <ComboBox x:Name="ComboBaudrate" HorizontalAlignment="Left" Margin="192,56,0,0" VerticalAlignment="Top" Width="120" Height="26">
                         <ComboBoxItem Content="4800"/>
                         <ComboBoxItem Content="9600"/>
@@ -51,6 +50,9 @@
                             </TransformGroup>
                         </CheckBox.RenderTransform>
                     </CheckBox>
+                    <ComboBox x:Name="comboBoxIP" HorizontalAlignment="Left" Margin="67,26,0,0" VerticalAlignment="Top" Width="107" IsEditable="True" Height="26">
+                        <ComboBoxItem Content="16.7.30.254"/>
+                    </ComboBox>
                 </Grid>
             </TabItem>
             <TabItem Header="通道状态显示" Height="30" Width="200">

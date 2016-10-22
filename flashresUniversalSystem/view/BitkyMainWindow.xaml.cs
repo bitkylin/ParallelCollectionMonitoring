@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO.Ports;
+using System.Net;
+using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,7 +32,7 @@ namespace bitkyFlashresUniversal.view
 
             InitBitkyPoleShow();
             InitSettingFragment();
-            InitSerialPortShow();
+            InitWifiSerialPortShow();
         }
 
         /// <summary>
@@ -52,6 +54,7 @@ namespace bitkyFlashresUniversal.view
             {
                 ListBoxControlText.Items.Add(message);
                 ListBoxControlText.SelectedIndex = ListBoxControlText.Items.Count - 1;
+                ListBoxControlText.ScrollIntoView(ListBoxControlText.Items.CurrentItem);
             });
         }
 
@@ -211,7 +214,10 @@ namespace bitkyFlashresUniversal.view
             TextBoxFrameSendDelay.Text = PresetInfo.FrameSendDelay.ToString();
         }
 
-        private void InitSerialPortShow()
+        /// <summary>
+        /// 初始化TCP、串口相关环境配置
+        /// </summary>
+        private void InitWifiSerialPortShow()
         {
             var ports = SerialPort.GetPortNames();
             Array.Sort(ports);
@@ -220,8 +226,17 @@ namespace bitkyFlashresUniversal.view
             foreach (var port in ports)
                 ComboPortName.Items.Add(port);
             //初始化波特率下拉列表框
-            ComboPortName.SelectedIndex = ComboPortName.Items.Count > 0 ? 0 : -1;
+            ComboPortName.SelectedIndex = ComboPortName.Items.Count - 1;
             ComboBaudrate.SelectedIndex = ComboBaudrate.Items.Count - 1;
+
+            //初始化IP地址下拉列表框
+            var addresses = new List<IPAddress>();
+            var addressList = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+            foreach (var ipAddress in addressList)
+                if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                    addresses.Add(ipAddress);
+            addresses.ForEach(ipAddress => { comboBoxIP.Items.Add(ipAddress); });
+            comboBoxIP.SelectedIndex = comboBoxIP.Items.Count > 0 ? 0 : -1;
         }
 
         /// <summary>
@@ -243,7 +258,7 @@ namespace bitkyFlashresUniversal.view
                 _commPresenter.FrontConnClosed();
                 return;
             }
-            var ip = TextBoxIp.Text.Trim();
+            var ip = comboBoxIP.Text.Trim();
             var portStr = TextBoxPort.Text.Trim();
             var match = Regex.IsMatch(ip,
                 @"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$");
@@ -356,7 +371,7 @@ namespace bitkyFlashresUniversal.view
         /// <param name="e"></param>
         private void btnRefreshPort_Click(object sender, RoutedEventArgs e)
         {
-            InitSerialPortShow();
+            InitWifiSerialPortShow();
         }
 
         /// <summary>
