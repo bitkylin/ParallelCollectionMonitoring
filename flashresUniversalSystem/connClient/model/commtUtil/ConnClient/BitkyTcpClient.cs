@@ -45,7 +45,8 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
                     stringbuilder.Append($"{b:X2}" + " ");
                 _commucationFacade.SendDataShow("已发送:" + stringbuilder);
                 Debug.WriteLine("已发送:" + stringbuilder);
-               
+                Debug.WriteLine("已发送数量:" + bytes.Length);
+
                 _socketTcp?.Send(bytes);
             }
             catch (SocketException)

@@ -297,6 +297,21 @@ namespace bitkyFlashresUniversal.view
             _commPresenter.DeviceGatherStart(OperateType.Detect);
         }
 
+        private void BtnHandshakeStart_Click(object sender, RoutedEventArgs e)
+        {
+            _commPresenter.DeviceGatherStart(OperateType.Handshake);
+        }
+
+        private void BtnDeviceReset_Click(object sender, RoutedEventArgs e)
+        {
+            _commPresenter.DeviceGatherStart(OperateType.DeviceReset);
+        }
+
+        private void BtnHvRelayOpen_Click(object sender, RoutedEventArgs e)
+        {
+            _commPresenter.DeviceGatherStart(OperateType.HvRelayOpen);
+        }
+
         private void btnCommunicateClear_Click(object sender, RoutedEventArgs e)
         {
             ListBoxCommunicationText.Items.Clear();
@@ -330,10 +345,6 @@ namespace bitkyFlashresUniversal.view
             ListBoxReceiveData.Items.Clear();
         }
 
-        private void BtnHandshakeStart_Click(object sender, RoutedEventArgs e)
-        {
-            _commPresenter.DeviceGatherStart(OperateType.Handshake);
-        }
 
         private void Window_Closed(object sender, EventArgs e)
         {

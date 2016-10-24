@@ -289,9 +289,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     if (CheckTable())
                     {
                         _commucationFacade.SendDataFrame(new FrameData(FrameType.HandshakeSwitchDevice));
-                        Thread.Sleep(200);
-                        _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayOpen));
-                    }
+                     }
                     else
                         _view.ControlMessageShow("数据库初始化检查出错");
                     break;
@@ -311,7 +309,13 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     CheckTable();
                     StartWork();
                     break;
+                    case OperateType.HvRelayOpen:
+                    _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayOpen));
+                    break;
+                case OperateType.DeviceReset:
+                    _commucationFacade.SendDataFrame(new FrameData(FrameType.DeviceReset));
 
+                    break;
                 case OperateType.Debug:
                     _commucationFacade.SendDataFrame(_currentFrameData);
                     break;

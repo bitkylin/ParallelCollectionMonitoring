@@ -18,9 +18,9 @@
         public static bool StartAutoCollect = true;
 
         //---------帧回复超时等待------------
-        public static int FrameReceiveTimeout = 5000;
+        public static int FrameReceiveTimeout = 3500;
 
-        public static int FrameSendDelay = 1000;
+        public static int FrameSendDelay = 50;
         //---------电极检测模式--------------
         public static double ElectricThreshold = 10;
     }

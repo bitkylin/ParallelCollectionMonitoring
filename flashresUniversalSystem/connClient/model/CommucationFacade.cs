@@ -189,6 +189,9 @@ namespace bitkyFlashresUniversal.connClient.model
                 case FrameType.HandshakeSwitchDevice:
                     Send(CommMsg.CurrentReceiveSwitchFrame);
                     break;
+                case FrameType.DeviceReset:
+                    Send(CommMsg.DeviceResetFrame);
+                    break;
                 case FrameType.ControlGather:
                     Send(_controlFrameBuilder.DataFrameBuild(_currentframeData));
                     _electrodes.Clear();

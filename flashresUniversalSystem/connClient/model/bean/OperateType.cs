@@ -9,6 +9,8 @@
         Gather,
         Detect,
         Detect2,
+        DeviceReset,
+        HvRelayOpen,
         Debug,
         Null
     }
