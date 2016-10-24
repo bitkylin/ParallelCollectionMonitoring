@@ -33,7 +33,7 @@ namespace TCPServer.model
         {
             var value = _random.Next(330000);
 
-            Debug.WriteLine(value);
+           
             var src = new byte[3];
             src[0] = (byte) ((value >> 16) & 0xFF);
             src[1] = (byte) ((value >> 8) & 0xFF);
