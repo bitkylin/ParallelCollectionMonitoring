@@ -18,16 +18,37 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
         private ProcessPresenter _processPresenter;
         private readonly BitkyMainWindow _window;
         private readonly ControlFrameBuilder _controlFrameBuilder;
+        private List<int> _ints;
 
-        public ElectrodeSelecterForm(BitkyMainWindow window)
+
+        public ElectrodeSelecterForm(BitkyMainWindow window, List<int> ints)
         {
             InitializeComponent();
             _window = window;
-            _controlFrameBuilder=new ControlFrameBuilder();
+            _ints = ints;
+            _controlFrameBuilder = new ControlFrameBuilder();
 
             foreach (Control c in groupBoxPoleSelect.Controls)
                 _listCheckBox.Add((SkinCheckBox) c);
+            InitPoleSelection();
         }
+
+        private void InitPoleSelection()
+        {
+            _listCheckBox.ForEach(checkBox =>
+            {
+                checkBox.Checked = true;
+                var num = int.Parse(checkBox.Text);
+                _ints.ForEach(i =>
+                {
+                    if (i == num)
+                    {
+                        checkBox.Checked = false;
+                    }
+                });
+            });
+        }
+
 
         private void btnProcess_Click(object sender, EventArgs e)
         {
@@ -43,8 +64,8 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
             //新建数据处理类
             _processPresenter = new ProcessPresenter(list);
             var listReturn = _processPresenter.Process();
-            var fileStream=new FileStream("lmlPoleWrite", FileMode.Create,FileAccess.Write);
-            var binaryWriter=new BinaryWriter(fileStream);
+            var fileStream = new FileStream("lmlPoleWrite", FileMode.Create, FileAccess.Write);
+            var binaryWriter = new BinaryWriter(fileStream);
 
             var conn = new SQLiteConnection("Data Source = " + PresetInfo.DatabasePath + "; Version = 3;");
             conn.Open();
@@ -63,7 +84,7 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                 cmd.ExecuteNonQuery();
                 listReturn.ForEach(list2 =>
                 {
-                    binaryWriter.Write( _controlFrameBuilder.DataFrameBuild(  new FrameData(FrameType.ControlGather, list2)));
+                    binaryWriter.Write(_controlFrameBuilder.DataFrameBuild(new FrameData(FrameType.ControlGather, list2)));
                     var poleGroup = new ElectrodeGroup();
                     list2.ForEach(pole =>
                     {
@@ -76,7 +97,8 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                     });
                     if (poleGroup.IsReady())
                     {
-                        cmd.CommandText = "INSERT INTO " + PresetInfo.ElectrodeControllerTable + "(typeA,typeB,typeM) VALUES (" +
+                        cmd.CommandText = "INSERT INTO " + PresetInfo.ElectrodeControllerTable +
+                                          "(typeA,typeB,typeM) VALUES (" +
                                           poleGroup.TypeA + "," + poleGroup.TypeB + "," + poleGroup.TypeM + ")";
                         cmd.ExecuteNonQuery();
                     }
@@ -100,12 +122,11 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
             trans.Commit();
             conn.Close();
             Close();
-            _window.SetElectrodeSuccessful();
+            _window.SetElectrodeSuccessful(list);
 
             binaryWriter.Close();
             fileStream.Close();
         }
-
 
 
         /// <summary>

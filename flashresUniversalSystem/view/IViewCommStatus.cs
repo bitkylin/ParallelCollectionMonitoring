@@ -50,5 +50,15 @@ namespace bitkyFlashresUniversal.view
         /// </summary>
         /// <param name="electrodes"></param>
         void BitkyPoleShow(List<Electrode> electrodes);
+
+        /// <summary>
+        /// 在view中显示配置信息
+        /// </summary>
+        void SetPreferencesData();
+
+        /// <summary>
+        /// 将电极检测结果返回View，返回坏电极的集合
+        /// </summary>
+        void InitPoleSelection(List<int> badList);
     }
 }

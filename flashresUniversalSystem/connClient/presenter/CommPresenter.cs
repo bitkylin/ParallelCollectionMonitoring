@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Timers;
+using System.Windows;
 using bitkyFlashresUniversal.connClient.model;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.databaseUtil.presenter;
@@ -115,14 +116,15 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     switch (_currentFrameData.Type)
                     {
                         case FrameType.None:
-                            _view.ControlMessageShow("数据库检索已完成");
+                            _view.CommunicateMessageShow("数据库检索已完成");
+                            MessageBox.Show("数据采集已完成！", "提示");
                             break;
                         case FrameType.ControlGather:
                             _timerSendDelay.Interval = PresetInfo.FrameSendDelay;
                             _timerSendDelay.Start();
                             break;
                         default:
-                            _view.ControlMessageShow("未知错误");
+                            _view.CommunicateMessageShow("未知错误");
                             break;
                     }
                     break;
@@ -139,18 +141,30 @@ namespace bitkyFlashresUniversal.connClient.presenter
                             var electrodeInspect = _sqlPresenter.SecondRroundInspect();
                             if (electrodeInspect.NiceId == -1)
                             {
-                                _view.ControlMessageShow("电极检测完毕,无错误");
+                                _view.CommunicateMessageShow("电极检测完毕,无错误");
+                                _view.InitPoleSelection(new List<int>());
                             }
                             else
                             {
                                 var builder = new StringBuilder();
                                 electrodeInspect.BadList.ForEach(id => { builder.Append(id + " "); });
-                                _view.ControlMessageShow("电极检测完毕,有异常");
-                                _view.ControlMessageShow("选取好电极:" + electrodeInspect.NiceId + " 坏电极:" + builder);
+                                _view.CommunicateMessageShow(string.Format("电极检测完毕,坏电极个数为:{0},结果如下:",
+                                    electrodeInspect.BadList.Count));
+                                _view.CommunicateMessageShow("好电极:" + electrodeInspect.NiceId + " 坏电极:" + builder);
+                                if (electrodeInspect.BadList.Count > 32)
+                                {
+                                    _view.CommunicateMessageShow("电极检测完毕,坏电极较多，程序终止");
+                                    return;
+                                }
                                 if (_poleDetectPresenter.RoundNum == 2) //第二轮从数据库获取不满足阈值的电极
                                 {
                                     _view.CommunicateMessageShow("第二轮检测结束");
+                                    _view.InitPoleSelection(new List<int>(electrodeInspect.BadList));
                                     return;
+                                }
+                                else
+                                {
+                                    _view.CommunicateMessageShow("第一轮检测结束, 已开始第二轮检测");
                                 }
                                 //第二轮检测初始化
                                 _poleDetectPresenter.SetSecondRoundData(electrodeInspect);
@@ -159,7 +173,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                             }
                             break;
                         default:
-                            _view.ControlMessageShow("未知错误");
+                            _view.CommunicateMessageShow("未知错误");
                             break;
                     }
                     break;
@@ -289,7 +303,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     if (CheckTable())
                     {
                         _commucationFacade.SendDataFrame(new FrameData(FrameType.HandshakeSwitchDevice));
-                     }
+                    }
                     else
                         _view.ControlMessageShow("数据库初始化检查出错");
                     break;
@@ -309,7 +323,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     CheckTable();
                     StartWork();
                     break;
-                    case OperateType.HvRelayOpen:
+                case OperateType.HvRelayOpen:
                     _commucationFacade.SendDataFrame(new FrameData(FrameType.HvRelayOpen));
                     break;
                 case OperateType.DeviceReset:
@@ -336,10 +350,31 @@ namespace bitkyFlashresUniversal.connClient.presenter
             CheckTable();
         }
 
+        /// <summary>
+        ///     获取配置信息
+        /// </summary>
+        public void GetPreferences()
+        {
+            _sqlPresenter.GetPreferences();
+            _view.SetPreferencesData();
+        }
+
+        /// <summary>
+        /// 调试用，直接指定发送帧
+        /// </summary>
+        /// <param name="frameData"></param>
         public void DebugPole(FrameData frameData)
         {
             _currentFrameData = frameData;
             DeviceGatherStart(OperateType.Debug);
+        }
+
+        /// <summary>
+        /// 在数据库中更新配置信息
+        /// </summary>
+        public void UpdatePreferences()
+        {
+            _sqlPresenter.UpdatePreferences();
         }
     }
 }

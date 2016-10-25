@@ -45,5 +45,13 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
         ///     清空已采集的数据
         /// </summary>
         void GatherDataClear();
+        /// <summary>
+        ///     获取配置信息
+        /// </summary>
+        void GetPreferences();
+        /// <summary>
+        /// 在数据库中更新配置信息
+        /// </summary>
+        void UpdatePreferences();
     }
 }

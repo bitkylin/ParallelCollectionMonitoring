@@ -17,7 +17,7 @@
             <Label Content="端口号：" HorizontalAlignment="Left" Margin="0,74,0,0"
                    VerticalAlignment="Top" FontSize="16" />
             <TextBox x:Name="TextBoxPort" HorizontalAlignment="Left" Height="30" Margin="87,74,0,0" TextWrapping="Wrap"
-                     VerticalAlignment="Top" Width="188" FontSize="16" Text="4321" />
+                     VerticalAlignment="Top" Width="188" FontSize="16" Text="49000" />
         </Grid>
         <ListBox x:Name="ListBoxControlText" HorizontalAlignment="Left" Height="197" Margin="390,230,0,0"
                  VerticalAlignment="Top" Width="354" />

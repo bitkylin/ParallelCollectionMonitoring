@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Timers;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.model.commtUtil;
@@ -26,6 +27,7 @@ namespace bitkyFlashresUniversal.connClient.model
         private readonly ICommPresenter _presenter; //通信接口表现层
 
         private readonly Timer _timerFrameCollect;
+        private int _sendDeviceResetTimeout = 0;
         public bool ConnIsOpen = false;
 
         private FrameData _currentframeData;
@@ -77,6 +79,7 @@ namespace bitkyFlashresUniversal.connClient.model
             ConnIsOpen = false;
             MessageBeep(0x00000030);
             _timerFrameCollect.Stop();
+            _sendDeviceResetTimeout = 0;
             switch (PresetInfo.CurrentCommType)
             {
                 case CommType.Wifi:
@@ -138,6 +141,8 @@ namespace bitkyFlashresUniversal.connClient.model
 
                 case FrameType.ReturnDataGather:
                     _timerFrameCollect.Stop();
+                    _sendDeviceResetTimeout = 0;
+                    _electrodes.Clear();
 
                     frameData.PoleList.ForEach(pole =>
                     {
@@ -147,13 +152,17 @@ namespace bitkyFlashresUniversal.connClient.model
                             return;
                         }
                         if (pole.IdOrigin <= 63)
+                        {
                             pole.Value = (pole.Value*5/16777216 - 2.5)*2000;
-                        if (pole.IdOrigin > 63)
+                            _electrodes.Add(pole);
+                        }
+
+                        if (pole.IdOrigin == 64)
+                        {
                             pole.Value = Math.Abs((pole.Value*5/16777216 - 2.5)*100/1.25);
+                            _electrodes.Add(pole);
+                        }
                     });
-
-
-                    _electrodes.AddRange(frameData.PoleList);
                     _presenter.InsertDataIntoDb(_electrodes);
                     break;
 
@@ -178,6 +187,10 @@ namespace bitkyFlashresUniversal.connClient.model
                 return;
             }
             _currentframeData = frameData;
+            if (frameData.Type != FrameType.ControlGather)
+            {
+                _sendDeviceResetTimeout = 0;
+            }
             switch (frameData.Type)
             {
                 case FrameType.HvRelayOpen:
@@ -194,7 +207,6 @@ namespace bitkyFlashresUniversal.connClient.model
                     break;
                 case FrameType.ControlGather:
                     Send(_controlFrameBuilder.DataFrameBuild(_currentframeData));
-                    _electrodes.Clear();
                     _timerFrameCollect.Interval = PresetInfo.FrameReceiveTimeout;
                     _timerFrameCollect.Start();
                     break;
@@ -244,6 +256,14 @@ namespace bitkyFlashresUniversal.connClient.model
                 return;
             }
             _presenter.CommunicateMessageShow("未接收到正确的子帧数据,程序继续");
+            _sendDeviceResetTimeout++;
+            if (_sendDeviceResetTimeout >= 3)
+            {
+                Send(CommMsg.DeviceResetFrame);
+                Debug.WriteLine("已发送重置帧");
+                _sendDeviceResetTimeout = 0;
+                Thread.Sleep(1000);
+            }
             SendDataFrame(_currentframeData);
         }
 

@@ -31,8 +31,8 @@ namespace bitkyFlashresUniversal.view
                 LabelDataOutlineShow.Content = "请使用电极选择器选择待测电极";
 
             InitBitkyPoleShow();
-            InitSettingFragment();
             InitWifiSerialPortShow();
+            _commPresenter.GetPreferences();
         }
 
         /// <summary>
@@ -180,11 +180,34 @@ namespace bitkyFlashresUniversal.view
         }
 
         /// <summary>
+        /// 在view中显示配置信息, 初始化系统设置标签页面
+        /// </summary>
+        public void SetPreferencesData()
+        {
+            TextBoxElectricThreshold.Text = PresetInfo.ElectricThreshold.ToString(CultureInfo.CurrentCulture);
+            TextBoxFrameReceiveTimeout.Text = PresetInfo.FrameReceiveTimeout.ToString();
+            TextBoxFrameSendDelay.Text = PresetInfo.FrameSendDelay.ToString();
+        }
+
+        /// <summary>
+        /// 将电极检测结果返回View，返回坏电极的集合
+        /// </summary>
+        public void InitPoleSelection(List<int> badList)
+        {
+            
+            Dispatcher.Invoke(() =>
+            {
+                new ElectrodeSelecterForm(this, badList).Show();
+            });
+        }
+
+        /// <summary>
         ///     初始化电极信息显示标签界面
         /// </summary>
         private void InitBitkyPoleShow()
         {
             var controls = new List<BitkyPoleControl>();
+            GridPoleStatusShow.Children.Clear();
             var id = 0;
             for (var i = 0; i < 8; i++)
                 for (var j = 0; j < 8; j++)
@@ -205,13 +228,29 @@ namespace bitkyFlashresUniversal.view
         }
 
         /// <summary>
-        ///     初始化系统设置标签页面
+        ///     电极信息初始化成功
         /// </summary>
-        private void InitSettingFragment()
+        public void SetElectrodeSuccessful(List<Electrode> electrodes)
         {
-            TextBoxElectricThreshold.Text = PresetInfo.ElectricThreshold.ToString(CultureInfo.CurrentCulture);
-            TextBoxFrameReceiveTimeout.Text = PresetInfo.FrameReceiveTimeout.ToString();
-            TextBoxFrameSendDelay.Text = PresetInfo.FrameSendDelay.ToString();
+            InitBitkyPoleShow();
+            foreach (var control in _bitkyPoleControls)
+            {
+                int id = int.Parse(control.LabelPoleId.Content.ToString());
+                foreach (var pole in electrodes)
+                {
+                    if (pole.IdOrigin == id)
+                    {
+                        control.isEnabled = true;
+                    }
+                }
+                if (!control.isEnabled)
+                {
+                    control.SetInvaild();
+                }
+            }
+
+
+            _commPresenter.CheckTable();
         }
 
         /// <summary>
@@ -239,13 +278,6 @@ namespace bitkyFlashresUniversal.view
             comboBoxIP.SelectedIndex = comboBoxIP.Items.Count > 0 ? 0 : -1;
         }
 
-        /// <summary>
-        ///     电极信息初始化成功
-        /// </summary>
-        public void SetElectrodeSuccessful()
-        {
-            _commPresenter.CheckTable();
-        }
 
         /// <summary>
         ///     建立连接按钮点击事件
@@ -289,7 +321,7 @@ namespace bitkyFlashresUniversal.view
         /// <param name="e"></param>
         private void btnOpenElectrodeSelectForm_Click(object sender, RoutedEventArgs e)
         {
-            new ElectrodeSelecterForm(this).Show();
+            new ElectrodeSelecterForm(this, new List<int>()).Show();
         }
 
         private void btnElectrodeDetect_Click(object sender, RoutedEventArgs e)
@@ -362,6 +394,7 @@ namespace bitkyFlashresUniversal.view
             PresetInfo.ElectricThreshold = double.Parse(TextBoxElectricThreshold.Text);
             PresetInfo.FrameReceiveTimeout = int.Parse(TextBoxFrameReceiveTimeout.Text);
             PresetInfo.FrameSendDelay = int.Parse(TextBoxFrameSendDelay.Text);
+            _commPresenter.UpdatePreferences();
         }
 
         private void btnDebugPole_Click(object sender, RoutedEventArgs e)

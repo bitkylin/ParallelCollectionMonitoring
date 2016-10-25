@@ -159,5 +159,40 @@ namespace bitkyFlashresUniversal.databaseUtil
 
             return new ElectrodeInspect(badList, maxId);
         }
+
+        /// <summary>
+        ///     获取配置信息
+        /// </summary>
+        public void GetPreferences()
+        {
+            _command.Reset();
+            _command.CommandText = "SELECT value FROM Preferences WHERE parameter = 'FrameReceiveTimeout'";
+            PresetInfo.FrameReceiveTimeout = int.Parse(_command.ExecuteScalar().ToString());
+            _command.Reset();
+            _command.CommandText = "SELECT value FROM Preferences WHERE parameter = 'FrameSendDelay'";
+            PresetInfo.FrameSendDelay = int.Parse(_command.ExecuteScalar().ToString());
+            _command.Reset();
+            _command.CommandText = "SELECT value FROM Preferences WHERE parameter = 'ElectricThreshold'";
+            PresetInfo.ElectricThreshold = int.Parse(_command.ExecuteScalar().ToString());
+        }
+
+        /// <summary>
+        ///     设置配置信息
+        /// </summary>
+        public void UpdatePreferences()
+        {
+            _command.Reset();
+            _command.CommandText = "UPDATE Preferences SET value = '" + PresetInfo.FrameReceiveTimeout +
+                                   "' WHERE parameter = 'FrameReceiveTimeout'";
+            _command.ExecuteNonQuery();
+            _command.Reset();
+            _command.CommandText = "UPDATE Preferences SET value = '" + PresetInfo.FrameSendDelay +
+                                   "' WHERE parameter = 'FrameSendDelay'";
+            _command.ExecuteNonQuery();
+            _command.Reset();
+            _command.CommandText = "UPDATE Preferences SET value = '" + PresetInfo.ElectricThreshold +
+                                   "' WHERE parameter = 'ElectricThreshold'";
+            _command.ExecuteNonQuery();
+        }
     }
 }

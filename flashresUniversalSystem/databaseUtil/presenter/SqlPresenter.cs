@@ -34,7 +34,7 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
         {
             _currentNum = preCollectRow;
             _sumNum = sumNun;
-            _commPresenter.DataOutlineShow("待采集行:" + preCollectRow + " 总行数:" + sumNun);
+            _commPresenter.DataOutlineShow("已采集次数: " + (preCollectRow - 1) + " 总次数: " + sumNun);
         }
 
         /// <summary>
@@ -115,26 +115,26 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
                     double valueSum = 0;
                     electrodes.ForEach(pole =>
                     {
-                        if ((pole.IdOrigin >= 64) && (pole.IdOrigin <= 79))
+                        if (pole.IdOrigin == 64)
                         {
                             count++;
-                            valueSum += pole.Value;
+                            valueSum = pole.Value;
                         }
                     });
                     if (count == 0)
                     {
-                        Debug.WriteLine("插入数据库失败");
+                        _commPresenter.CommunicateMessageShow("未获取到电流值，数据采集异常");
+                        Debug.WriteLine("未获取到电流值，数据采集异常");
                         return;
                     }
-                    var valueMean = valueSum/count;
                     var id2 = id + 1;
                     var sqlTextDetect1 = "INSERT INTO " + PresetInfo.ElectrodeDetectionTable +
                                          " (poleid,value) VALUES ('" + id +
-                                         "','" + valueMean + "')";
+                                         "','" + valueSum + "')";
 
                     var sqlTextDetect2 = "INSERT INTO " + PresetInfo.ElectrodeDetectionTable +
                                          " (poleid,value) VALUES ('" + id2 +
-                                         "','" + valueMean + "')";
+                                         "','" + valueSum + "')";
                     if (_sqliteBitky.InsertResultDataToDb(sqlTextDetect1) &&
                         _sqliteBitky.InsertResultDataToDb(sqlTextDetect2))
                     {
@@ -153,19 +153,19 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
                     double valueSum2 = 0;
                     electrodes.ForEach(pole =>
                     {
-                        if ((pole.IdOrigin >= 64) && (pole.IdOrigin <= 79))
+                        if (pole.IdOrigin == 64)
                         {
                             count2++;
-                            valueSum2 += pole.Value;
+                            valueSum2 = pole.Value;
                         }
                     });
                     if (count2 == 0)
                     {
-                        Debug.WriteLine("插入数据库失败");
+                        _commPresenter.CommunicateMessageShow("未获取到电流值，数据采集异常");
+                        Debug.WriteLine("未获取到电流值，数据采集异常");
                         return;
                     }
-                    var valueMean2 = valueSum2/count2;
-                    var sqlTextDetect3 = "UPDATE " + PresetInfo.ElectrodeDetectionTable + " SET value = '" + valueMean2 +
+                    var sqlTextDetect3 = "UPDATE " + PresetInfo.ElectrodeDetectionTable + " SET value = '" + valueSum2 +
                                          "' WHERE poleid = '" + id + "'";
 
                     if (_sqliteBitky.InsertResultDataToDb(sqlTextDetect3))
@@ -219,6 +219,22 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
             _sqliteBitky.InsertResultDataToDb(sqlElectrodDetectInit);
             _sqliteBitky.InsertResultDataToDb(sqlElectrodDetectInit2);
             _sqliteBitky.InsertResultDataToDb(sqlElectrodDetectInit3);
+        }
+
+        /// <summary>
+        ///     获取配置信息
+        /// </summary>
+        public void GetPreferences()
+        {
+            _sqliteBitky.GetPreferences();
+        }
+        /// <summary>
+        /// 在数据库中更新配置信息
+        /// </summary>
+        
+        public void UpdatePreferences()
+        {
+            _sqliteBitky.UpdatePreferences();
         }
     }
 }
