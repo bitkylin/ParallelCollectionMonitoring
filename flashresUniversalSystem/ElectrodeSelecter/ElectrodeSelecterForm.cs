@@ -64,8 +64,13 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
             //新建数据处理类
             _processPresenter = new ProcessPresenter(list);
             var listReturn = _processPresenter.Process();
-            var fileStream = new FileStream("lmlPoleWrite", FileMode.Create, FileAccess.Write);
-            var binaryWriter = new BinaryWriter(fileStream);
+//            if (!Directory.Exists("./json"))
+//            {
+//                Directory.CreateDirectory("./json");
+//            }
+//            
+//            var fileStream = new FileStream("./json/lmlPoleWrite", FileMode.Create, FileAccess.Write);
+//            var binaryWriter = new BinaryWriter(fileStream);
 
             var conn = new SQLiteConnection("Data Source = " + PresetInfo.DatabasePath + "; Version = 3;");
             conn.Open();
@@ -84,7 +89,7 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                 cmd.ExecuteNonQuery();
                 listReturn.ForEach(list2 =>
                 {
-                    binaryWriter.Write(_controlFrameBuilder.DataFrameBuild(new FrameData(FrameType.ControlGather, list2)));
+           //         binaryWriter.Write(_controlFrameBuilder.DataFrameBuild(new FrameData(FrameType.ControlGather, list2)));
                     var poleGroup = new ElectrodeGroup();
                     list2.ForEach(pole =>
                     {
@@ -124,8 +129,8 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
             Close();
             _window.SetElectrodeSuccessful(list);
 
-            binaryWriter.Close();
-            fileStream.Close();
+//            binaryWriter.Close();
+//            fileStream.Close();
         }
 
 

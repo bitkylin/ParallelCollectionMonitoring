@@ -27,7 +27,7 @@
                     <Button x:Name="BtnElectrodeDetect" Content="检测并选择" HorizontalAlignment="Left" Margin="187,209,0,0" VerticalAlignment="Top" Width="115" Height="44" Click="btnElectrodeDetect_Click"/>
                     <Button x:Name="BtnCommunicateClear" Content="清空通信信息" Margin="237,0,0,44" Click="btnCommunicateClear_Click" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="85"/>
                     <Button x:Name="BtnControlClear" Content="清空控制信息" HorizontalAlignment="Left" Margin="237,0,0,10" VerticalAlignment="Bottom" Width="85" Height="29" Click="btnControlClear_Click"/>
-                    <Button x:Name="BtnGatherDataClear" Content="清空已采数据" HorizontalAlignment="Left" Margin="187,363,0,0" Width="115" Click="btnGatherDataClear_Click" Height="45" VerticalAlignment="Top"/>
+                    <Button x:Name="BtnGatherDataClear" Content="已采数据处理" HorizontalAlignment="Left" Margin="187,363,0,0" Width="115" Click="btnGatherDataClear_Click" Height="45" VerticalAlignment="Top"/>
                     <Button x:Name="BtnHandshakeStart" Content="选择通信方式" HorizontalAlignment="Left" Margin="27,0,0,48" Width="90" Click="BtnHandshakeStart_Click" Height="22" VerticalAlignment="Bottom"/>
                     <ListBox x:Name="ListBoxSendData" Margin="332,10,370,249"/>
                     <ListBox x:Name="ListBoxReceiveData" Height="237" Margin="332,0,370,7" VerticalAlignment="Bottom"/>

@@ -75,6 +75,10 @@
     <Reference Include="CSkin">
       <HintPath>..\..\..\import\CSkin4\CSkin.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.103.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -97,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="dataExport\DataExportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\BitkyMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,6 +120,9 @@
     <Compile Include="connClient\model\bean\OperateType.cs" />
     <Compile Include="connClient\model\bean\PoleMode.cs" />
     <Compile Include="connClient\model\bean\PresetInfo.cs" />
+    <Compile Include="dataExport\bean\CollectItem.cs" />
+    <Compile Include="dataExport\bean\Pole.cs" />
+    <Compile Include="dataExport\bean\SummaryDataJson.cs" />
     <Compile Include="connClient\model\commtUtil\ConnClient\SerialPortClient.cs" />
     <Compile Include="connClient\model\commtUtil\FrameProvider.cs" />
     <Compile Include="connClient\model\commtUtil\ControlFrameBuilder.cs" />
@@ -122,6 +133,10 @@
     <Compile Include="connClient\presenter\ICommPresenter.cs" />
     <Compile Include="connClient\model\commtUtil\ConnClient\BitkyTcpClient.cs" />
     <Compile Include="connClient\model\bean\CommMsg.cs" />
+    <Compile Include="dataExport\DataExport.cs" />
+    <Compile Include="dataExport\DataExportWindow.xaml.cs">
+      <DependentUpon>DataExportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\IViewCommStatus.cs" />
     <Compile Include="view\BitkyMainWindow.xaml.cs">
       <DependentUpon>BitkyMainWindow.xaml</DependentUpon>
@@ -194,6 +209,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.103\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.103\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

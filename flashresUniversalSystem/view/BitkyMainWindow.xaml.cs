@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.presenter;
+using bitkyFlashresUniversal.dataExport;
 using bitkyFlashresUniversal.ElectrodeSelecter;
 using bitkyFlashresUniversal.poleInfoShow;
 
@@ -366,7 +367,7 @@ namespace bitkyFlashresUniversal.view
 
         private void btnGatherDataClear_Click(object sender, RoutedEventArgs e)
         {
-            _commPresenter.GatherDataClear();
+            new DataExportWindow(_commPresenter).Show();
         }
 
         private void btnShowClear_Click(object sender, RoutedEventArgs e)
