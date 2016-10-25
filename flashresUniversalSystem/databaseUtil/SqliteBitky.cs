@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.databaseUtil.presenter;
 using bitkyFlashresUniversal.dataExport;
+using bitkyFlashresUniversal.dataExport.bean;
 using bitkyFlashresUniversal.ElectrodeDetection;
 
 namespace bitkyFlashresUniversal.databaseUtil
