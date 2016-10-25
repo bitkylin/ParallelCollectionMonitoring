@@ -29,24 +29,6 @@ namespace bitkyFlashresUniversal.dataExport
             InitializeComponent();
         }
 
-        public void temp()
-        {
-            var poles = new List<Pole> {new Pole(1, 1.1), new Pole(2, 2.1), new Pole(3, 3.1)};
-            var collectItem = new CollectItem(1, 2, 3, 4, 4.321, poles);
-            var poles2 = new List<Pole> {new Pole(11, 1.1), new Pole(12, 2.1), new Pole(13, 3.1)};
-            var collectItem2 = new CollectItem(12, 22, 32, 42, 4.3212, poles2);
-
-//            var dataJson = new SummaryDataJson(new List<int>() {16, 17},
-//                new List<CollectItem>() {collectItem, collectItem2});
-
-//            DataExport.Output(dataJson);
-        }
-
-        public void DataClear()
-        {
-            _commPresenter.GatherDataClear();
-        }
-
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -54,8 +36,8 @@ namespace bitkyFlashresUniversal.dataExport
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-          string dataJson =  _commPresenter.GetJsonFromDb();
-            temp();
+            var dataJson =  _commPresenter.GetJsonFromDb();
+            DataExport.Output(dataJson);
             MessageBox.Show("数据已存入指定文件中", "提示");
         }
 

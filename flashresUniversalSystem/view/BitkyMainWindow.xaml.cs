@@ -219,15 +219,24 @@ namespace bitkyFlashresUniversal.view
                     controls.Add(bitkyPoleControl);
                     //对控件使用自定义方法进行初始化
                     bitkyPoleControl.SetContent(id);
-
                     id++;
                 }
             _bitkyPoleControls = controls.ToArray();
+
+            //初始化已启用的电极，并将信息保存在presenter中
+            var enabledPolesList = new List<Electrode>(64);
+            for (var i = 0; i < 64; i++)
+            {
+                enabledPolesList.Add(new Electrode(i));
+            }
+            _commPresenter.EnabledPoleList = enabledPolesList;
         }
+
 
         /// <summary>
         ///     电极信息初始化成功
         /// </summary>
+        /// <param name="electrodes">使用的电极的集合</param>
         public void SetElectrodeSuccessful(List<Electrode> electrodes)
         {
             foreach (var control in _bitkyPoleControls)
@@ -247,6 +256,8 @@ namespace bitkyFlashresUniversal.view
                 }
             }
             _commPresenter.CheckTable();
+            //初始化已启用的电极，并将信息保存在presenter中
+            _commPresenter.EnabledPoleList = electrodes;
         }
 
         /// <summary>

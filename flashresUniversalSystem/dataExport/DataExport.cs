@@ -17,8 +17,8 @@ namespace bitkyFlashresUniversal.dataExport
             {
                 Directory.CreateDirectory("./json");
             }
-
-            var fileStream = new FileStream("./json/outJson.json", FileMode.Create, FileAccess.Write);
+            var dateTimeStr = dataJson.DateTime.ToString("yyyy-MM-dd_H-mm-ss");
+            var fileStream = new FileStream("./json/"+ dateTimeStr + "_OutData.json", FileMode.Create, FileAccess.Write);
             var json = JsonConvert.SerializeObject(dataJson);
             var streamWriter = new StreamWriter(fileStream, Encoding.UTF8);
             streamWriter.Write(json);

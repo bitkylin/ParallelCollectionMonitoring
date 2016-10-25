@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using bitkyFlashresUniversal.connClient.model.bean;
+using bitkyFlashresUniversal.dataExport.bean;
 
 namespace bitkyFlashresUniversal.connClient.presenter
 {
@@ -88,6 +89,8 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// 从数据库中获取用于输出的Json格式数据
         /// </summary>
         /// <returns>用于输出的Json格式数据</returns>
-        string GetJsonFromDb();
+        SummaryDataJson GetJsonFromDb();
+
+        List<Electrode> EnabledPoleList { get; set; }
     }
 }

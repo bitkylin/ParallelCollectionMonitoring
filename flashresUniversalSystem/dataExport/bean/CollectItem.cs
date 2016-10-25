@@ -2,7 +2,7 @@
 
 namespace bitkyFlashresUniversal.dataExport.bean
 {
-    class CollectItem
+   public class CollectItem
     {
         public int No { get; set; }
         public int A { get; set; }

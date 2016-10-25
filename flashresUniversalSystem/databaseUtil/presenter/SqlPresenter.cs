@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.presenter;
+using bitkyFlashresUniversal.dataExport.bean;
 using bitkyFlashresUniversal.ElectrodeDetection;
 
 namespace bitkyFlashresUniversal.databaseUtil.presenter
@@ -240,7 +241,7 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
         /// 从数据库中获取用于输出的Json格式数据
         /// </summary>
         /// <returns>用于输出的Json格式数据</returns>
-        public string GetJsonFromDb()
+        public SummaryDataJson GetJsonFromDb()
         {
            return _sqliteBitky.GetJsonFromDb();
         }
