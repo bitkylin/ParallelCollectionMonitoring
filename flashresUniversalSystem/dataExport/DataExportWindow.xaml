@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bitkyFlashresUniversal.dataExport"
         mc:Ignorable="d"
-        Title="DataExportWindow" Height="450" Width="800" MinWidth="800" MinHeight="450" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Foreground="Black">
+        Title="DataExportWindow" Height="450" Width="800" MinWidth="800" MinHeight="450" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Foreground="Black" BorderThickness="5">
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF5D44FF" Offset="0"/>
+            <GradientStop Color="#FF37E6FF" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
     <Window.Background>
         <RadialGradientBrush>
             <GradientStop Color="Black" Offset="0"/>

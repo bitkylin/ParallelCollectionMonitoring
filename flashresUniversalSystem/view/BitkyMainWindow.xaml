@@ -256,7 +256,6 @@
                     <TextBox x:Name="TextBoxFrameReceiveTimeout" HorizontalAlignment="Left" Height="30" Margin="167,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16" BorderBrush="#FF00E8FF" Background="White" VerticalContentAlignment="Center"/>
                     <Label x:Name="Label1Copy1" Content="帧发送延时：" HorizontalAlignment="Left" Margin="52,170,0,0" VerticalAlignment="Top" Width="110" Foreground="White" FontSize="16"/>
                     <TextBox x:Name="TextBoxFrameSendDelay" HorizontalAlignment="Left" Height="30" Margin="167,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16" BorderBrush="#FF00E8FF" Background="White" VerticalContentAlignment="Center"/>
-                    <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="417,117,0,0" VerticalAlignment="Top" Width="140" Height="73" Click="button_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

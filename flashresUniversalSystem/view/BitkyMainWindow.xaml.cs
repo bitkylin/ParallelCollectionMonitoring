@@ -195,7 +195,7 @@ namespace bitkyFlashresUniversal.view
         /// </summary>
         public void InitPoleSelection(List<int> badList)
         {
-            Dispatcher.Invoke(() => { new ElectrodeSelecterForm(this, badList).Show(); });
+            Dispatcher.Invoke(() => { new ElectrodeSelecterWindow(this, badList).Show(); });
         }
 
         /// <summary>
@@ -328,7 +328,7 @@ namespace bitkyFlashresUniversal.view
         /// <param name="e"></param>
         private void btnOpenElectrodeSelectForm_Click(object sender, RoutedEventArgs e)
         {
-            new ElectrodeSelecterForm(this, new List<int>()).Show();
+            new ElectrodeSelecterWindow(this, new List<int>()).Show();
         }
 
         private void btnElectrodeDetect_Click(object sender, RoutedEventArgs e)
@@ -404,16 +404,6 @@ namespace bitkyFlashresUniversal.view
             _commPresenter.UpdatePreferences();
         }
 
-//        private void btnDebugPole_Click(object sender, RoutedEventArgs e)
-//        {
-//            var electrodes = new List<Electrode>
-//            {
-//                new Electrode(int.Parse(TextBoxDebugPole0.Text.Trim()), PoleMode.A),
-//                new Electrode(int.Parse(TextBoxDebugPole1.Text.Trim()), PoleMode.B)
-//            };
-//
-//            _commPresenter.DebugPole(new FrameData(FrameType.ControlGather, electrodes));
-//        }
 
         /// <summary>
         ///     刷新串口按钮
@@ -454,11 +444,6 @@ namespace bitkyFlashresUniversal.view
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            new ElectrodeSelecterWindow().Show();
         }
     }
 }
