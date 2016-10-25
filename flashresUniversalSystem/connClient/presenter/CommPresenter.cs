@@ -336,9 +336,9 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     _commucationFacade.SendDataFrame(new FrameData(FrameType.DeviceReset));
 
                     break;
-                case OperateType.Debug:
-                    _commucationFacade.SendDataFrame(_currentFrameData);
-                    break;
+//                case OperateType.Debug:
+//                    _commucationFacade.SendDataFrame(_currentFrameData);
+//                    break;
                 default:
                     _view.CommunicateMessageShow("设备运行时启动了无法识别的帧");
                     break;
@@ -365,15 +365,15 @@ namespace bitkyFlashresUniversal.connClient.presenter
             _view.SetPreferencesData();
         }
 
-        /// <summary>
-        /// 调试用，直接指定发送帧
-        /// </summary>
-        /// <param name="frameData"></param>
-        public void DebugPole(FrameData frameData)
-        {
-            _currentFrameData = frameData;
-            DeviceGatherStart(OperateType.Debug);
-        }
+//        /// <summary>
+//        /// 调试用，直接指定发送帧
+//        /// </summary>
+//        /// <param name="frameData"></param>
+//        public void DebugPole(FrameData frameData)
+//        {
+//            _currentFrameData = frameData;
+//            DeviceGatherStart(OperateType.Debug);
+//        }
 
         /// <summary>
         /// 在数据库中更新配置信息

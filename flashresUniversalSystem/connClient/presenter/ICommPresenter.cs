@@ -79,7 +79,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
         ///     获取配置信息
         /// </summary>
         void GetPreferences();
-        void DebugPole(FrameData frameData);
+       // void DebugPole(FrameData frameData);
         /// <summary>
         /// 在数据库中更新配置信息
         /// </summary>

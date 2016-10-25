@@ -105,6 +105,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ElectrodeSelecter\BitkyCheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ElectrodeSelecter\ElectrodeSelecterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\BitkyMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -136,6 +144,12 @@
     <Compile Include="dataExport\DataExport.cs" />
     <Compile Include="dataExport\DataExportWindow.xaml.cs">
       <DependentUpon>DataExportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElectrodeSelecter\BitkyCheckBox.xaml.cs">
+      <DependentUpon>BitkyCheckBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElectrodeSelecter\ElectrodeSelecterWindow.xaml.cs">
+      <DependentUpon>ElectrodeSelecterWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\IViewCommStatus.cs" />
     <Compile Include="view\BitkyMainWindow.xaml.cs">

@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Timers;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using bitkyFlashresUniversal.connClient.presenter;
-using bitkyFlashresUniversal.dataExport.bean;
 
 namespace bitkyFlashresUniversal.dataExport
 {
@@ -27,6 +17,17 @@ namespace bitkyFlashresUniversal.dataExport
         {
             _commPresenter = commPresenter1;
             InitializeComponent();
+//            Timer timer = new Timer(5000);
+//            timer.AutoReset = true;
+//            timer.Elapsed += FormTop;
+//            timer.Start();
+        }
+
+        private void FormTop(object sender, ElapsedEventArgs e)
+        {
+            Debug.WriteLine("保持在顶端");
+            
+            Topmost = true;
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -36,7 +37,7 @@ namespace bitkyFlashresUniversal.dataExport
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var dataJson =  _commPresenter.GetJsonFromDb();
+            var dataJson = _commPresenter.GetJsonFromDb();
             DataExport.Output(dataJson);
             MessageBox.Show("数据已存入指定文件中", "提示");
         }

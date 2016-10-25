@@ -404,16 +404,16 @@ namespace bitkyFlashresUniversal.view
             _commPresenter.UpdatePreferences();
         }
 
-        private void btnDebugPole_Click(object sender, RoutedEventArgs e)
-        {
-            var electrodes = new List<Electrode>
-            {
-                new Electrode(int.Parse(TextBoxDebugPole0.Text.Trim()), PoleMode.A),
-                new Electrode(int.Parse(TextBoxDebugPole1.Text.Trim()), PoleMode.B)
-            };
-
-            _commPresenter.DebugPole(new FrameData(FrameType.ControlGather, electrodes));
-        }
+//        private void btnDebugPole_Click(object sender, RoutedEventArgs e)
+//        {
+//            var electrodes = new List<Electrode>
+//            {
+//                new Electrode(int.Parse(TextBoxDebugPole0.Text.Trim()), PoleMode.A),
+//                new Electrode(int.Parse(TextBoxDebugPole1.Text.Trim()), PoleMode.B)
+//            };
+//
+//            _commPresenter.DebugPole(new FrameData(FrameType.ControlGather, electrodes));
+//        }
 
         /// <summary>
         ///     刷新串口按钮
@@ -454,6 +454,11 @@ namespace bitkyFlashresUniversal.view
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            new ElectrodeSelecterWindow().Show();
         }
     }
 }

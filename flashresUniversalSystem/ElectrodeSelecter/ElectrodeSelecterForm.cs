@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Timers;
 using System.Windows.Forms;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.model.commtUtil;
@@ -18,14 +20,14 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
         private ProcessPresenter _processPresenter;
         private readonly BitkyMainWindow _window;
         private readonly ControlFrameBuilder _controlFrameBuilder;
-        private List<int> _ints;
+        private readonly List<int> _badPoleInts;
 
 
-        public ElectrodeSelecterForm(BitkyMainWindow window, List<int> ints)
+        public ElectrodeSelecterForm(BitkyMainWindow window, List<int> badPoleInts)
         {
             InitializeComponent();
             _window = window;
-            _ints = ints;
+            _badPoleInts = badPoleInts;
             _controlFrameBuilder = new ControlFrameBuilder();
 
             foreach (Control c in groupBoxPoleSelect.Controls)
@@ -39,7 +41,7 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
             {
                 checkBox.Checked = true;
                 var num = int.Parse(checkBox.Text);
-                _ints.ForEach(i =>
+                _badPoleInts.ForEach(i =>
                 {
                     if (i == num)
                     {
