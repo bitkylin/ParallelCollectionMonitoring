@@ -112,12 +112,12 @@
             this.btnconfirm.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnconfirm.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnconfirm.DownBack = null;
-            this.btnconfirm.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnconfirm.Location = new System.Drawing.Point(174, 184);
+            this.btnconfirm.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnconfirm.Location = new System.Drawing.Point(228, 198);
             this.btnconfirm.MouseBack = null;
             this.btnconfirm.Name = "btnconfirm";
             this.btnconfirm.NormlBack = null;
-            this.btnconfirm.Size = new System.Drawing.Size(125, 46);
+            this.btnconfirm.Size = new System.Drawing.Size(192, 58);
             this.btnconfirm.TabIndex = 8;
             this.btnconfirm.Text = "确认选择";
             this.btnconfirm.UseVisualStyleBackColor = false;
@@ -129,12 +129,12 @@
             this.btnReset.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnReset.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnReset.DownBack = null;
-            this.btnReset.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReset.Location = new System.Drawing.Point(23, 184);
+            this.btnReset.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnReset.Location = new System.Drawing.Point(23, 198);
             this.btnReset.MouseBack = null;
             this.btnReset.Name = "btnReset";
             this.btnReset.NormlBack = null;
-            this.btnReset.Size = new System.Drawing.Size(125, 46);
+            this.btnReset.Size = new System.Drawing.Size(185, 58);
             this.btnReset.TabIndex = 7;
             this.btnReset.Text = "重置复选框";
             this.btnReset.UseVisualStyleBackColor = false;
@@ -530,13 +530,13 @@
             this.skinGroupBox1.Controls.Add(this.textBoxCheckedBoxBegin);
             this.skinGroupBox1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinGroupBox1.ForeColor = System.Drawing.Color.Black;
-            this.skinGroupBox1.Location = new System.Drawing.Point(477, 49);
+            this.skinGroupBox1.Location = new System.Drawing.Point(403, 49);
             this.skinGroupBox1.Margin = new System.Windows.Forms.Padding(10);
             this.skinGroupBox1.Name = "skinGroupBox1";
             this.skinGroupBox1.Padding = new System.Windows.Forms.Padding(20);
             this.skinGroupBox1.RectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.skinGroupBox1.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.skinGroupBox1.Size = new System.Drawing.Size(336, 253);
+            this.skinGroupBox1.Size = new System.Drawing.Size(443, 308);
             this.skinGroupBox1.TabIndex = 11;
             this.skinGroupBox1.TabStop = false;
             this.skinGroupBox1.Text = "电极选取范围";
@@ -549,10 +549,10 @@
             this.skinLabel2.AutoSize = true;
             this.skinLabel2.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel2.BorderColor = System.Drawing.Color.White;
-            this.skinLabel2.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel2.Location = new System.Drawing.Point(97, 105);
+            this.skinLabel2.Font = new System.Drawing.Font("微软雅黑", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel2.Location = new System.Drawing.Point(114, 121);
             this.skinLabel2.Name = "skinLabel2";
-            this.skinLabel2.Size = new System.Drawing.Size(69, 25);
+            this.skinLabel2.Size = new System.Drawing.Size(86, 31);
             this.skinLabel2.TabIndex = 6;
             this.skinLabel2.Text = "终止：";
             // 
@@ -561,10 +561,10 @@
             this.skinLabel1.AutoSize = true;
             this.skinLabel1.BackColor = System.Drawing.Color.Transparent;
             this.skinLabel1.BorderColor = System.Drawing.Color.White;
-            this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.skinLabel1.Location = new System.Drawing.Point(97, 46);
+            this.skinLabel1.Font = new System.Drawing.Font("微软雅黑", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.skinLabel1.Location = new System.Drawing.Point(114, 62);
             this.skinLabel1.Name = "skinLabel1";
-            this.skinLabel1.Size = new System.Drawing.Size(69, 25);
+            this.skinLabel1.Size = new System.Drawing.Size(86, 31);
             this.skinLabel1.TabIndex = 5;
             this.skinLabel1.Text = "起始：";
             // 
@@ -578,7 +578,7 @@
             this.textBoxCheckedBoxEnd.IsPasswordChat = '\0';
             this.textBoxCheckedBoxEnd.IsSystemPasswordChar = false;
             this.textBoxCheckedBoxEnd.Lines = new string[0];
-            this.textBoxCheckedBoxEnd.Location = new System.Drawing.Point(169, 100);
+            this.textBoxCheckedBoxEnd.Location = new System.Drawing.Point(228, 117);
             this.textBoxCheckedBoxEnd.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxCheckedBoxEnd.MaxLength = 32767;
             this.textBoxCheckedBoxEnd.MinimumSize = new System.Drawing.Size(28, 28);
@@ -590,7 +590,7 @@
             this.textBoxCheckedBoxEnd.Padding = new System.Windows.Forms.Padding(5);
             this.textBoxCheckedBoxEnd.ReadOnly = false;
             this.textBoxCheckedBoxEnd.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.textBoxCheckedBoxEnd.Size = new System.Drawing.Size(130, 35);
+            this.textBoxCheckedBoxEnd.Size = new System.Drawing.Size(157, 35);
             // 
             // 
             // 
@@ -600,7 +600,7 @@
             this.textBoxCheckedBoxEnd.SkinTxt.Location = new System.Drawing.Point(5, 5);
             this.textBoxCheckedBoxEnd.SkinTxt.Multiline = true;
             this.textBoxCheckedBoxEnd.SkinTxt.Name = "BaseText";
-            this.textBoxCheckedBoxEnd.SkinTxt.Size = new System.Drawing.Size(120, 25);
+            this.textBoxCheckedBoxEnd.SkinTxt.Size = new System.Drawing.Size(147, 25);
             this.textBoxCheckedBoxEnd.SkinTxt.TabIndex = 1;
             this.textBoxCheckedBoxEnd.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.textBoxCheckedBoxEnd.SkinTxt.WaterText = "";
@@ -621,7 +621,7 @@
             this.textBoxCheckedBoxBegin.IsPasswordChat = '\0';
             this.textBoxCheckedBoxBegin.IsSystemPasswordChar = false;
             this.textBoxCheckedBoxBegin.Lines = new string[0];
-            this.textBoxCheckedBoxBegin.Location = new System.Drawing.Point(169, 41);
+            this.textBoxCheckedBoxBegin.Location = new System.Drawing.Point(228, 62);
             this.textBoxCheckedBoxBegin.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxCheckedBoxBegin.MaxLength = 32767;
             this.textBoxCheckedBoxBegin.MinimumSize = new System.Drawing.Size(28, 28);
@@ -633,7 +633,7 @@
             this.textBoxCheckedBoxBegin.Padding = new System.Windows.Forms.Padding(5);
             this.textBoxCheckedBoxBegin.ReadOnly = false;
             this.textBoxCheckedBoxBegin.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.textBoxCheckedBoxBegin.Size = new System.Drawing.Size(130, 35);
+            this.textBoxCheckedBoxBegin.Size = new System.Drawing.Size(157, 35);
             // 
             // 
             // 
@@ -643,7 +643,7 @@
             this.textBoxCheckedBoxBegin.SkinTxt.Location = new System.Drawing.Point(5, 5);
             this.textBoxCheckedBoxBegin.SkinTxt.Multiline = true;
             this.textBoxCheckedBoxBegin.SkinTxt.Name = "BaseText";
-            this.textBoxCheckedBoxBegin.SkinTxt.Size = new System.Drawing.Size(120, 25);
+            this.textBoxCheckedBoxBegin.SkinTxt.Size = new System.Drawing.Size(147, 25);
             this.textBoxCheckedBoxBegin.SkinTxt.TabIndex = 0;
             this.textBoxCheckedBoxBegin.SkinTxt.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.textBoxCheckedBoxBegin.SkinTxt.WaterText = "";
@@ -681,12 +681,12 @@
             this.btnProcess.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnProcess.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnProcess.DownBack = null;
-            this.btnProcess.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnProcess.Location = new System.Drawing.Point(579, 380);
+            this.btnProcess.Font = new System.Drawing.Font("微软雅黑", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnProcess.Location = new System.Drawing.Point(536, 394);
             this.btnProcess.MouseBack = null;
             this.btnProcess.Name = "btnProcess";
             this.btnProcess.NormlBack = null;
-            this.btnProcess.Size = new System.Drawing.Size(125, 46);
+            this.btnProcess.Size = new System.Drawing.Size(193, 66);
             this.btnProcess.TabIndex = 12;
             this.btnProcess.Text = "执行";
             this.btnProcess.UseVisualStyleBackColor = false;
@@ -1729,6 +1729,7 @@
             this.CaptionBackColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.CaptionBackColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(897, 772);
+            this.CloseBoxSize = new System.Drawing.Size(80, 35);
             this.Controls.Add(this.skinGroupBox1);
             this.Controls.Add(this.btnProcess);
             this.Controls.Add(this.groupBoxPoleSelect);

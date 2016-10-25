@@ -8,6 +8,7 @@
         public const string ElectrodeDetectionTable = "ElectrodeDetection";
         public const string SqliteSequenceTable = "sqlite_sequence";
         public const string ElectrodeResultTable = "ElectrodeResult";
+        public const string PreferencesTable = "Preferences";
 
         public const string DatabasePath = "./bitkyDataReady.db";
 

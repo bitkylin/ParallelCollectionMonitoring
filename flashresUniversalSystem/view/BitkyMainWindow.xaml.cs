@@ -195,11 +195,7 @@ namespace bitkyFlashresUniversal.view
         /// </summary>
         public void InitPoleSelection(List<int> badList)
         {
-            
-            Dispatcher.Invoke(() =>
-            {
-                new ElectrodeSelecterForm(this, badList).Show();
-            });
+            Dispatcher.Invoke(() => { new ElectrodeSelecterForm(this, badList).Show(); });
         }
 
         /// <summary>
@@ -223,6 +219,7 @@ namespace bitkyFlashresUniversal.view
                     controls.Add(bitkyPoleControl);
                     //对控件使用自定义方法进行初始化
                     bitkyPoleControl.SetContent(id);
+
                     id++;
                 }
             _bitkyPoleControls = controls.ToArray();
@@ -233,9 +230,9 @@ namespace bitkyFlashresUniversal.view
         /// </summary>
         public void SetElectrodeSuccessful(List<Electrode> electrodes)
         {
-            InitBitkyPoleShow();
             foreach (var control in _bitkyPoleControls)
             {
+                control.isEnabled = false;
                 int id = int.Parse(control.LabelPoleId.Content.ToString());
                 foreach (var pole in electrodes)
                 {
@@ -249,8 +246,6 @@ namespace bitkyFlashresUniversal.view
                     control.SetInvaild();
                 }
             }
-
-
             _commPresenter.CheckTable();
         }
 
@@ -443,6 +438,11 @@ namespace bitkyFlashresUniversal.view
         {
             Debug.WriteLine("change");
             PresetInfo.StartAutoCollect = checkBoxStartAutoCollect.IsChecked != false;
+        }
+
+        private void btnCloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
