@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.databaseUtil.presenter;
+using bitkyFlashresUniversal.dataExport;
 using bitkyFlashresUniversal.ElectrodeDetection;
 
 namespace bitkyFlashresUniversal.databaseUtil
@@ -193,6 +195,69 @@ namespace bitkyFlashresUniversal.databaseUtil
             _command.CommandText = "UPDATE Preferences SET value = '" + PresetInfo.ElectricThreshold +
                                    "' WHERE parameter = 'ElectricThreshold'";
             _command.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// 从数据库中获取用于输出的Json格式数据
+        /// </summary>
+        /// <returns>用于输出的Json格式数据</returns>
+        public string GetJsonFromDb()
+        {
+            //从'DataInfo'和'Preferences'表中获取已完成次数，总次数，电流阈值
+            var preference = new Dictionary<string, int>();
+            _command.Reset();
+            _command.CommandText = "SELECT num FROM " + PresetInfo.DataInfoTable + " WHERE name = 'sum'";
+            var sumNum = Convert.ToInt32(_command.ExecuteScalar());
+            _command.Reset();
+            _command.CommandText = "SELECT num FROM " + PresetInfo.DataInfoTable + " WHERE name = 'current'";
+            var completedNum = Convert.ToInt32(_command.ExecuteScalar());
+            _command.Reset();
+            _command.CommandText = "SELECT value FROM " + PresetInfo.PreferencesTable +
+                                   " WHERE parameter = 'ElectricThreshold'";
+            var elecThreshold = Convert.ToInt32(_command.ExecuteScalar());
+
+            preference.Add("sumNum", sumNum);
+            preference.Add("completedNum", completedNum);
+            preference.Add("elecThreshold", elecThreshold);
+
+            //从'ElectrodeDetection'表中获取电极的电流检测信息
+            var elecDetect = new List<Pole>(64);
+            _command.Reset();
+            _command.CommandText = "SELECT poleid,value FROM " + PresetInfo.ElectrodeDetectionTable;
+            var reader = _command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    var id = reader.GetInt32(0);
+                    var value = reader.GetDouble(1);
+                    elecDetect.Add(new Pole(id, value));
+                }
+            }
+            //从'ElectrodeResult'表中获取采集结果数据
+            var collectItems = new List<CollectItem>(sumNum);
+            _command.Reset();
+            _command.CommandText = "SELECT * FROM " + PresetInfo.ElectrodeResultTable;
+            reader = _command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    var no = reader.GetInt32(0);
+                    var a = reader.GetInt32(1);
+                    var b = reader.GetInt32(2);
+                    var m = reader.GetInt32(3);
+                    var poles = new List<Pole>(64);
+                    for (var i = 0; i < 64; i++)
+                    {
+                        var value = reader.GetDouble(i + 4);
+                        poles.Add(new Pole(i, value));
+                    }
+                    var elec = reader.GetDouble(68);
+                    collectItems.Add(new CollectItem(no, a, b, m, elec, poles));
+                }
+            }
+            return null;
         }
     }
 }

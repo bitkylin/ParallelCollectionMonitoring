@@ -83,5 +83,11 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// 在数据库中更新配置信息
         /// </summary>
         void UpdatePreferences();
+
+        /// <summary>
+        /// 从数据库中获取用于输出的Json格式数据
+        /// </summary>
+        /// <returns>用于输出的Json格式数据</returns>
+        string GetJsonFromDb();
     }
 }
