@@ -50,7 +50,7 @@ namespace bitkyFlashresUniversal.dataExport
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("您确定要清空缓存数据吗？执行此操作后将无法撤销!", "警告", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (MessageBox.Show("您确定要清空当前已采数据吗？执行此操作后将无法撤销!", "警告", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 _commPresenter.GatherDataClear();
                 MessageBox.Show("数据库清空完毕!", "提示");
