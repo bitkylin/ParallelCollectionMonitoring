@@ -27,8 +27,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.4.0.%2a</ApplicationVersion>
+    <ProductName>跨孔CT探测仪智能控制及采集系统</ProductName>
+    <PublisherName>李明亮</PublisherName>
+    <SuiteName>跨孔CT探测仪智能控制及采集系统套件</SuiteName>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>1.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -60,7 +63,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -68,13 +71,16 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSkin">
-      <HintPath>..\..\..\import\CSkin4\CSkin.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -85,8 +91,7 @@
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.103\lib\net46\System.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -102,6 +107,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="dataExport\DataExportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ElectrodeSelecter\BitkyCheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ElectrodeSelecter\ElectrodeSelecterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,6 +150,12 @@
     <Compile Include="dataExport\DataExportWindow.xaml.cs">
       <DependentUpon>DataExportWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ElectrodeSelecter\BitkyCheckBox.xaml.cs">
+      <DependentUpon>BitkyCheckBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ElectrodeSelecter\ElectrodeSelecterWindow.xaml.cs">
+      <DependentUpon>ElectrodeSelecterWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\IViewCommStatus.cs" />
     <Compile Include="view\BitkyMainWindow.xaml.cs">
       <DependentUpon>BitkyMainWindow.xaml</DependentUpon>
@@ -153,12 +172,6 @@
     <Compile Include="databaseUtil\SqliteBitky.cs" />
     <Compile Include="ElectrodeDetection\ElectrodeInspect.cs" />
     <Compile Include="ElectrodeDetection\PoleDetectPresenter.cs" />
-    <Compile Include="ElectrodeSelecter\ElectrodeSelecterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ElectrodeSelecter\ElectrodeSelecterForm.Designer.cs">
-      <DependentUpon>ElectrodeSelecterForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ElectrodeSelecter\ProcessPresenter.cs" />
     <Compile Include="poleInfoShow\BitkyPoleControl.xaml.cs">
       <DependentUpon>BitkyPoleControl.xaml</DependentUpon>
@@ -176,16 +189,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="ElectrodeSelecter\ElectrodeSelecterForm.resx">
-      <DependentUpon>ElectrodeSelecterForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="flashresUniversalSystem_1_TemporaryKey.pfx" />
-    <None Include="flashresUniversalSystem_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -209,7 +217,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.103\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.103\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

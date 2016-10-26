@@ -3,8 +3,12 @@ using System.Collections.Generic;
 
 namespace bitkyFlashresUniversal.dataExport.bean
 {
-    internal class SummaryDataJson
+    public class SummaryDataJson
     {
+        public SummaryDataJson()
+        {
+        }
+
         public SummaryDataJson(List<CollectItem> poleResult, List<Pole> elecDetect, Dictionary<string, int> preference)
         {
             PoleResult = poleResult;
@@ -15,7 +19,7 @@ namespace bitkyFlashresUniversal.dataExport.bean
         /// <summary>
         ///     不良电极编号集合,如果只有一个值'-1', 说明该项未使用, 有异常
         /// </summary>
-        public List<int> BadPoleInts { set; get; } = new List<int>(-1);
+        public List<int> EnabledPoleInts { set; get; } = new List<int>() {-1};
 
         /// <summary>
         ///     采集结果集合

@@ -18,7 +18,7 @@ namespace TCPServer.util
         private Socket _socketServerSub;
         private Thread _threadServer;
         private Thread _threadServerSub;
-        private Random _random;
+        private readonly Random _random;
 
         public BitkyTcpServer(IServerPresenter serverPresenter)
         {

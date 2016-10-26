@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using System.Threading;
 using System.Timers;
 using System.Windows;
 using bitkyFlashresUniversal.connClient.model;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.databaseUtil.presenter;
+using bitkyFlashresUniversal.dataExport.bean;
 using bitkyFlashresUniversal.ElectrodeDetection;
 using bitkyFlashresUniversal.view;
 using Timer = System.Timers.Timer;
@@ -25,6 +25,11 @@ namespace bitkyFlashresUniversal.connClient.presenter
         private FrameData _currentFrameData;
         private List<Electrode> _electrodes;
         private readonly Timer _timerSendDelay;
+
+        /// <summary>
+        /// 启用的电极的集合
+        /// </summary>
+        public List<Electrode> EnabledPoleList { set; get; }
 
 
         public CommPresenter(IViewCommStatus view)
@@ -330,9 +335,9 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     _commucationFacade.SendDataFrame(new FrameData(FrameType.DeviceReset));
 
                     break;
-                case OperateType.Debug:
-                    _commucationFacade.SendDataFrame(_currentFrameData);
-                    break;
+//                case OperateType.Debug:
+//                    _commucationFacade.SendDataFrame(_currentFrameData);
+//                    break;
                 default:
                     _view.CommunicateMessageShow("设备运行时启动了无法识别的帧");
                     break;
@@ -359,15 +364,15 @@ namespace bitkyFlashresUniversal.connClient.presenter
             _view.SetPreferencesData();
         }
 
-        /// <summary>
-        /// 调试用，直接指定发送帧
-        /// </summary>
-        /// <param name="frameData"></param>
-        public void DebugPole(FrameData frameData)
-        {
-            _currentFrameData = frameData;
-            DeviceGatherStart(OperateType.Debug);
-        }
+//        /// <summary>
+//        /// 调试用，直接指定发送帧
+//        /// </summary>
+//        /// <param name="frameData"></param>
+//        public void DebugPole(FrameData frameData)
+//        {
+//            _currentFrameData = frameData;
+//            DeviceGatherStart(OperateType.Debug);
+//        }
 
         /// <summary>
         /// 在数据库中更新配置信息
@@ -376,13 +381,26 @@ namespace bitkyFlashresUniversal.connClient.presenter
         {
             _sqlPresenter.UpdatePreferences();
         }
+
         /// <summary>
         /// 从数据库中获取用于输出的Json格式数据
         /// </summary>
         /// <returns>用于输出的Json格式数据</returns>
-        public string GetJsonFromDb()
+        public SummaryDataJson GetJsonFromDb()
         {
-          return  _sqlPresenter.GetJsonFromDb();
+            var dataJson = _sqlPresenter.GetJsonFromDb();
+            if (EnabledPoleList != null && EnabledPoleList.Count > 0)
+            {
+                var enabledInts = new List<int>(64);
+                EnabledPoleList.ForEach(pole => { enabledInts.Add(pole.IdOrigin); });
+                dataJson.Preference.Add("EnabledPoleNum", EnabledPoleList.Count);
+                dataJson.EnabledPoleInts = enabledInts;
+            }
+            else
+            {
+                dataJson.Preference.Add("EnabledPoleNum", -1);
+            }
+            return dataJson;
         }
     }
 }

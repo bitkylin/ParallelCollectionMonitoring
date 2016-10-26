@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.databaseUtil.presenter;
-using bitkyFlashresUniversal.dataExport;
 using bitkyFlashresUniversal.dataExport.bean;
 using bitkyFlashresUniversal.ElectrodeDetection;
 
@@ -202,10 +201,10 @@ namespace bitkyFlashresUniversal.databaseUtil
         /// 从数据库中获取用于输出的Json格式数据
         /// </summary>
         /// <returns>用于输出的Json格式数据</returns>
-        public string GetJsonFromDb()
+        public SummaryDataJson GetJsonFromDb()
         {
             //从'DataInfo'和'Preferences'表中获取已完成次数，总次数，电流阈值
-            var preference = new Dictionary<string, int>();
+            var preference = new Dictionary<string, int>(3);
             _command.Reset();
             _command.CommandText = "SELECT num FROM " + PresetInfo.DataInfoTable + " WHERE name = 'sum'";
             var sumNum = Convert.ToInt32(_command.ExecuteScalar());
@@ -258,7 +257,7 @@ namespace bitkyFlashresUniversal.databaseUtil
                     collectItems.Add(new CollectItem(no, a, b, m, elec, poles));
                 }
             }
-            return null;
+            return new SummaryDataJson(collectItems,elecDetect,preference);
         }
     }
 }

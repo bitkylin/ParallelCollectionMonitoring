@@ -4,30 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="跨孔CT自动化控制及采集系统" Height="625" Width="1000" MinWidth="1000" MinHeight="625" Closed="Window_Closed" WindowState="Maximized" AllowsTransparency="True" WindowStyle="None">
+        Title="跨孔CT自动化控制及采集系统" Height="625" Width="1000" MinWidth="1000" MinHeight="625" Closed="Window_Closed" WindowState="Maximized" AllowsTransparency="True" WindowStyle="None" Background="Black">
     <Grid>
-        <Grid.Background>
-            <RadialGradientBrush>
-                <GradientStop Color="Black" Offset="1"/>
-                <GradientStop Color="#FF4C4C4C"/>
-            </RadialGradientBrush>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="44.8" MinHeight="44.8" MaxHeight="44.8"/>
         </Grid.RowDefinitions>
-        <Label x:Name="LabelDataOutlineShow" Content="Label" Margin="0,2.6,0,0.2" RenderTransformOrigin="1.62,0.852" HorizontalAlignment="Left" Width="465" FontSize="22" Grid.Row="1" Foreground="White"/>
+        <Label x:Name="LabelDataOutlineShow" Content="Label" Margin="20,0,0,-0.2" RenderTransformOrigin="1.62,0.852" HorizontalAlignment="Left" Width="515" FontSize="22" Grid.Row="1" Foreground="White"/>
         <TabControl Grid.Row="0" x:Name="TabControl" Margin="0,40,1,2" Background="{x:Null}">
-            <TabItem Header="数据采集" Width="200" Height="30" Foreground="Black">
-                <TabItem.Background>
-                    <RadialGradientBrush>
-                        <GradientStop Color="#E5FFFFFF" Offset="0"/>
-                        <GradientStop Color="#BF7C7C7C" Offset="0.997"/>
-                    </RadialGradientBrush>
-                </TabItem.Background>
+            <TabItem Header="数据采集" Width="200" Height="30" Foreground="Black" Background="#A8D2FDFF">
                 <Grid Margin="0,0,0.4,0.6">
-                    <GroupBox x:Name="groupBox" Header="电极选择" HorizontalAlignment="Left" Margin="10,183,0,0" VerticalAlignment="Top" Height="90" Width="302" BorderBrush="#FF636363" Foreground="White">
-                        <Button x:Name="BtnSendStopGather" Content="自主选择" HorizontalAlignment="Left" Margin="10,10,0,0" Width="117" Click="btnOpenElectrodeSelectForm_Click" Height="45" VerticalAlignment="Top" Foreground="White">
+                    <GroupBox x:Name="GroupBox" Header="电极选择" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Height="90" Width="302" BorderBrush="#FF636363" Foreground="White">
+                        <Button x:Name="BtnSendStopGather" Content="自主选择" HorizontalAlignment="Left" Margin="10,10,0,0" Width="127" Click="btnOpenElectrodeSelectForm_Click" Height="45" VerticalAlignment="Top" Foreground="White" FontSize="16" IsTabStop="False">
                             <Button.Background>
                                 <RadialGradientBrush>
                                     <GradientStop Color="Black"/>
@@ -36,26 +24,12 @@
                             </Button.Background>
                         </Button>
                     </GroupBox>
-                    <ListBox x:Name="ListBoxControlText" HorizontalAlignment="Right" Margin="0,0,10,6.4" Width="354" Height="237" VerticalAlignment="Bottom" Foreground="White">
-                        <ListBox.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="#FF141414" Offset="1"/>
-                                <GradientStop Color="Black"/>
-                            </RadialGradientBrush>
-                        </ListBox.Background>
-                    </ListBox>
-                    <ListBox x:Name="ListBoxCommunicationText" HorizontalAlignment="Right" Margin="0,10,10.4,248.8" Width="354" Foreground="White">
-                        <ListBox.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="#FF141414" Offset="1"/>
-                                <GradientStop Color="Black"/>
-                            </RadialGradientBrush>
-                        </ListBox.Background>
-                    </ListBox>
-                    <Label Content="IP地址：" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Height="25" Foreground="White"/>
-                    <Label Content="端口号：" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <TextBox x:Name="TextBoxPort" HorizontalAlignment="Left" Height="26" Margin="68,56,0,0" TextWrapping="Wrap" Text="49000" VerticalAlignment="Top" Width="106" Foreground="Black" Background="White"/>
-                    <Button x:Name="BtnConnect" Content="连接" HorizontalAlignment="Left" Margin="37,87,0,0" VerticalAlignment="Top" Width="137" Height="43" Click="btnConnect_Click" Foreground="White">
+                    <ListBox x:Name="ListBoxControlText" HorizontalAlignment="Right" Margin="0,0,10,6.4" Width="354" Height="237" VerticalAlignment="Bottom" Foreground="White" Background="#FF141414"/>
+                    <ListBox x:Name="ListBoxCommunicationText" HorizontalAlignment="Right" Margin="0,10,10.4,248.8" Width="354" Foreground="White" Background="#FF141414"/>
+                    <Label Content="IP地址: " HorizontalAlignment="Left" Margin="0,26,0,0" VerticalAlignment="Top" Height="25" Foreground="White" Width="50"/>
+                    <Label Content="端口号: " HorizontalAlignment="Left" Margin="0,56,0,0" VerticalAlignment="Top" Foreground="White" Width="50"/>
+                    <TextBox x:Name="TextBoxPort" HorizontalAlignment="Left" Height="26" Margin="50,56,0,0" TextWrapping="Wrap" Text="49000" VerticalAlignment="Top" Width="111" Foreground="Black" Background="White" BorderBrush="#FF00DFFF" VerticalContentAlignment="Center" TabIndex="1"/>
+                    <Button x:Name="BtnConnect" Content="连接" HorizontalAlignment="Left" Margin="26,86,0,0" VerticalAlignment="Top" Width="135" Height="43" Click="btnConnect_Click" Foreground="White" FontSize="16" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -63,7 +37,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnHandshake" Content="开始工作" HorizontalAlignment="Left" Margin="187,290,0,0" VerticalAlignment="Top" Width="115" Height="45" Click="btnHandshake_Click" Foreground="White">
+                    <Button x:Name="BtnHandshake" Content="开始工作" HorizontalAlignment="Left" Margin="172,290,0,0" VerticalAlignment="Top" Width="130" Height="45" Click="btnHandshake_Click" Foreground="White" FontSize="16" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -71,7 +45,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnElectrodeDetect" Content="检测并选择" HorizontalAlignment="Left" Margin="187,209,0,0" VerticalAlignment="Top" Width="115" Height="44" Click="btnElectrodeDetect_Click" Foreground="White">
+                    <Button x:Name="BtnElectrodeDetect" Content="检测并选择" HorizontalAlignment="Left" Margin="172,206,0,0" VerticalAlignment="Top" Width="130" Height="44" Click="btnElectrodeDetect_Click" Foreground="White" FontSize="16" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -79,7 +53,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnCommunicateClear" Content="清空通信信息" Margin="237,0,0,44" Click="btnCommunicateClear_Click" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="85" Foreground="White">
+                    <Button x:Name="BtnCommunicateClear" Content="清空通信信息" Margin="237,0,0,44" Click="btnCommunicateClear_Click" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="85" Foreground="White" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -87,7 +61,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnControlClear" Content="清空控制信息" HorizontalAlignment="Left" Margin="237,0,0,10" VerticalAlignment="Bottom" Width="85" Height="29" Click="btnControlClear_Click" Foreground="White">
+                    <Button x:Name="BtnControlClear" Content="清空控制信息" HorizontalAlignment="Left" Margin="237,0,0,10" VerticalAlignment="Bottom" Width="85" Height="29" Click="btnControlClear_Click" Foreground="White" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -95,7 +69,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnGatherDataClear" Content="已采数据处理" HorizontalAlignment="Left" Margin="187,363,0,0" Width="115" Click="btnGatherDataClear_Click" Height="45" VerticalAlignment="Top" Foreground="White">
+                    <Button x:Name="BtnGatherDataClear" Content="已采数据处理" HorizontalAlignment="Left" Margin="172,363,0,0" Width="130" Click="btnGatherDataClear_Click" Height="45" VerticalAlignment="Top" Foreground="White" FontSize="16" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -103,7 +77,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnHandshakeStart" Content="选择通信方式" HorizontalAlignment="Left" Margin="27,0,0,48" Width="90" Click="BtnHandshakeStart_Click" Height="22" VerticalAlignment="Bottom" Foreground="White">
+                    <Button x:Name="BtnHandshakeStart" Content="选择通信方式" HorizontalAlignment="Left" Margin="27,0,0,48" Width="90" Click="BtnHandshakeStart_Click" Height="22" VerticalAlignment="Bottom" Foreground="White" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -111,23 +85,9 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <ListBox x:Name="ListBoxSendData" Margin="332,10,370,249" Foreground="White">
-                        <ListBox.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="#FF141414" Offset="1"/>
-                                <GradientStop Color="Black"/>
-                            </RadialGradientBrush>
-                        </ListBox.Background>
-                    </ListBox>
-                    <ListBox x:Name="ListBoxReceiveData" Height="237" Margin="332,0,370,7" VerticalAlignment="Bottom" Foreground="White">
-                        <ListBox.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="#FF141414" Offset="1"/>
-                                <GradientStop Color="Black"/>
-                            </RadialGradientBrush>
-                        </ListBox.Background>
-                    </ListBox>
-                    <Button x:Name="BtnSendDataClear" Content="清空发送帧" HorizontalAlignment="Left" Margin="162,0,0,44" VerticalAlignment="Bottom" Width="70" Height="29" Click="btnSendDataClear_Click" Foreground="White">
+                    <ListBox x:Name="ListBoxSendData" Margin="332,10,370,249" Foreground="White" Background="#FF141414"/>
+                    <ListBox x:Name="ListBoxReceiveData" Height="237" Margin="332,0,370,7" VerticalAlignment="Bottom" Foreground="White" Background="#FF141414"/>
+                    <Button x:Name="BtnSendDataClear" Content="清空发送帧" HorizontalAlignment="Left" Margin="162,0,0,44" VerticalAlignment="Bottom" Width="70" Height="29" Click="btnSendDataClear_Click" Foreground="White" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -135,7 +95,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnReceiveDataClear" Content="清空接收帧" HorizontalAlignment="Left" Margin="162,0,0,10" VerticalAlignment="Bottom" Width="70" Height="29" Click="btnReceiveDataClear_Click" Foreground="White">
+                    <Button x:Name="BtnReceiveDataClear" Content="清空接收帧" HorizontalAlignment="Left" Margin="162,0,0,10" VerticalAlignment="Bottom" Width="70" Height="29" Click="btnReceiveDataClear_Click" Foreground="White" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -143,7 +103,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnShowClear" Content="清空显示数据" HorizontalAlignment="Left" Margin="27,363,0,0" VerticalAlignment="Top" Width="115" Height="45" Click="btnShowClear_Click" Foreground="White">
+                    <Button x:Name="BtnShowClear" Content="清空显示数据" HorizontalAlignment="Left" Margin="27,363,0,0" VerticalAlignment="Top" Width="125" Height="45" Click="btnShowClear_Click" Foreground="White" FontSize="16" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -151,13 +111,13 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <ComboBox x:Name="ComboPortName" HorizontalAlignment="Left" Margin="192,26,0,0" VerticalAlignment="Top" Width="120" Height="25" IsEditable="True" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                    <ComboBox x:Name="ComboBaudrate" HorizontalAlignment="Left" Margin="192,56,0,0" VerticalAlignment="Top" Width="120" Height="26" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <ComboBox x:Name="ComboPortName" HorizontalAlignment="Left" Margin="227,26,0,0" VerticalAlignment="Top" Width="85" Height="25" IsEditable="True" Foreground="Black" Background="White" BorderBrush="#FF00DFFF" VerticalContentAlignment="Center" IsTabStop="True" TabIndex="2"/>
+                    <ComboBox x:Name="ComboBaudrate" HorizontalAlignment="Left" Margin="227,56,0,0" VerticalAlignment="Top" Width="85" Height="26" Foreground="Black" Background="White" BorderBrush="#FF00DFFF" VerticalContentAlignment="Center" IsEditable="True" IsTabStop="True" TabIndex="3">
                         <ComboBoxItem Content="4800"/>
                         <ComboBoxItem Content="9600"/>
                         <ComboBoxItem Content="115200"/>
                     </ComboBox>
-                    <Button x:Name="BtnPort" Content="打开串口" HorizontalAlignment="Left" Margin="192,87,0,0" VerticalAlignment="Top" Width="120" Height="43" Click="btnPort_Click" Foreground="White">
+                    <Button x:Name="BtnPort" Content="打开串口" HorizontalAlignment="Left" Margin="177,87,0,0" VerticalAlignment="Top" Width="135" Height="43" Click="btnPort_Click" Foreground="White" FontSize="16" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -165,7 +125,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnRefreshPort" Content="刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Margin="227,135,0,0" Click="btnRefreshPort_Click" Height="33" Foreground="White">
+                    <Button x:Name="BtnRefreshPort" Content="刷新" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Margin="227,135,0,0" Click="btnRefreshPort_Click" Height="33" Foreground="White" FontSize="14" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -173,20 +133,20 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <CheckBox x:Name="checkBoxStartAutoCollect" Content="开启自动采集" HorizontalAlignment="Left" Margin="50,149,0,0" Width="102" IsChecked="True"  Click="checkBox_Clicked" RenderTransformOrigin="0.5,0.5" Height="21" VerticalAlignment="Top" Foreground="White">
+                    <CheckBox x:Name="CheckBoxStartAutoCollect" Content="开启自动采集" HorizontalAlignment="Left" Margin="47,140,0,0" Width="108" IsChecked="True"  Click="checkBox_Clicked" RenderTransformOrigin="0.5,0.5" Height="25" VerticalAlignment="Top" Foreground="White" IsTabStop="False" VerticalContentAlignment="Center">
                         <CheckBox.RenderTransform>
                             <TransformGroup>
-                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                <ScaleTransform ScaleX="1.4" ScaleY="1.4"/>
                                 <SkewTransform/>
                                 <RotateTransform/>
                                 <TranslateTransform/>
                             </TransformGroup>
                         </CheckBox.RenderTransform>
                     </CheckBox>
-                    <ComboBox x:Name="comboBoxIP" HorizontalAlignment="Left" Margin="67,26,0,0" VerticalAlignment="Top" Width="107" IsEditable="True" Height="26" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <ComboBox x:Name="ComboBoxIp" HorizontalAlignment="Left" Margin="50,26,0,0" VerticalAlignment="Top" Width="111" IsEditable="True" Height="26" Foreground="Black" Background="White" BorderBrush="#FF00DFFF" VerticalContentAlignment="Center" IsTabStop="True" TabIndex="0">
                         <ComboBoxItem Content="16.7.30.254" Foreground="Black"/>
                     </ComboBox>
-                    <Button x:Name="BtnHvRelayOpen" Content="打开高压继电器" HorizontalAlignment="Left" Margin="27,290,0,0" VerticalAlignment="Top" Width="115" Height="45" Click="BtnHvRelayOpen_Click" Foreground="White">
+                    <Button x:Name="BtnHvRelayOpen" Content="打开高压继电器" HorizontalAlignment="Left" Margin="27,290,0,0" VerticalAlignment="Top" Width="125" Height="45" Click="BtnHvRelayOpen_Click" Foreground="White" FontSize="16" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -194,7 +154,7 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnDeviceReset" Content="设备重置" HorizontalAlignment="Left" Margin="27,0,0,14" VerticalAlignment="Bottom" Width="90" Height="22" Click="BtnDeviceReset_Click" Foreground="White">
+                    <Button x:Name="BtnDeviceReset" Content="设备重置" HorizontalAlignment="Left" Margin="27,0,0,14" VerticalAlignment="Bottom" Width="90" Height="22" Click="BtnDeviceReset_Click" Foreground="White" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -202,15 +162,11 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
+                    <Label Content="串口名: " HorizontalAlignment="Left" Margin="177,26,0,0" VerticalAlignment="Top" Height="25" Foreground="White" Width="50"/>
+                    <Label Content="波特率: " HorizontalAlignment="Left" Margin="177,56,0,0" VerticalAlignment="Top" Foreground="White" Width="50" RenderTransformOrigin="0.892,0.539"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="通道状态显示" Height="30" Width="200" Foreground="Black">
-                <TabItem.Background>
-                    <RadialGradientBrush>
-                        <GradientStop Color="#E5FFFFFF" Offset="0"/>
-                        <GradientStop Color="#BF7C7C7C" Offset="0.997"/>
-                    </RadialGradientBrush>
-                </TabItem.Background>
+            <TabItem Header="通道状态显示" Height="30" Width="200" Foreground="Black" Background="#A8D2FDFF">
                 <Grid x:Name="GridPoleStatusShow" Background="#00E5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition x:Name="Row0" MinHeight="50"/>
@@ -234,17 +190,11 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </TabItem>
-            <TabItem Header="系统设置" Height="30" Width="200" Foreground="Black">
-                <TabItem.Background>
-                    <RadialGradientBrush>
-                        <GradientStop Color="#E5FFFFFF" Offset="0"/>
-                        <GradientStop Color="#BF7C7C7C" Offset="0.997"/>
-                    </RadialGradientBrush>
-                </TabItem.Background>
+            <TabItem Header="系统设置" Height="30" Width="200" Foreground="Black" Background="#A8D2FDFF">
                 <Grid>
-                    <Label Content="电流阈值：" HorizontalAlignment="Left" Margin="72,65,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
-                    <TextBox x:Name="TextBoxElectricThreshold" HorizontalAlignment="Left" Height="31" Margin="167,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16"/>
-                    <Button x:Name="ButtonConfirmSetting" Content="确认" HorizontalAlignment="Left" Margin="92,220,0,0" VerticalAlignment="Top" Width="135" Click="buttonConfirmSetting_Click" Height="44" Foreground="White" FontSize="16">
+                    <Label Content="电流阈值：" HorizontalAlignment="Left" Margin="69,65,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="93"/>
+                    <TextBox x:Name="TextBoxElectricThreshold" HorizontalAlignment="Left" Height="31" Margin="167,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16" BorderBrush="#FF00E8FF" Background="White" VerticalContentAlignment="Center" TabIndex="0" MaxLines="1" MaxLength="5" AutoWordSelection="True"/>
+                    <Button x:Name="ButtonConfirmSetting" Content="确认" HorizontalAlignment="Left" Margin="92,231,0,0" VerticalAlignment="Top" Width="135" Click="buttonConfirmSetting_Click" Height="44" Foreground="White" FontSize="16" IsTabStop="False">
                         <Button.Background>
                             <RadialGradientBrush>
                                 <GradientStop Color="Black"/>
@@ -252,26 +202,16 @@
                             </RadialGradientBrush>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="BtnDebugPole" Content="测试" HorizontalAlignment="Left" Margin="532,166,0,0" VerticalAlignment="Top" Width="120" Click="btnDebugPole_Click" Foreground="White" Height="44" FontSize="16">
-                        <Button.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="Black"/>
-                                <GradientStop Color="#7F424242" Offset="1"/>
-                            </RadialGradientBrush>
-                        </Button.Background>
-                    </Button>
-                    <TextBox x:Name="TextBoxDebugPole0" HorizontalAlignment="Left" Height="31" Margin="532,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16"/>
-                    <TextBox x:Name="TextBoxDebugPole1" HorizontalAlignment="Left" Height="30" Margin="532,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16"/>
                     <Label x:Name="Label1Copy" Content="帧回复超时时间：" HorizontalAlignment="Left" Margin="21,117,0,0" VerticalAlignment="Top" Width="141" Foreground="White" FontSize="16"/>
-                    <TextBox x:Name="TextBoxFrameReceiveTimeout" HorizontalAlignment="Left" Height="30" Margin="167,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16"/>
-                    <Label x:Name="Label1Copy1" Content="帧发送延时：" HorizontalAlignment="Left" Margin="52,163,0,0" VerticalAlignment="Top" Width="110" Foreground="White" FontSize="16"/>
-                    <TextBox x:Name="TextBoxFrameSendDelay" HorizontalAlignment="Left" Height="30" Margin="167,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16"/>
+                    <TextBox x:Name="TextBoxFrameReceiveTimeout" HorizontalAlignment="Left" Height="30" Margin="167,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16" BorderBrush="#FF00E8FF" Background="White" VerticalContentAlignment="Center" TabIndex="1" MaxLines="1" MaxLength="5" AutoWordSelection="True"/>
+                    <Label x:Name="Label1Copy1" Content="帧发送延时：" HorizontalAlignment="Left" Margin="52,170,0,0" VerticalAlignment="Top" Width="110" Foreground="White" FontSize="16"/>
+                    <TextBox x:Name="TextBoxFrameSendDelay" HorizontalAlignment="Left" Height="30" Margin="167,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="Black" FontSize="16" BorderBrush="#FF00E8FF" Background="White" VerticalContentAlignment="Center" TabIndex="2" MaxLines="1" MaxLength="5" AutoWordSelection="True"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label x:Name="Label" Content="电流(mA):" HorizontalAlignment="Right" Margin="0,2.6,234.6,0.2" Width="120" FontSize="22" Grid.Row="1" Foreground="White"/>
-        <Label x:Name="LabelElectricShow" Content="待获取" HorizontalAlignment="Right" Margin="0,2.6,9.6,0.2" Width="220" FontSize="22" Grid.Row="1" Foreground="White"/>
-        <Label x:Name="label" Content="跨孔CT自动化控制及采集系统" VerticalAlignment="Top" Height="40" FontSize="18" Margin="300,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White"/>
-        <Button x:Name="btnCloseWindow" Content="X" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Width="109" Height="40" FontSize="18" Foreground="Black" Background="#BFFF0000" BorderBrush="#7F00FAFF" Click="btnCloseWindow_Click"/>
+        <Label x:Name="Label" Content="电流(mA):" HorizontalAlignment="Right" Margin="0,0,200,-0.2" Width="120" FontSize="22" Grid.Row="1" Foreground="White"/>
+        <Label x:Name="LabelElectricShow" Content="待获取" HorizontalAlignment="Right" Margin="0,0,10,-0.2" Width="185" FontSize="22" Grid.Row="1" Foreground="White"/>
+        <Label Grid.Row="0" x:Name="label" Content="跨孔CT自动化控制及采集系统" FontSize="18" Margin="300,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Height="40" VerticalAlignment="Top"/>
+        <Button Grid.Row="0" x:Name="BtnCloseWindow" Content="X" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Width="80" Height="40" FontSize="24" Foreground="White" Background="Red" BorderBrush="#FFFF00D3" Click="btnCloseWindow_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>

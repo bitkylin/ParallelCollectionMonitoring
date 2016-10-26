@@ -3,9 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:bitkyFlashresUniversal.dataExport"
         mc:Ignorable="d"
-        Title="DataExportWindow" Height="450" Width="800" MinWidth="800" MinHeight="450" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Foreground="Black">
+        Title="DataExportWindow" Height="349.8" Width="719.8" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Foreground="Black" BorderThickness="5">
+    <Window.BorderBrush>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF5D44FF" Offset="0"/>
+            <GradientStop Color="#FF37E6FF" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.BorderBrush>
     <Window.Background>
         <RadialGradientBrush>
             <GradientStop Color="Black" Offset="0"/>
@@ -13,10 +18,10 @@
         </RadialGradientBrush>
     </Window.Background>
     <Grid>
-        <Label x:Name="label" Content="已采数据处理" HorizontalAlignment="Left" Margin="168,70,0,0" VerticalAlignment="Top" Foreground="White" FontSize="72"/>
-        <Button x:Name="btnSave" Content="数据本地存储" HorizontalAlignment="Left" Margin="45,237,0,0" VerticalAlignment="Top" Width="270" Background="#B203006B" Foreground="White" FontSize="36" Height="80" Click="btnSave_Click"/>
-        <Button x:Name="btnClear" Content="数据清除" HorizontalAlignment="Left" Margin="445,237,0,0" VerticalAlignment="Top" Width="270" Background="#B24E0000" Foreground="White" FontSize="36" Height="80" Click="btnClear_Click"/>
-        <Button x:Name="btnClose" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Height="55" Background="#BFFF0000" BorderBrush="#00707070" Foreground="White" FontSize="36" Click="btnClose_Click"/>
+        <Label x:Name="Label" Content="已采数据处理" Margin="200,50,200,0" VerticalAlignment="Top" Foreground="White" FontSize="48" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button x:Name="BtnSave" Content="数据导出" HorizontalAlignment="Left" Margin="45,170,0,0" VerticalAlignment="Top" Width="270" Background="#B202004C" Foreground="White" FontSize="36" Height="80" Click="btnSave_Click" IsTabStop="False"/>
+        <Button x:Name="BtnClear" Content="清除已采数据" HorizontalAlignment="Left" Margin="385,170,0,0" VerticalAlignment="Top" Width="270" Background="#B24E0000" Foreground="White" FontSize="36" Height="80" Click="btnClear_Click" IsTabStop="False"/>
+        <Button x:Name="BtnClose" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="40" Background="#BFFF0000" BorderBrush="#00707070" Foreground="White" FontSize="24" Click="btnClose_Click" IsTabStop="False" Margin="0,0,0.4,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
     </Grid>
 </Window>

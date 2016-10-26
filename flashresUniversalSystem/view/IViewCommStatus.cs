@@ -3,7 +3,7 @@ using bitkyFlashresUniversal.connClient.model.bean;
 
 namespace bitkyFlashresUniversal.view
 {
-    internal interface IViewCommStatus
+    public interface IViewCommStatus
     {
         /// <summary>
         ///     控制信息的显示
@@ -60,5 +60,7 @@ namespace bitkyFlashresUniversal.view
         /// 将电极检测结果返回View，返回坏电极的集合
         /// </summary>
         void InitPoleSelection(List<int> badList);
+
+        void SetElectrodeSuccessful(List<Electrode> list);
     }
 }

@@ -195,7 +195,25 @@ namespace bitkyFlashresUniversal.view
         /// </summary>
         public void InitPoleSelection(List<int> badList)
         {
-            Dispatcher.Invoke(() => { new ElectrodeSelecterForm(this, badList).Show(); });
+            Dispatcher.Invoke(() =>
+            {
+                if (badList.Count == 0)
+                {
+                    if (MessageBox.Show("电极检测结束, 所有电极均有效, 系统已自动勾选全部电极, 确定后进行电极选择。", "电极检测结束", MessageBoxButton.OK) ==
+                        MessageBoxResult.OK)
+                        new ElectrodeSelecterWindow(this).Show();
+                }
+                else
+                {
+                    if (
+                        MessageBox.Show(
+                            "电极检测结束, 其中" + badList.Count + "个电极无效, 系统已自动勾选其余" + (64 - badList.Count) + "个电极, 确定后打开电极选择器, 自主进行电极选择。",
+                            "电极检测结束",
+                            MessageBoxButton.OKCancel) ==
+                        MessageBoxResult.OK)
+                        new ElectrodeSelecterWindow(this, badList).Show();
+                }
+            });
         }
 
         /// <summary>
@@ -219,21 +237,30 @@ namespace bitkyFlashresUniversal.view
                     controls.Add(bitkyPoleControl);
                     //对控件使用自定义方法进行初始化
                     bitkyPoleControl.SetContent(id);
-
                     id++;
                 }
             _bitkyPoleControls = controls.ToArray();
+
+            //初始化已启用的电极，并将信息保存在presenter中
+            var enabledPolesList = new List<Electrode>(64);
+            for (var i = 0; i < 64; i++)
+            {
+                enabledPolesList.Add(new Electrode(i));
+            }
+            _commPresenter.EnabledPoleList = enabledPolesList;
         }
+
 
         /// <summary>
         ///     电极信息初始化成功
         /// </summary>
+        /// <param name="electrodes">使用的电极的集合</param>
         public void SetElectrodeSuccessful(List<Electrode> electrodes)
         {
             foreach (var control in _bitkyPoleControls)
             {
                 control.isEnabled = false;
-                int id = int.Parse(control.LabelPoleId.Content.ToString());
+                var id = int.Parse(control.LabelPoleId.Content.ToString());
                 foreach (var pole in electrodes)
                 {
                     if (pole.IdOrigin == id)
@@ -247,6 +274,8 @@ namespace bitkyFlashresUniversal.view
                 }
             }
             _commPresenter.CheckTable();
+            //初始化已启用的电极，并将信息保存在presenter中
+            _commPresenter.EnabledPoleList = electrodes;
         }
 
         /// <summary>
@@ -270,8 +299,8 @@ namespace bitkyFlashresUniversal.view
             foreach (var ipAddress in addressList)
                 if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
                     addresses.Add(ipAddress);
-            addresses.ForEach(ipAddress => { comboBoxIP.Items.Add(ipAddress); });
-            comboBoxIP.SelectedIndex = comboBoxIP.Items.Count > 0 ? 0 : -1;
+            addresses.ForEach(ipAddress => { ComboBoxIp.Items.Add(ipAddress); });
+            ComboBoxIp.SelectedIndex = ComboBoxIp.Items.Count > 0 ? 0 : -1;
         }
 
 
@@ -286,7 +315,7 @@ namespace bitkyFlashresUniversal.view
                 _commPresenter.FrontConnClosed();
                 return;
             }
-            var ip = comboBoxIP.Text.Trim();
+            var ip = ComboBoxIp.Text.Trim();
             var portStr = TextBoxPort.Text.Trim();
             var match = Regex.IsMatch(ip,
                 @"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$");
@@ -317,7 +346,7 @@ namespace bitkyFlashresUniversal.view
         /// <param name="e"></param>
         private void btnOpenElectrodeSelectForm_Click(object sender, RoutedEventArgs e)
         {
-            new ElectrodeSelecterForm(this, new List<int>()).Show();
+            new ElectrodeSelecterWindow(this, new List<int>()).Show();
         }
 
         private void btnElectrodeDetect_Click(object sender, RoutedEventArgs e)
@@ -391,18 +420,9 @@ namespace bitkyFlashresUniversal.view
             PresetInfo.FrameReceiveTimeout = int.Parse(TextBoxFrameReceiveTimeout.Text);
             PresetInfo.FrameSendDelay = int.Parse(TextBoxFrameSendDelay.Text);
             _commPresenter.UpdatePreferences();
+            MessageBox.Show("系统配置信息已更新成功!", "提示");
         }
 
-        private void btnDebugPole_Click(object sender, RoutedEventArgs e)
-        {
-            var electrodes = new List<Electrode>
-            {
-                new Electrode(int.Parse(TextBoxDebugPole0.Text.Trim()), PoleMode.A),
-                new Electrode(int.Parse(TextBoxDebugPole1.Text.Trim()), PoleMode.B)
-            };
-
-            _commPresenter.DebugPole(new FrameData(FrameType.ControlGather, electrodes));
-        }
 
         /// <summary>
         ///     刷新串口按钮
@@ -437,7 +457,7 @@ namespace bitkyFlashresUniversal.view
         private void checkBox_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("change");
-            PresetInfo.StartAutoCollect = checkBoxStartAutoCollect.IsChecked != false;
+            PresetInfo.StartAutoCollect = CheckBoxStartAutoCollect.IsChecked != false;
         }
 
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)

@@ -28,7 +28,7 @@ namespace bitkyFlashresUniversal.connClient.model
 
         private readonly Timer _timerFrameCollect;
         private int _sendDeviceResetTimeout = 0;
-        public bool ConnIsOpen = false;
+        private bool _connIsOpen = false;
 
         private FrameData _currentframeData;
 
@@ -76,7 +76,7 @@ namespace bitkyFlashresUniversal.connClient.model
         /// </summary>
         public void CommClientFailed(string str)
         {
-            ConnIsOpen = false;
+            _connIsOpen = false;
             MessageBeep(0x00000030);
             _timerFrameCollect.Stop();
             _sendDeviceResetTimeout = 0;
@@ -104,7 +104,7 @@ namespace bitkyFlashresUniversal.connClient.model
         /// </summary>
         public void GetSocketSuccess()
         {
-            ConnIsOpen = true;
+            _connIsOpen = true;
             _presenter.GetSocketSuccess();
         }
 
@@ -181,7 +181,7 @@ namespace bitkyFlashresUniversal.connClient.model
         /// <param name="frameData">指定的帧格式</param>
         public void SendDataFrame(FrameData frameData)
         {
-            if (!ConnIsOpen)
+            if (!_connIsOpen)
             {
                 _presenter.CommunicateMessageShow("连接已断开");
                 return;
@@ -246,7 +246,7 @@ namespace bitkyFlashresUniversal.connClient.model
         {
             MessageBeep(0x00000030);
             //  MessageBox.Show("确认后继续");
-            if (!ConnIsOpen)
+            if (!_connIsOpen)
             {
                 _presenter.CommunicateMessageShow("连接已断开，程序停止");
                 return;
