@@ -28,6 +28,14 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
         private readonly IViewCommStatus _window;
         private readonly List<int> _badPoleInts;
 
+        public ElectrodeSelecterWindow(IViewCommStatus window)
+        {
+            InitializeComponent();
+            _window = window;
+            _badPoleInts = new List<int>();
+            InitPoleShow();
+        }
+
         public ElectrodeSelecterWindow(IViewCommStatus window, List<int> badPoleInts)
         {
             InitializeComponent();

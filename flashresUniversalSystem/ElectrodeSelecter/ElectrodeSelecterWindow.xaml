@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bitkyFlashresUniversal.ElectrodeSelecter"
         mc:Ignorable="d"
-        Title="ElectrodeSelecterWindow" Height="700" Width="1179.8" AllowsTransparency="True" WindowStyle="None" MinWidth="900" MinHeight="750" MouseLeftButtonDown="Window_MouseLeftButtonDown" BorderThickness="5">
+        Title="ElectrodeSelecterWindow" Height="700" Width="934.8" AllowsTransparency="True" WindowStyle="None" MinWidth="900" MinHeight="750" MouseLeftButtonDown="Window_MouseLeftButtonDown" BorderThickness="5">
     <Window.BorderBrush>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF31EDFF" Offset="0"/>
@@ -21,7 +21,7 @@
     <Grid>
         <Label x:Name="label" Content="电极选择" Margin="200,0" Foreground="White" FontSize="36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="60" VerticalAlignment="Top"/>
         <Button x:Name="btnClose" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Height="55" BorderBrush="#FFF400FF" Background="Red" Foreground="White" FontSize="36" Click="btnClose_Click"/>
-        <GroupBox x:Name="groupBox" Header="自主选择" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Foreground="White" Height="680" Width="560" FontSize="24">
+        <GroupBox x:Name="groupBox" Header="自主选择" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Foreground="White" Height="680" Width="485" FontSize="24">
             <Grid x:Name="GridCheckBox" Margin="10" AutomationProperties.IsOffscreenBehavior="Onscreen">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -49,12 +49,12 @@
                 </Grid.RowDefinitions>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="groupBox1" Header="点击选取范围" HorizontalAlignment="Left" Margin="629,65,0,0" VerticalAlignment="Top" Height="330" Width="531" Foreground="White" FontSize="24"/>
-        <Label x:Name="label1" Content="起始: " HorizontalAlignment="Left" Margin="730,125,0,0" VerticalAlignment="Top" Height="55" Width="110" FontSize="36" Foreground="White"/>
-        <Label x:Name="label1_Copy" Content="终止: " HorizontalAlignment="Left" Margin="730,205,0,0" VerticalAlignment="Top" Height="55" Width="110" FontSize="36" Foreground="White"/>
-        <TextBox x:Name="textBoxCheckedBoxBegin" Height="55" Margin="0,125,64.6,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" FontSize="36" HorizontalAlignment="Right" Width="235" BorderBrush="#FF00C3FF" Background="White" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="textBoxCheckedBoxEnd" Height="55" Margin="0,205,64.6,0" TextWrapping="Wrap" Text="&#xA;" VerticalAlignment="Top" FontSize="36" HorizontalAlignment="Right" Width="235" BorderBrush="#FF00C3FF" Background="White" VerticalContentAlignment="Center"/>
-        <Button x:Name="btnReset" Content="重置复选框" HorizontalAlignment="Left" Margin="660,290,0,0" VerticalAlignment="Top" Width="235" Height="65" FontSize="36" Foreground="White" Click="btnReset_Click">
+        <GroupBox x:Name="groupBox1" Header="点击选取范围" HorizontalAlignment="Left" Margin="500,65,0,0" VerticalAlignment="Top" Height="330" Width="420" Foreground="White" FontSize="24"/>
+        <Label x:Name="label1" Content="起始: " HorizontalAlignment="Left" Margin="530,125,0,0" VerticalAlignment="Top" Height="55" Width="110" FontSize="36" Foreground="White"/>
+        <Label x:Name="label1_Copy" Content="终止: " HorizontalAlignment="Left" Margin="530,205,0,0" VerticalAlignment="Top" Height="55" Width="110" FontSize="36" Foreground="White"/>
+        <TextBox x:Name="textBoxCheckedBoxBegin" Height="55" Margin="0,125,39.8,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" FontSize="36" HorizontalAlignment="Right" Width="235" BorderBrush="#FF00C3FF" Background="White" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="textBoxCheckedBoxEnd" Height="55" Margin="0,205,39.8,0" TextWrapping="Wrap" Text="&#xA;" VerticalAlignment="Top" FontSize="36" HorizontalAlignment="Right" Width="235" BorderBrush="#FF00C3FF" Background="White" VerticalContentAlignment="Center"/>
+        <Button x:Name="btnReset" Content="重置复选框" HorizontalAlignment="Left" Margin="510,290,0,0" VerticalAlignment="Top" Width="205" Height="65" FontSize="36" Foreground="White" Click="btnReset_Click">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="Black"/>
@@ -62,7 +62,7 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnconfirm" Content="确认选择" HorizontalAlignment="Left" Margin="930,290,0,0" VerticalAlignment="Top" Width="215" Height="65" FontSize="36" Foreground="White" Click="btnconfirm_Click">
+        <Button x:Name="btnconfirm" Content="确认选择" HorizontalAlignment="Left" Margin="735,290,0,0" VerticalAlignment="Top" Width="170" Height="65" FontSize="36" Foreground="White" Click="btnconfirm_Click">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="Black"/>
@@ -70,7 +70,7 @@
                 </RadialGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnProcess" Content="开始执行" HorizontalAlignment="Left" Margin="730,529,0,0" VerticalAlignment="Top" Width="340" Height="126" FontSize="36" Foreground="White" Click="btnProcess_Click">
+        <Button x:Name="btnProcess" Content="开始执行" HorizontalAlignment="Left" Margin="545,439,0,0" VerticalAlignment="Top" Width="340" Height="126" FontSize="36" Foreground="White" Click="btnProcess_Click">
             <Button.Background>
                 <RadialGradientBrush>
                     <GradientStop Color="Black"/>
