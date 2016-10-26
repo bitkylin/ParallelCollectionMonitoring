@@ -299,8 +299,8 @@ namespace bitkyFlashresUniversal.view
             foreach (var ipAddress in addressList)
                 if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
                     addresses.Add(ipAddress);
-            addresses.ForEach(ipAddress => { comboBoxIP.Items.Add(ipAddress); });
-            comboBoxIP.SelectedIndex = comboBoxIP.Items.Count > 0 ? 0 : -1;
+            addresses.ForEach(ipAddress => { ComboBoxIp.Items.Add(ipAddress); });
+            ComboBoxIp.SelectedIndex = ComboBoxIp.Items.Count > 0 ? 0 : -1;
         }
 
 
@@ -315,7 +315,7 @@ namespace bitkyFlashresUniversal.view
                 _commPresenter.FrontConnClosed();
                 return;
             }
-            var ip = comboBoxIP.Text.Trim();
+            var ip = ComboBoxIp.Text.Trim();
             var portStr = TextBoxPort.Text.Trim();
             var match = Regex.IsMatch(ip,
                 @"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$");
@@ -457,7 +457,7 @@ namespace bitkyFlashresUniversal.view
         private void checkBox_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("change");
-            PresetInfo.StartAutoCollect = checkBoxStartAutoCollect.IsChecked != false;
+            PresetInfo.StartAutoCollect = CheckBoxStartAutoCollect.IsChecked != false;
         }
 
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)

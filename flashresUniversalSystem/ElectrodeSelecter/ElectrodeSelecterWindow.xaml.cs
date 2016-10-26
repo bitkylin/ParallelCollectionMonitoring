@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Diagnostics;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.view;
 
@@ -21,7 +13,7 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
     /// <summary>
     /// ElectrodeSelecterWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ElectrodeSelecterWindow : Window
+    public partial class ElectrodeSelecterWindow
     {
         private List<BitkyCheckBox> _checkBoxList;
         private ProcessPresenter _processPresenter;
@@ -64,15 +56,15 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                     //将控件添加到集合中，方便下一步的使用
                     _checkBoxList.Add(bitkyCheckBox);
                     //对控件使用自定义方法进行初始化
-                    bitkyCheckBox.checkBox.Content = id;
-                    bitkyCheckBox.checkBox.IsChecked = true;
+                    bitkyCheckBox.CheckBox.Content = id;
+                    bitkyCheckBox.CheckBox.IsChecked = true;
 
                     //设置输入的不良电极所代表的复选框为不选中状态
                     _badPoleInts.ForEach(badId =>
                     {
                         if (badId == id)
                         {
-                            bitkyCheckBox.checkBox.IsChecked = false;
+                            bitkyCheckBox.CheckBox.IsChecked = false;
                         }
                     });
 
@@ -92,13 +84,13 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
-            _checkBoxList.ForEach(bitkyCheckBox => { bitkyCheckBox.checkBox.IsChecked = false; });
+            _checkBoxList.ForEach(bitkyCheckBox => { bitkyCheckBox.CheckBox.IsChecked = false; });
         }
 
         private void btnconfirm_Click(object sender, RoutedEventArgs e)
         {
-            var beginStr = textBoxCheckedBoxBegin.Text.Trim();
-            var endStr = textBoxCheckedBoxEnd.Text.Trim();
+            var beginStr = TextBoxCheckedBoxBegin.Text.Trim();
+            var endStr = TextBoxCheckedBoxEnd.Text.Trim();
             if (IsInt(beginStr) && IsInt(endStr))
             {
                 var begin = int.Parse(beginStr);
@@ -108,9 +100,9 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                 else
                     _checkBoxList.ForEach(bitkyCheckBox =>
                     {
-                        var num = int.Parse(bitkyCheckBox.checkBox.Content.ToString());
+                        var num = int.Parse(bitkyCheckBox.CheckBox.Content.ToString());
                         if ((num >= begin) && (num <= end))
-                            bitkyCheckBox.checkBox.IsChecked = true;
+                            bitkyCheckBox.CheckBox.IsChecked = true;
                     });
             }
             else
@@ -199,8 +191,8 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
             var list = new List<Electrode>();
             _checkBoxList.ForEach(bitkyCheckBox =>
             {
-                if (bitkyCheckBox.checkBox.IsChecked == true)
-                    list.Add(new Electrode(int.Parse(bitkyCheckBox.checkBox.Content.ToString())));
+                if (bitkyCheckBox.CheckBox.IsChecked == true)
+                    list.Add(new Electrode(int.Parse(bitkyCheckBox.CheckBox.Content.ToString())));
             });
             //对集合进行排序
             Comparison<Electrode> sort = CompareSort;

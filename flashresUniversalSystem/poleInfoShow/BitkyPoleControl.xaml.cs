@@ -17,7 +17,7 @@ namespace bitkyFlashresUniversal.poleInfoShow
 
         private readonly Color _colorBlack = Color.FromArgb(95, 0, 0, 0);
 
-        public bool isEnabled = true;
+        public bool isEnabled { get; set; } = true;
 
         public BitkyPoleControl()
         {

@@ -38,7 +38,7 @@ namespace bitkyFlashresUniversal.dataExport
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var dataJson = _commPresenter.GetJsonFromDb();
-            DataExport.Output(dataJson);
+            DataExport.OutputJson(dataJson);
             MessageBox.Show("数据已存入指定文件中", "提示");
         }
 

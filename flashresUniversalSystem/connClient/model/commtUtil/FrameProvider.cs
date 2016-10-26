@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using bitkyFlashresUniversal.connClient.model.bean;
 
 namespace bitkyFlashresUniversal.connClient.model.commtUtil
@@ -20,7 +19,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil
         {
             //开始程序
             _dataList.AddRange(dataBytes);
-            int dataCount;
+//            int dataCount;
           
 //            //接收到帧头(4个字节)
 //            if ((_dataList.Count >= 4) && (_dataList.Count < 68))
