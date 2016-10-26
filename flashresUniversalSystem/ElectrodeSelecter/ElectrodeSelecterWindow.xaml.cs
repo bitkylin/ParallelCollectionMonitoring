@@ -166,7 +166,7 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
                 var countRow = int.Parse(cmd.ExecuteScalar().ToString());
                 cmd.CommandText = "INSERT INTO DataInfo (name, num) VALUES ('sum', '" + countRow + "')";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = "INSERT INTO DataInfo (name, num) VALUES ('current', '1')";
+                cmd.CommandText = "INSERT INTO DataInfo (name, num) VALUES ('current', '0')";
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)

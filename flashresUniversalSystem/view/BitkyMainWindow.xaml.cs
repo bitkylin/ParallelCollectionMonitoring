@@ -199,7 +199,7 @@ namespace bitkyFlashresUniversal.view
             {
                 if (badList.Count == 0)
                 {
-                    if (MessageBox.Show("电极检测结束, 所有电极均有效, 系统已自动勾选全部电极, 确定后进行电极选择", "电极检测结束", MessageBoxButton.OK) ==
+                    if (MessageBox.Show("电极检测结束, 所有电极均有效, 系统已自动勾选全部电极, 确定后进行电极选择。", "电极检测结束", MessageBoxButton.OK) ==
                         MessageBoxResult.OK)
                         new ElectrodeSelecterWindow(this).Show();
                 }
@@ -207,7 +207,7 @@ namespace bitkyFlashresUniversal.view
                 {
                     if (
                         MessageBox.Show(
-                            "电极检测结束, 其中" + badList.Count + "个电极无效, 系统已自动勾选其余" + (64 - badList.Count) + "个电极, 确定后进行电极选择",
+                            "电极检测结束, 其中" + badList.Count + "个电极无效, 系统已自动勾选其余" + (64 - badList.Count) + "个电极, 确定后打开电极选择器, 自主进行电极选择。",
                             "电极检测结束",
                             MessageBoxButton.OKCancel) ==
                         MessageBoxResult.OK)
@@ -260,7 +260,7 @@ namespace bitkyFlashresUniversal.view
             foreach (var control in _bitkyPoleControls)
             {
                 control.isEnabled = false;
-                int id = int.Parse(control.LabelPoleId.Content.ToString());
+                var id = int.Parse(control.LabelPoleId.Content.ToString());
                 foreach (var pole in electrodes)
                 {
                     if (pole.IdOrigin == id)
@@ -420,7 +420,7 @@ namespace bitkyFlashresUniversal.view
             PresetInfo.FrameReceiveTimeout = int.Parse(TextBoxFrameReceiveTimeout.Text);
             PresetInfo.FrameSendDelay = int.Parse(TextBoxFrameSendDelay.Text);
             _commPresenter.UpdatePreferences();
-            MessageBox.Show("系统配置信息已更新成功", "提示");
+            MessageBox.Show("系统配置信息已更新成功!", "提示");
         }
 
 

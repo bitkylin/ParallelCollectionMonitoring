@@ -26,7 +26,7 @@ namespace bitkyFlashresUniversal.dataExport
         private void FormTop(object sender, ElapsedEventArgs e)
         {
             Debug.WriteLine("保持在顶端");
-            
+
             Topmost = true;
         }
 
@@ -38,16 +38,22 @@ namespace bitkyFlashresUniversal.dataExport
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             var dataJson = _commPresenter.GetJsonFromDb();
-            DataExport.OutputJson(dataJson);
-            MessageBox.Show("数据已存入指定文件中", "提示");
+            if (DataExport.OutputJson(dataJson))
+            {
+                MessageBox.Show("数据已存入如下路径中:\n" + DataExport.FilePath, "保存成功");
+            }
+            else
+            {
+                MessageBox.Show("数据保存失败, 错误信息如下:\n" + DataExport.FilePath, "保存失败");
+            }
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("您确定要清空数据库吗？执行此操作后将无法撤销", "警告", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (MessageBox.Show("您确定要清空缓存数据吗？执行此操作后将无法撤销!", "警告", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 _commPresenter.GatherDataClear();
-                MessageBox.Show("数据库清空完毕", "提示");
+                MessageBox.Show("数据库清空完毕!", "提示");
                 Close();
             }
         }

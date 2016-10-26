@@ -5,6 +5,10 @@ namespace bitkyFlashresUniversal.dataExport.bean
 {
     public class SummaryDataJson
     {
+        public SummaryDataJson()
+        {
+        }
+
         public SummaryDataJson(List<CollectItem> poleResult, List<Pole> elecDetect, Dictionary<string, int> preference)
         {
             PoleResult = poleResult;

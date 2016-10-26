@@ -19,8 +19,8 @@
     </Window.Background>
     <Grid>
         <Label x:Name="Label" Content="已采数据处理" Margin="200,50,200,0" VerticalAlignment="Top" Foreground="White" FontSize="48" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <Button x:Name="BtnSave" Content="数据本地存储" HorizontalAlignment="Left" Margin="45,170,0,0" VerticalAlignment="Top" Width="270" Background="#B202004C" Foreground="White" FontSize="36" Height="80" Click="btnSave_Click" IsTabStop="False"/>
-        <Button x:Name="BtnClear" Content="数据清除" HorizontalAlignment="Left" Margin="385,170,0,0" VerticalAlignment="Top" Width="270" Background="#B24E0000" Foreground="White" FontSize="36" Height="80" Click="btnClear_Click" IsTabStop="False"/>
+        <Button x:Name="BtnSave" Content="数据导出" HorizontalAlignment="Left" Margin="45,170,0,0" VerticalAlignment="Top" Width="270" Background="#B202004C" Foreground="White" FontSize="36" Height="80" Click="btnSave_Click" IsTabStop="False"/>
+        <Button x:Name="BtnClear" Content="清除已采数据" HorizontalAlignment="Left" Margin="385,170,0,0" VerticalAlignment="Top" Width="270" Background="#B24E0000" Foreground="White" FontSize="36" Height="80" Click="btnClear_Click" IsTabStop="False"/>
         <Button x:Name="BtnClose" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="40" Background="#BFFF0000" BorderBrush="#00707070" Foreground="White" FontSize="24" Click="btnClose_Click" IsTabStop="False" Margin="0,0,0.4,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
     </Grid>
