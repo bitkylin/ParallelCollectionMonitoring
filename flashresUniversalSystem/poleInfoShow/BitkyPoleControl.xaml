@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" Background="#7FFFFFFF" Margin="0" MinWidth="121" MinHeight="62">
+             mc:Ignorable="d" Background="#7F000000" Margin="0" MinWidth="121" MinHeight="62">
     <Grid x:Name="GridMain" Background="#F2000000" Margin="5">
         <Label x:Name="LabelNum" Content="待获取" Margin="-5,15,-5,0.4" Foreground="White" HorizontalContentAlignment="Center" FontSize="20" VerticalContentAlignment="Center"/>
         <Label x:Name="LabelPoleId" Content="Label" Margin="30,0,0,0" Foreground="White" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40" FontSize="10" RenderTransformOrigin="0.833,0.5"/>

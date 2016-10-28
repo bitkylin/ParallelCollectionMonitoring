@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="DataExportWindow" Height="349.8" Width="719.8" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Foreground="Black" BorderThickness="5">
+        Title="DataExportWindow" Height="349.8" Width="719.8" AllowsTransparency="True" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Foreground="Black" BorderThickness="5" WindowStartupLocation="CenterScreen" Topmost="True">
     <Window.BorderBrush>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF5D44FF" Offset="0"/>

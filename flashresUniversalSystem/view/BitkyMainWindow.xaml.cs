@@ -259,18 +259,14 @@ namespace bitkyFlashresUniversal.view
         {
             foreach (var control in _bitkyPoleControls)
             {
-                control.isEnabled = false;
+                control.SetInvaild();
                 var id = int.Parse(control.LabelPoleId.Content.ToString());
                 foreach (var pole in electrodes)
                 {
                     if (pole.IdOrigin == id)
                     {
-                        control.isEnabled = true;
+                        control.SetVaild();
                     }
-                }
-                if (!control.isEnabled)
-                {
-                    control.SetInvaild();
                 }
             }
             _commPresenter.CheckTable();
