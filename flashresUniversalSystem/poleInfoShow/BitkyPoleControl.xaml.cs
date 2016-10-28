@@ -7,28 +7,28 @@ namespace bitkyFlashresUniversal.poleInfoShow
     /// </summary>
     public partial class BitkyPoleControl
     {
-        private readonly Color _colorBlue = Color.FromArgb(75, 0, 255, 200);
+        private readonly Color _colorBlue = Color.FromArgb(255, 0, 255, 200);
         //改变颜色
-        private readonly Color _colorRed = Color.FromArgb(75, 255, 0, 0);
+        private readonly Color _colorRed = Color.FromArgb(255, 255, 0, 0);
 
-        private readonly Color _colorWrite = Color.FromArgb(50, 255, 255, 255);
+        private readonly Color _colorGray = Color.FromArgb(255, 150, 150, 150);
 
-        private readonly Color _colorGray = Color.FromArgb(50, 0, 0, 0);
+        private readonly Color _colorBlack = Color.FromArgb(255, 0, 0, 0);
 
-        private readonly Color _colorBlack = Color.FromArgb(95, 0, 0, 0);
-
-        public bool isEnabled { get; set; } = true;
+        public  bool isEnabled { get; set; } = true;
 
         public BitkyPoleControl()
         {
             InitializeComponent();
+            Background = new SolidColorBrush(_colorGray);
+            GridMain.Background = new SolidColorBrush(_colorBlack);
         }
 
         public void SetInvaild()
         {
             isEnabled = false;
             LabelNum.Content = "失效";
-         //   Background = new SolidColorBrush(_colorGray);
+            Background = new SolidColorBrush(_colorGray);
             GridMain.Background=new SolidColorBrush(_colorGray);
         }
 
@@ -36,7 +36,7 @@ namespace bitkyFlashresUniversal.poleInfoShow
         {
             isEnabled = true;
             LabelNum.Content = "待获取";
-          //  Background = new SolidColorBrush(_colorBlack);
+            Background = new SolidColorBrush(_colorBlue);
             GridMain.Background = new SolidColorBrush(_colorBlack);
         }
 
