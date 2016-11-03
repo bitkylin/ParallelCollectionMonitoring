@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="跨孔CT自动化控制及采集系统" Height="625" Width="1000" MinWidth="1000" MinHeight="625" Closed="Window_Closed" AllowsTransparency="True" WindowStyle="None" Background="Black" WindowState="Maximized">
+        Title="跨孔CT自动化控制及采集系统" Height="625" Width="1000" MinWidth="1000" MinHeight="625" Closed="Window_Closed" AllowsTransparency="True" WindowStyle="None" Background="Black" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
