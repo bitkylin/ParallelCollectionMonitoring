@@ -393,12 +393,12 @@ namespace bitkyFlashresUniversal.connClient.presenter
             {
                 var enabledInts = new List<int>(64);
                 EnabledPoleList.ForEach(pole => { enabledInts.Add(pole.IdOrigin); });
-                dataJson.Preference.Add("EnabledPoleNum", EnabledPoleList.Count);
+                dataJson.Preference.Add("enabledPoleNum", EnabledPoleList.Count);
                 dataJson.EnabledPoleInts = enabledInts;
             }
             else
             {
-                dataJson.Preference.Add("EnabledPoleNum", -1);
+                dataJson.Preference.Add("enabledPoleNum", -1);
             }
             return dataJson;
         }
