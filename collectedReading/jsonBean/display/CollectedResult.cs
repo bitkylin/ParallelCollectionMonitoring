@@ -18,7 +18,6 @@ namespace collectedReading.jsonBean.display
                 switch (pole.Id)
                 {
                     case 0:
-                        Debug.WriteLine("电极0:"+ 电极0);
                         电极0 = Math.Round(pole.Value, PresetInfo.DecimalRound);
                         break;
                     case 1:

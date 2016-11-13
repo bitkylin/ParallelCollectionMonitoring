@@ -220,11 +220,11 @@ namespace bitkyFlashresUniversal.ElectrodeSelecter
         }
 
         /// <summary>
-        ///     判断是正整数
+        ///     判断是自然数
         /// </summary>
         /// <param name="value">待匹配的文本</param>
         /// <returns>匹配结果</returns>
-        private static bool IsInt(string value) //判断是正整数
+        private static bool IsInt(string value) //判断是自然数
         {
             value = value.Trim();
             return Regex.IsMatch(value, @"^[1-9]\d*|0$");
