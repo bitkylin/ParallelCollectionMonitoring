@@ -116,12 +116,13 @@ namespace collectedReading.produceData
                 var dataFileStream = new FileStream(filePath + "DataFile.txt", FileMode.Create, FileAccess.Write);
                 var mrefFileStream = new FileStream(filePath + "MrefFile.txt", FileMode.Create, FileAccess.Write);
 
-                return this.SetsrcFileStreamWriter(new StreamWriter(srcFileStream, Encoding.UTF8))
-                    .SetrecFileStreamWriter(new StreamWriter(recFileStream, Encoding.UTF8))
-                    .SetdataFileStreamWriter(new StreamWriter(dataFileStream, Encoding.UTF8))
-                    .SetmrefFileStreamWriter(new StreamWriter(mrefFileStream, Encoding.UTF8))
-                    .SetDxStreamWriter(new StreamWriter(dxStream, Encoding.UTF8))
-                    .SetDzStreamWriter(new StreamWriter(dzStream, Encoding.UTF8));
+                var utf8Encoding = new UTF8Encoding(false);
+                return this.SetsrcFileStreamWriter(new StreamWriter(srcFileStream, utf8Encoding))
+                    .SetrecFileStreamWriter(new StreamWriter(recFileStream, utf8Encoding))
+                    .SetdataFileStreamWriter(new StreamWriter(dataFileStream, utf8Encoding))
+                    .SetmrefFileStreamWriter(new StreamWriter(mrefFileStream, utf8Encoding))
+                    .SetDxStreamWriter(new StreamWriter(dxStream, utf8Encoding))
+                    .SetDzStreamWriter(new StreamWriter(dzStream, utf8Encoding));
             }
 
             private StreamWriterSet SetPoleLocations(PoleLocation[] poleLocations)
@@ -231,17 +232,17 @@ namespace collectedReading.produceData
                     mrefFileStreamWriter.Write(100 + " ");
                 }
 
-                var scaleX = maxX*2;
-                var scaleZ = maxZ;
-                Debug.WriteLine("scaleX:"+ scaleX+ "scaleZ:"+ scaleZ);
+                var scaleX = maxX*2 + 10;
+                var scaleZ = maxZ + 10;
+                Debug.WriteLine("scaleX:" + scaleX + "scaleZ:" + scaleZ);
 
                 for (var i = 0; i < scaleX; i++)
                 {
-                    dxStreamWriter.Write(1 + " ");
+                    dxStreamWriter.WriteLine(1);
                 }
                 for (var i = 0; i < scaleZ; i++)
                 {
-                    dzStreamWriter.Write(1 + " ");
+                    dzStreamWriter.WriteLine(1);
                 }
             }
         }

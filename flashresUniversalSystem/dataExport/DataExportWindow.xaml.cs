@@ -17,10 +17,6 @@ namespace bitkyFlashresUniversal.dataExport
         {
             _commPresenter = commPresenter1;
             InitializeComponent();
-//            Timer timer = new Timer(5000);
-//            timer.AutoReset = true;
-//            timer.Elapsed += FormTop;
-//            timer.Start();
         }
 
         private void FormTop(object sender, ElapsedEventArgs e)
