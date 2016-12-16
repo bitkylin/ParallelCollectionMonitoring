@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 
-namespace collectedReading.jsonBean.display
+namespace KyInversion.jsonBean.display
 {
     public class CollectedResult
     {

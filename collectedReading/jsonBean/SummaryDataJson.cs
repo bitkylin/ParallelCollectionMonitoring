@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace collectedReading.jsonBean
+namespace KyInversion.jsonBean
 {
     public class SummaryDataJson
     {

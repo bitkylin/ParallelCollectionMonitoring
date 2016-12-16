@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace collectedReading
+namespace KyInversion
 {
     /// <summary>
     /// App.xaml 的交互逻辑

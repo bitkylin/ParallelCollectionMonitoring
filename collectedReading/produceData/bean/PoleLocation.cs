@@ -1,4 +1,4 @@
-﻿namespace collectedReading.produceData.bean
+﻿namespace KyInversion.produceData.bean
 {
     public class PoleLocation
     {

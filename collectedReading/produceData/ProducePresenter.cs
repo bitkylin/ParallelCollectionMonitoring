@@ -2,10 +2,10 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using collectedReading.jsonBean;
-using collectedReading.produceData.bean;
+using KyInversion.jsonBean;
+using KyInversion.produceData.bean;
 
-namespace collectedReading.produceData
+namespace KyInversion.produceData
 {
     public class ProducePresenter
     {
@@ -37,6 +37,16 @@ namespace collectedReading.produceData
 
         public void ProduceOutputData()
         {
+//            foreach (var poleLocation in _poleLocations)
+//            {
+//                if (poleLocation != null)
+//                {
+//                    Debug.WriteLine(poleLocation.ID + ":(" + poleLocation.xAxis + "," + poleLocation.zAxis + ")" +
+//                                    poleLocation.Enabled);
+//                }
+//            }
+
+
             var streamWriterSet = StreamWriterSet.Builder(_dataJson.DateTime.ToString("yyyy-MM-dd_H-mm-ss"),
                 _poleLocations);
             var collectResult = _dataJson.PoleResult;
@@ -104,7 +114,8 @@ namespace collectedReading.produceData
             private StreamWriterSet InitDataOutputFile(string folderName)
             {
                 var dateTimeStr = folderName;
-                var filePath = "./dataOutput/RESINVM/" + dateTimeStr + "_OutData/";
+                //   var filePath = "./dataOutput/RESINVM/" + dateTimeStr + "_OutData/";
+                var filePath = "./rawData/";
                 if (!Directory.Exists(filePath))
                 {
                     Directory.CreateDirectory(filePath);
@@ -117,7 +128,7 @@ namespace collectedReading.produceData
                 var mrefFileStream = new FileStream(filePath + "MrefFile.txt", FileMode.Create, FileAccess.Write);
 
                 var utf8Encoding = new UTF8Encoding(false);
-                return this.SetsrcFileStreamWriter(new StreamWriter(srcFileStream, utf8Encoding))
+                return SetsrcFileStreamWriter(new StreamWriter(srcFileStream, utf8Encoding))
                     .SetrecFileStreamWriter(new StreamWriter(recFileStream, utf8Encoding))
                     .SetdataFileStreamWriter(new StreamWriter(dataFileStream, utf8Encoding))
                     .SetmrefFileStreamWriter(new StreamWriter(mrefFileStream, utf8Encoding))
@@ -214,7 +225,7 @@ namespace collectedReading.produceData
                 {
                     if (poleLocation != null)
                     {
-                        Debug.WriteLine(poleLocation.ID + ":" + poleLocation.xAxis + "," + poleLocation.zAxis);
+                        //      Debug.WriteLine(poleLocation.ID + ":" + poleLocation.xAxis + "," + poleLocation.zAxis);
 
                         if (poleLocation.xAxis > maxX)
                         {
@@ -226,6 +237,17 @@ namespace collectedReading.produceData
                         }
                     }
                 }
+//                var scaleX = maxX * 2 + 10;
+//                var scaleZ = maxZ + 10;
+//
+//
+//                var length = scaleX * scaleZ;
+//                for (var i = 0; i < length; i++)
+//                {
+//                    mrefFileStreamWriter.Write(100 + " ");
+//                }
+
+              
                 var length = maxX*maxZ*2;
                 for (var i = 0; i < length; i++)
                 {
@@ -234,7 +256,10 @@ namespace collectedReading.produceData
 
                 var scaleX = maxX*2 + 10;
                 var scaleZ = maxZ + 10;
-                Debug.WriteLine("scaleX:" + scaleX + "scaleZ:" + scaleZ);
+
+                Debug.WriteLine("maxX:" + maxX + ",maxZ:" + maxZ);
+                Debug.WriteLine("scaleX:" + scaleX + ",scaleZ:" + scaleZ);
+                //     Debug.WriteLine("scaleX:" + scaleX + "scaleZ:" + scaleZ);
 
                 for (var i = 0; i < scaleX; i++)
                 {

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace collectedReading
+namespace KyInversion
 {
     /// <summary>
     /// AboutWindow.xaml 的交互逻辑

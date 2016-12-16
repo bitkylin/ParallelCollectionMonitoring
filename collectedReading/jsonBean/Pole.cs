@@ -1,4 +1,4 @@
-﻿namespace collectedReading.jsonBean
+﻿namespace KyInversion.jsonBean
 {
     public class Pole
     {

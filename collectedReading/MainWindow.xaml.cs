@@ -1,34 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using collectedReading.jsonBean;
-using collectedReading.jsonBean.display;
-using collectedReading.produceData;
-using collectedReading.produceData.bean;
+using KyInversion.jsonBean;
+using KyInversion.jsonBean.display;
+using KyInversion.produceData;
+using KyInversion.produceData.bean;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
-namespace collectedReading
+namespace KyInversion
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    ///     MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        private DataTable _dataTable;
         private SummaryDataJson _dataJson;
 
         public MainWindow()
         {
             InitializeComponent();
-            _dataTable = InitDataTable();
-            dataGridElecmatrixShow.ItemsSource = _dataTable.DefaultView;
+            var dataTable = InitDataTable();
+            dataGridElecmatrixShow.ItemsSource = dataTable.DefaultView;
         }
 
         /// <summary>
-        /// 初始化数据表
+        ///     初始化数据表
         /// </summary>
         /// <returns></returns>
         private DataTable InitDataTable()
@@ -61,7 +61,8 @@ namespace collectedReading
         private void button_Click(object sender, RoutedEventArgs e)
         {
             _dataJson = GetDataJson();
-
+            if (_dataJson == null)
+                return;
 
             var collectItems = _dataJson.PoleResult;
             var itemDisplays = new List<CollectedResult>();
@@ -104,7 +105,7 @@ namespace collectedReading
             fileDialog.InitialDirectory = Environment.CurrentDirectory;
             fileDialog.DefaultExt = ".json";
             fileDialog.Filter = "JSON文件 (*.json)|*.json|所有文件(*.*)|*.*";
-            if (fileDialog.ShowDialog() != true) throw new Exception("操作错误");
+            if (fileDialog.ShowDialog() != true) return null;
             var fileUrl = fileDialog.FileName;
             var streamReader = new StreamReader(fileDialog.OpenFile());
             var jsonStr = streamReader.ReadToEnd();
@@ -116,11 +117,17 @@ namespace collectedReading
 
         private void btnOutputData_Click(object sender, RoutedEventArgs e)
         {
+            if (_dataJson == null)
+            {
+                MessageBox.Show("请先读取Json数据文件");
+                return;
+            }
             var poleLocations = GetPoleArray();
             ProducePresenter.Builder()
                 .SetDataJson(_dataJson)
                 .SetPoleLocationArray(poleLocations)
                 .ProduceOutputData();
+            MessageBox.Show("数据处理完毕,可以开始执行反演运算");
         }
 
         private PoleLocation[] GetPoleArray()
@@ -173,6 +180,44 @@ namespace collectedReading
                 }
             }
             return poleLocations;
+        }
+
+        private void btnExecReversal_Click(object sender, RoutedEventArgs e)
+        {
+           
+            var rawDataDir = "./rawData/";
+            if (!(Directory.Exists(rawDataDir) && File.Exists(rawDataDir + "DataFile.txt") &&
+                  File.Exists(rawDataDir + "dx.txt") && File.Exists(rawDataDir + "dz.txt") &&
+                  File.Exists(rawDataDir + "MrefFile.txt") && File.Exists(rawDataDir + "RecFile.txt") &&
+                  File.Exists(rawDataDir + "SrcFile.txt")))
+            {
+                MessageBox.Show("请先从采集的Json数据文件中导出反演预备文件，再进行反演操作");
+                return;
+            }
+            Debug.WriteLine("即将开始反演");
+            MessageBox.Show("即将开始反演,这个过程可能需要数十分钟时间,请耐心等待");
+
+            var process = new Process();
+            process.StartInfo.FileName = "KyInversionSr2010aX86.exe";
+            process.Exited += ProcessOnExited;
+            process.Disposed += ProcessOnDisposed;
+            process.ErrorDataReceived += ProcessOnErrorDataReceived;
+            process.Start();
+        }
+
+        private void ProcessOnErrorDataReceived(object sender, DataReceivedEventArgs dataReceivedEventArgs)
+        {
+            Debug.WriteLine("ProcessOnErrorDataReceived");
+        }
+
+        private void ProcessOnDisposed(object sender, EventArgs eventArgs)
+        {
+            Debug.WriteLine("ProcessOnDisposed");
+        }
+
+        private void ProcessOnExited(object sender, EventArgs eventArgs)
+        {
+            Debug.WriteLine("进程已退出");
         }
     }
 }
