@@ -14,9 +14,7 @@
     <Grid>
         <Label x:Name="label" Content="关于" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button x:Name="btnClose" Content="X" HorizontalAlignment="Left" Margin="250,0,0,0" VerticalAlignment="Top" Width="50" Height="26" Background="#CCFF0000" Click="btnClose_Click" IsDefault="True" IsCancel="True"/>
-        <Label x:Name="label1" Content="版权所有：桂林电子科技大学" HorizontalAlignment="Left" Margin="69,119,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1_Copy" Content="开发者：李明亮" HorizontalAlignment="Left" Margin="69,88,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1_Copy1" Content="版本：1.0" HorizontalAlignment="Left" Margin="69,57,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy1" Content="版本：1.0" HorizontalAlignment="Left" Margin="115,79,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -76,8 +76,7 @@ namespace KyInversion
                 var item = items[pole.A/2] as DataRowView;
                 item.Row[pole.B/2 + 1] = Math.Round(pole.Elec, 2);
             });
-
-
+            
             dataGridPoleResultShow.ItemsSource = itemDisplays;
             dataGridElecShow.ItemsSource = _dataJson.ElecDetect;
             var dictionary = _dataJson.Preference;
@@ -198,7 +197,7 @@ namespace KyInversion
             MessageBox.Show("即将开始反演,这个过程可能需要数十分钟时间,请耐心等待");
 
             var process = new Process();
-            process.StartInfo.FileName = "KyInversionSr2010aX86.exe";
+            process.StartInfo.FileName = "KyInversionSr2012bX64.exe";
             process.Exited += ProcessOnExited;
             process.Disposed += ProcessOnDisposed;
             process.ErrorDataReceived += ProcessOnErrorDataReceived;
