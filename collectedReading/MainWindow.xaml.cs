@@ -206,7 +206,7 @@ namespace KyInversion
                 File.Delete(rawDataDir + "printPhoto.jpg");
             }
             Debug.WriteLine("即将开始反演");
-            MessageBox.Show("即将开始反演,这个过程可能需要数十分钟时间,请耐心等待");
+            MessageBox.Show("即将开始正反演,这个过程可能需要数十分钟时间,请耐心等待");
 
 
             var process = new Process();

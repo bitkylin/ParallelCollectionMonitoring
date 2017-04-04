@@ -25,7 +25,6 @@ namespace TCPServer.util
             _serverPresenter = serverPresenter;
             _sendHolder = new SendHolder(this);
             _random = new Random();
-           
         }
 
         /// <summary>
@@ -122,11 +121,10 @@ namespace TCPServer.util
 
         public void SendDelayed(byte[] bytes, int timeInterval)
         {
-            if (_random.Next(100)>80)
+            if (_random.Next(100) > 90)
             {
                 return;
             }
-          
             _sendHolder.SendDelayed(bytes, timeInterval);
         }
     }

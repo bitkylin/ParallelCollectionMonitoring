@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="已采数据处理及反演" Height="800" Width="1200" WindowStartupLocation="CenterScreen" MinWidth="1200"
-        MinHeight="800" FontSize="20" WindowState="Maximized" WindowStyle="None">
+        Title="已采数据处理" Height="800" Width="1200" WindowStartupLocation="CenterScreen" MinWidth="1200"
+        MinHeight="800" FontSize="20" WindowStyle="None">
     <Window.ContextMenu>
         <ContextMenu Name="ChangePassword">
 
@@ -93,12 +93,12 @@
                VerticalContentAlignment="Center" />
                 </Grid>
             </TabItem>
-            <TabItem Header="反演" Height="50" Width="180">
+            <TabItem Header="正反演" Height="50" Width="180">
                 <Grid Background="#FFE5E5E5" Margin="1">
-                    <Button x:Name="btnExecReversal" Content="进行反演" Margin="10,10,0,0"
+                    <Button x:Name="btnExecReversal" Content="进行正反演" Margin="10,10,0,0"
             VerticalAlignment="Top" Height="70" Click="btnExecReversal_Click"
             HorizontalAlignment="Left" Width="180" />
-                    <ProgressBar x:Name="ProgressBarInversionStatusShow" Height="41" Margin="195,23,9.8,0" VerticalAlignment="Top" Visibility="Hidden"/>
+                    <ProgressBar x:Name="ProgressBarInversionStatusShow" Height="41" Margin="195,23,9.8,0" VerticalAlignment="Top" Visibility="Visible" Value="100"/>
                     <Image x:Name="imageInversionShow" Margin="10,85,10,10"/>
 
 
@@ -120,7 +120,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label x:Name="label7" Content="已采数据处理及反演" Margin="2,0,98.6,0" VerticalAlignment="Top" Height="53" HorizontalContentAlignment="Center" FontSize="24"/>
+        <Label x:Name="label7" Content="已采数据处理" Margin="2,0,98.6,0" VerticalAlignment="Top" Height="53" HorizontalContentAlignment="Center" FontSize="24"/>
         <Button x:Name="btnClose" Content="X" Margin="0,0,-0.4,0" VerticalAlignment="Top" Height="53" HorizontalAlignment="Right" Width="94" Background="Red" Click="btnClose_Click" FontSize="24"/>
 
     </Grid>
