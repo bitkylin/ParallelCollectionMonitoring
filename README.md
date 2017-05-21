@@ -1,3 +1,9 @@
+# 基于 WPF 的自定义帧控制演示项目
+
+[![GitHub stars](https://img.shields.io/github/stars/bitkylin/InteractionByFrames.svg)](https://github.com/bitkylin/InteractionByFrames/stargazers)
+![技术](https://img.shields.io/badge/%E6%8A%80%E6%9C%AF-WPF%7CTCP%7CSQLite-brightgreen.svg)
+[![GitHub license](https://img.shields.io/badge/许可证-Apache_2-blue.svg)](https://raw.githubusercontent.com/bitkylin/InteractionByFrames/master/LICENSE)
+
 ## 功能说明
 
 基于 WPF 框架和 C# 的 .NET 演示程序，分为客户端和服务端：
