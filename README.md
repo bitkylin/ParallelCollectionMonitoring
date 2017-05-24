@@ -2,7 +2,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/bitkylin/InteractionByFrames.svg)](https://github.com/bitkylin/InteractionByFrames/stargazers)
 ![技术](https://img.shields.io/badge/%E6%8A%80%E6%9C%AF-WPF%7CTCP%7CSQLite-brightgreen.svg)
-[![GitHub license](https://img.shields.io/badge/许可证-Apache_2-blue.svg)](https://raw.githubusercontent.com/bitkylin/InteractionByFrames/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/许可证-Apache_2-blue.svg)](https://github.com/bitkylin/InteractionByFrames/blob/master/LICENSE)
 
 ## 功能说明
 

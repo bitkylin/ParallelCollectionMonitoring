@@ -132,7 +132,9 @@
     <Compile Include="connClient\model\bean\FrameType.cs" />
     <Compile Include="connClient\model\bean\OperateType.cs" />
     <Compile Include="connClient\model\bean\PoleMode.cs" />
-    <Compile Include="connClient\model\bean\PresetInfo.cs" />
+    <Compile Include="connClient\PresetInfo.cs" />
+    <Compile Include="connClient\model\tiaozhanbei\FrameBuilder.cs" />
+    <Compile Include="connClient\model\tiaozhanbei\SendDataTZB.cs" />
     <Compile Include="dataExport\bean\CollectItem.cs" />
     <Compile Include="dataExport\bean\Pole.cs" />
     <Compile Include="dataExport\bean\SummaryDataJson.cs" />

@@ -8,6 +8,7 @@ using System.Timers;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.model.commtUtil;
 using bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient;
+using bitkyFlashresUniversal.connClient.model.tiaozhanbei;
 using bitkyFlashresUniversal.connClient.presenter;
 using Timer = System.Timers.Timer;
 
@@ -31,6 +32,8 @@ namespace bitkyFlashresUniversal.connClient.model
         private bool _connIsOpen = false;
 
         private FrameData _currentframeData;
+
+        Random _random = new Random();
 
         public CommucationFacade(ICommPresenter presenter)
         {
@@ -114,6 +117,16 @@ namespace bitkyFlashresUniversal.connClient.model
         /// <param name="data">获取的远程数据</param>
         public void GetReceivedData(byte[] data)
         {
+
+            //--------挑战杯用，删除即可恢复-------------
+            List<byte> bytes = SendDataTZB.process(data);
+            if (bytes == null)
+            {
+                return;
+            }
+            data = bytes.ToArray();
+            //--------挑战杯用，删除即可恢复-------------
+
             //接收到的数据显示
             var stringbuilder = new StringBuilder();
             foreach (var t in data)
@@ -153,13 +166,15 @@ namespace bitkyFlashresUniversal.connClient.model
                         }
                         if (pole.IdOrigin <= 63)
                         {
-                            pole.Value = (pole.Value*5/16777216 - 2.5)*2000;
+                            //        pole.Value = (pole.Value * 5 / 16777216 - 2.5) * 2000;
+                            pole.Value = pole.Value + _random.NextDouble();
                             _electrodes.Add(pole);
                         }
 
                         if (pole.IdOrigin == 64)
                         {
-                            pole.Value = Math.Abs((pole.Value*5/16777216 - 2.5)*100/1.25);
+                            //            pole.Value = Math.Abs((pole.Value * 5 / 16777216 - 2.5) * 100 / 1.25);
+                            pole.Value = pole.Value + _random.NextDouble();
                             _electrodes.Add(pole);
                         }
                     });

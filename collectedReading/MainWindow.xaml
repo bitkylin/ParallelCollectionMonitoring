@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="已采数据处理" Height="800" Width="1200" WindowStartupLocation="CenterScreen" MinWidth="1200"
-        MinHeight="800" FontSize="20" WindowStyle="None">
+        Title="已采数据处理" Height="465.2" Width="462.8" WindowStartupLocation="CenterScreen" MinWidth="800"
+        MinHeight="500" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.ContextMenu>
         <ContextMenu Name="ChangePassword">
 
@@ -15,113 +15,112 @@
 
     </Window.ContextMenu>
     <Grid>
-        <TabControl x:Name="tabControl" Margin="2,58,1.6,1.6" SelectedIndex="0">
-            <TabItem Header="已采数据概览" Height="50" Width="180">
+        <TabControl x:Name="tabControl" Margin="1,40,1,1" SelectedIndex="0" FontSize="16">
+            <TabItem Header="已采数据概览" Height="30" Width="120">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="241*" />
-                        <ColumnDefinition Width="351*" />
+                        <ColumnDefinition Width="170*" />
+                        <ColumnDefinition Width="223*" />
                     </Grid.ColumnDefinitions>
-                    <GroupBox x:Name="groupBox" Grid.Column="1" Header="数据设置" Margin="8.6,13,9.8,0"
-                              VerticalAlignment="Top" Height="255" BorderBrush="#7F696ADF" />
+                    <GroupBox x:Name="groupBox" Grid.Column="1" Header="数据设置" Margin="24,13,9.4,0"
+                              VerticalAlignment="Top" Height="181" BorderBrush="#7F696ADF" />
                     <Label x:Name="label1" Content="采集时间：" HorizontalAlignment="Left" Margin="11,60,0,0"
-                           VerticalAlignment="Top" Height="50" Width="190" VerticalContentAlignment="Center" />
-                    <Label x:Name="label2" Content="操作者：" HorizontalAlignment="Left" Margin="11,115,0,0"
-                           VerticalAlignment="Top" Height="50" Width="190" VerticalContentAlignment="Center" />
-                    <Label x:Name="label3" Content="备注：" HorizontalAlignment="Left" Margin="11,385,0,0"
-                           VerticalAlignment="Top" Height="50" Width="190" VerticalContentAlignment="Center" />
-                    <Label x:Name="label4" Content="总需采集次数(次)：" HorizontalAlignment="Left" Margin="11,280,0,0"
-                           VerticalAlignment="Top" Height="50" Width="190" VerticalContentAlignment="Center" />
-                    <Label x:Name="label4_Copy" Content="实际采集次数(次)：" HorizontalAlignment="Left" Margin="11,330,0,0"
-                           VerticalAlignment="Top" Height="50" Width="190" VerticalContentAlignment="Center" />
-                    <Label x:Name="label5" Content="已启用电极数：" HorizontalAlignment="Left" Margin="11,170,0,0"
-                           VerticalAlignment="Top" Height="50" Width="190" VerticalContentAlignment="Center" />
-                    <Label x:Name="label6" Content="电流阈值：" HorizontalAlignment="Left" Margin="11,225,0,0"
-                           VerticalAlignment="Top" Height="50" Width="190" VerticalContentAlignment="Center" />
-                    <Label x:Name="labelDatatime" Content="" Margin="216,60,10.4,0"
-                           VerticalAlignment="Top" Height="50" VerticalContentAlignment="Center" />
-                    <Label x:Name="labelUser" Content="" Margin="216,115,10.4,0" VerticalAlignment="Top"
-                           Height="50" VerticalContentAlignment="Center" />
-                    <Label x:Name="labelEnabledPoleNum" Content="" Margin="216,170,10.4,0"
-                           VerticalAlignment="Top" Height="50" VerticalContentAlignment="Center" />
-                    <Label x:Name="labelElecThreshold" Content="" Margin="216,225,10.4,0"
-                           VerticalAlignment="Top" Height="50" VerticalContentAlignment="Center" />
-                    <Label x:Name="labelSumNum" Content="" Margin="216,280,10.4,0"
-                           VerticalAlignment="Top" Height="50" VerticalContentAlignment="Center" />
-                    <Label x:Name="labelCompletedNum" Content="" Margin="216,330,10.4,0"
-                           VerticalAlignment="Top" Height="50" VerticalContentAlignment="Center" />
-                    <Label x:Name="labelNote" Content="" Margin="216,387,10.4,0" VerticalAlignment="Top"
-                           Height="50" VerticalContentAlignment="Center" />
-                    <Label x:Name="label1_Copy" Content="A线电极范围：" HorizontalAlignment="Left" Margin="40.6,40,0,0"
-                           VerticalAlignment="Top" Height="50" Width="188" Grid.Column="1"
+                           VerticalAlignment="Top" Height="30" Width="142" VerticalContentAlignment="Center" />
+                    <Label x:Name="label2" Content="操作者：" HorizontalAlignment="Left" Margin="11,90,0,0"
+                           VerticalAlignment="Top" Height="30" Width="142" VerticalContentAlignment="Center" />
+                    <Label x:Name="label3" Content="备注：" HorizontalAlignment="Left" Margin="11,242,0,0"
+                           VerticalAlignment="Top" Height="30" Width="142" VerticalContentAlignment="Center" />
+                    <Label x:Name="label4" Content="总需采集次数(次)：" HorizontalAlignment="Left" Margin="11,182,0,0"
+                           VerticalAlignment="Top" Height="30" Width="142" VerticalContentAlignment="Center" />
+                    <Label x:Name="label4_Copy" Content="实际采集次数(次)：" HorizontalAlignment="Left" Margin="11,212,0,0"
+                           VerticalAlignment="Top" Height="30" Width="142" VerticalContentAlignment="Center" />
+                    <Label x:Name="label5" Content="已启用电极数：" HorizontalAlignment="Left" Margin="11,120,0,0"
+                           VerticalAlignment="Top" Height="30" Width="142" VerticalContentAlignment="Center" />
+                    <Label x:Name="label6" Content="电流阈值：" HorizontalAlignment="Left" Margin="11,152,0,0"
+                           VerticalAlignment="Top" Height="30" Width="142" VerticalContentAlignment="Center" />
+                    <Label x:Name="labelDatatime" Content="" Margin="158,60,1,0"
+                           VerticalAlignment="Top" Height="30" VerticalContentAlignment="Center" />
+                    <Label x:Name="labelUser" Content="" Margin="158,90,1,0" VerticalAlignment="Top"
+                           Height="30" VerticalContentAlignment="Center" />
+                    <Label x:Name="labelEnabledPoleNum" Content="" Margin="158,120,437.4,0"
+                           VerticalAlignment="Top" Height="30" VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
+                    <Label x:Name="labelElecThreshold" Content="" Margin="158,152,1,0"
+                           VerticalAlignment="Top" Height="30" VerticalContentAlignment="Center" />
+                    <Label x:Name="labelSumNum" Content="" Margin="158,182,1,0"
+                           VerticalAlignment="Top" Height="30" VerticalContentAlignment="Center" />
+                    <Label x:Name="labelCompletedNum" Content="" Margin="158,212,1,0"
+                           VerticalAlignment="Top" Height="30" VerticalContentAlignment="Center" />
+                    <Label x:Name="labelNote" Content="" Margin="158,242,1,0" VerticalAlignment="Top"
+                           Height="30" VerticalContentAlignment="Center" />
+                    <Label x:Name="label1_Copy" Content="A线电极范围：" HorizontalAlignment="Left" Margin="46,47,0,0"
+                           VerticalAlignment="Top" Height="30" Width="112" Grid.Column="1"
                            VerticalContentAlignment="Center" />
-                    <Label x:Name="label2_Copy" Content="B线电极范围：" HorizontalAlignment="Left" Margin="40.6,95,0,0"
-                           VerticalAlignment="Top" Height="50" Width="188" Grid.Column="1"
+                    <Label x:Name="label2_Copy" Content="B线电极范围：" HorizontalAlignment="Left" Margin="46,83,0,0"
+                           VerticalAlignment="Top" Height="30" Width="112" Grid.Column="1"
                            VerticalContentAlignment="Center" />
-                    <Label x:Name="label5_Copy" Content="电极间距：" HorizontalAlignment="Left" Margin="40.6,150,0,0"
-                           VerticalAlignment="Top" Height="50" Width="188" Grid.Column="1"
+                    <Label x:Name="label5_Copy" Content="电极间距：" HorizontalAlignment="Left" Margin="46,115,0,0"
+                           VerticalAlignment="Top" Height="30" Width="112" Grid.Column="1"
                            VerticalContentAlignment="Center" />
-                    <Label x:Name="label6_Copy" Content="两线间距：" HorizontalAlignment="Left" Margin="40.6,205,0,0"
-                           VerticalAlignment="Top" Height="50" Width="188" Grid.Column="1"
+                    <Label x:Name="label6_Copy" Content="两线间距：" HorizontalAlignment="Left" Margin="46,150,0,0"
+                           VerticalAlignment="Top" Height="30" Width="112" Grid.Column="1"
                            VerticalContentAlignment="Center" />
-                    <TextBox x:Name="textBoxLeftStart" Grid.Column="1" HorizontalAlignment="Left" Height="50"
-                             Margin="233.6,40,0,0" TextWrapping="Wrap" Text="59" VerticalAlignment="Top" Width="80"
+                    <TextBox x:Name="textBoxLeftStart" Grid.Column="1" HorizontalAlignment="Left" Height="30"
+                             Margin="168,47,0,0" TextWrapping="Wrap" Text="59" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                    <TextBox x:Name="textBoxLeftEnd" Grid.Column="1" HorizontalAlignment="Left" Height="50"
-                             Margin="356.6,40,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="80"
+                    <TextBox x:Name="textBoxLeftEnd" Grid.Column="1" HorizontalAlignment="Left" Height="30"
+                             Margin="315,47,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                    <TextBox x:Name="textBoxRightStart" Grid.Column="1" HorizontalAlignment="Left" Height="50"
-                             Margin="233.6,95,0,0" TextWrapping="Wrap" Text="27" VerticalAlignment="Top" Width="80"
+                    <TextBox x:Name="textBoxRightStart" Grid.Column="1" HorizontalAlignment="Left" Height="30"
+                             Margin="168,81,0,0" TextWrapping="Wrap" Text="27" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                    <TextBox x:Name="textBoxRightEnd" Grid.Column="1" HorizontalAlignment="Left" Height="50"
-                             Margin="356.6,95,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="80"
+                    <TextBox x:Name="textBoxRightEnd" Grid.Column="1" HorizontalAlignment="Left" Height="30"
+                             Margin="315,82,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                    <TextBox x:Name="textBoxPoleInterval" Grid.Column="1" HorizontalAlignment="Left" Height="50"
-                             Margin="233.6,150,0,0" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Width="80"
+                    <TextBox x:Name="textBoxPoleInterval" Grid.Column="1" HorizontalAlignment="Left" Height="30"
+                             Margin="168,115,0,0" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                              RenderTransformOrigin="0.006,0.469" />
-                    <TextBox x:Name="textBoxLineInterval" Grid.Column="1" HorizontalAlignment="Left" Height="50"
-                             Margin="233.6,205,0,0" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Width="80"
+                    <TextBox x:Name="textBoxLineInterval" Grid.Column="1" HorizontalAlignment="Left" Height="30"
+                             Margin="168,150,0,0" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                    <Button x:Name="btnOutputData" Content="导出预备文件" Grid.Column="1" Margin="0,40,49.8,0"
-                            VerticalAlignment="Top" Height="70" Click="btnOutputData_Click" HorizontalAlignment="Right"
-                            Width="180" />
-                    <Image x:Name="image" Margin="9.6,335,9.8,11" Source="poleLocation.png" Grid.Column="1" />
-                    <Button x:Name="button" Content="打开Json文件" HorizontalAlignment="Left" Margin="11,10,0,0"
-                VerticalAlignment="Top" Width="190" Height="45" Click="button_Click" />
-                    <Label x:Name="labelJsonFileName" Content="" Margin="216,12,10.4,0" VerticalAlignment="Top" Height="40"
-               VerticalContentAlignment="Center" />
+                    <Button x:Name="btnOutputData" Content="正反演预备" Grid.Column="1" Margin="316,131,0,0"
+                            VerticalAlignment="Top" Height="49" Click="btnOutputData_Click" HorizontalAlignment="Left" Width="100" />
+                    <Image x:Name="image" Margin="25,199,10.4,10.2" Source="poleLocation.png" Grid.Column="1" />
+                    <Button x:Name="button" Content="打开已采数据" HorizontalAlignment="Left" Margin="11,10,0,0"
+                VerticalAlignment="Top" Width="140" Height="40" Click="button_Click" />
+                    <Label x:Name="labelJsonFileName" Content="" Margin="168,13,437.4,0" VerticalAlignment="Top" Height="40"
+               VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
                 </Grid>
             </TabItem>
-            <TabItem Header="正反演" Height="50" Width="180">
+            <TabItem Header="正反演" Height="30" Width="120">
                 <Grid Background="#FFE5E5E5" Margin="1">
                     <Button x:Name="btnExecReversal" Content="进行正反演" Margin="10,10,0,0"
-            VerticalAlignment="Top" Height="70" Click="btnExecReversal_Click"
-            HorizontalAlignment="Left" Width="180" />
-                    <ProgressBar x:Name="ProgressBarInversionStatusShow" Height="41" Margin="195,23,9.8,0" VerticalAlignment="Top" Visibility="Visible" Value="100"/>
-                    <Image x:Name="imageInversionShow" Margin="10,85,10,10"/>
+            VerticalAlignment="Top" Height="40" Click="btnExecReversal_Click"
+            HorizontalAlignment="Left" Width="140" />
+                    <ProgressBar x:Name="ProgressBarInversionStatusShow" Height="30" Margin="169,14,10.4,0" VerticalAlignment="Top" Visibility="Visible"/>
+                    <Image x:Name="imageInversionShow" Margin="10,59,10.4,10.2"/>
 
 
                 </Grid>
             </TabItem>
-            <TabItem Header="已采数据显示" Height="50" Width="180">
+            <TabItem Header="已采数据显示" Height="30" Width="120">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dataGridPoleResultShow" Margin="1" />
                 </Grid>
             </TabItem>
-            <TabItem Header="电流值显示" Height="50" Width="180">
+            <TabItem Header="电流值显示" Height="30" Width="120">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dataGridElecShow" Margin="1" />
                 </Grid>
             </TabItem>
-            <TabItem Header="电流值矩阵" Height="50" Width="180">
+            <TabItem Header="电流值矩阵" Height="30" Width="120">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dataGridElecmatrixShow" Margin="1" />
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label x:Name="label7" Content="已采数据处理" Margin="2,0,98.6,0" VerticalAlignment="Top" Height="53" HorizontalContentAlignment="Center" FontSize="24"/>
-        <Button x:Name="btnClose" Content="X" Margin="0,0,-0.4,0" VerticalAlignment="Top" Height="53" HorizontalAlignment="Right" Width="94" Background="Red" Click="btnClose_Click" FontSize="24"/>
+        <Label x:Name="label7" Content="已采数据正反演" Margin="0,0,70.6,0" VerticalAlignment="Top" Height="40" HorizontalContentAlignment="Center" FontSize="18" Padding="0" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Center"/>
+        <Button x:Name="btnClose" Content="X" Margin="723,0,0.6,0" Background="Red" Click="btnClose_Click" FontSize="18" Padding="1,0" Height="40" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

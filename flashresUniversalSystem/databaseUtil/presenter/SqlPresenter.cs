@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using bitkyFlashresUniversal.connClient;
+using bitkyFlashresUniversal.connClient.model;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.presenter;
 using bitkyFlashresUniversal.dataExport.bean;

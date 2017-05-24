@@ -121,10 +121,10 @@ namespace TCPServer.util
 
         public void SendDelayed(byte[] bytes, int timeInterval)
         {
-            if (_random.Next(100) > 90)
-            {
-                return;
-            }
+//            if (_random.Next(100) > 90)
+//            {
+//                return;
+//            }
             _sendHolder.SendDelayed(bytes, timeInterval);
         }
     }

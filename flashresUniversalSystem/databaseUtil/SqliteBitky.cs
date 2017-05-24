@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using bitkyFlashresUniversal.connClient;
+using bitkyFlashresUniversal.connClient.model;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.databaseUtil.presenter;
 using bitkyFlashresUniversal.dataExport.bean;

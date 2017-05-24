@@ -8,6 +8,8 @@ using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using bitkyFlashresUniversal.connClient;
+using bitkyFlashresUniversal.connClient.model;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.presenter;
 using bitkyFlashresUniversal.dataExport;
@@ -207,7 +209,8 @@ namespace bitkyFlashresUniversal.view
                 {
                     if (
                         MessageBox.Show(
-                            "电极检测结束, 其中" + badList.Count + "个电极无效, 系统已自动勾选其余" + (64 - badList.Count) + "个电极, 确定后打开电极选择器, 自主进行电极选择。",
+                            "电极检测结束, 其中" + badList.Count + "个电极无效, 系统已自动勾选其余" + (64 - badList.Count) +
+                            "个电极, 确定后打开电极选择器, 自主进行电极选择。",
                             "电极检测结束",
                             MessageBoxButton.OKCancel) ==
                         MessageBoxResult.OK)
@@ -225,20 +228,20 @@ namespace bitkyFlashresUniversal.view
             GridPoleStatusShow.Children.Clear();
             var id = 0;
             for (var i = 0; i < 8; i++)
-                for (var j = 0; j < 8; j++)
-                {
-                    var bitkyPoleControl = new BitkyPoleControl();
-                    //在Grid中动态添加控件
-                    GridPoleStatusShow.Children.Add(bitkyPoleControl);
-                    //设定控件在Grid中的位置
-                    Grid.SetRow(bitkyPoleControl, i);
-                    Grid.SetColumn(bitkyPoleControl, j);
-                    //将控件添加到集合中，方便下一步的使用
-                    controls.Add(bitkyPoleControl);
-                    //对控件使用自定义方法进行初始化
-                    bitkyPoleControl.SetContent(id);
-                    id++;
-                }
+            for (var j = 0; j < 8; j++)
+            {
+                var bitkyPoleControl = new BitkyPoleControl();
+                //在Grid中动态添加控件
+                GridPoleStatusShow.Children.Add(bitkyPoleControl);
+                //设定控件在Grid中的位置
+                Grid.SetRow(bitkyPoleControl, i);
+                Grid.SetColumn(bitkyPoleControl, j);
+                //将控件添加到集合中，方便下一步的使用
+                controls.Add(bitkyPoleControl);
+                //对控件使用自定义方法进行初始化
+                bitkyPoleControl.SetContent(id);
+                id++;
+            }
             _bitkyPoleControls = controls.ToArray();
 
             //初始化已启用的电极，并将信息保存在presenter中
@@ -396,6 +399,7 @@ namespace bitkyFlashresUniversal.view
             ListBoxControlText.Items.Clear();
             ListBoxSendData.Items.Clear();
             ListBoxReceiveData.Items.Clear();
+            LabelElectricShow.Content = "待获取";
         }
 
 
@@ -459,6 +463,31 @@ namespace bitkyFlashresUniversal.view
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void BtnMaximizedWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+            }
+        }
+
+        private void BtnMinimizedWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState != WindowState.Minimized)
+            {
+                WindowState = WindowState.Minimized;
+            }
         }
     }
 }

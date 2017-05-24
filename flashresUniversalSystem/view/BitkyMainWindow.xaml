@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="跨孔CT自动化控制及采集系统" Height="625" Width="1000" MinWidth="1000" MinHeight="625" Closed="Window_Closed" AllowsTransparency="True" WindowStyle="None" Background="Black" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="跨孔CT自动化控制及采集系统" Height="625" Width="1000" MinWidth="1000" MinHeight="625" Closed="Window_Closed" AllowsTransparency="True" WindowStyle="None" Background="Black" WindowStartupLocation="CenterScreen" MouseLeftButtonDown="Window_MouseLeftButtonDown" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -211,7 +211,9 @@
         </TabControl>
         <Label x:Name="Label" Content="电流(mA):" HorizontalAlignment="Right" Margin="0,0,200,-0.2" Width="120" FontSize="22" Grid.Row="1" Foreground="White"/>
         <Label x:Name="LabelElectricShow" Content="待获取" HorizontalAlignment="Right" Margin="0,0,10,-0.2" Width="185" FontSize="22" Grid.Row="1" Foreground="White"/>
-        <Label Grid.Row="0" x:Name="label" Content="跨孔CT自动化控制及采集系统" FontSize="18" Margin="300,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Height="40" VerticalAlignment="Top"/>
-        <Button Grid.Row="0" x:Name="BtnCloseWindow" Content="X" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Width="80" Height="40" FontSize="24" Foreground="White" Background="Red" BorderBrush="#FFFF00D3" Click="btnCloseWindow_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="0" x:Name="label" Content="超前预报地质勘探数据采集系统" FontSize="18" Margin="300,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" Height="40" VerticalAlignment="Top"/>
+        <Button Grid.Row="0" x:Name="BtnCloseWindow" Content="x" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Width="80" Height="40" FontSize="24" Foreground="White" Background="Red" BorderBrush="#FFFF00D3" Click="btnCloseWindow_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button Grid.Row="0" x:Name="BtnMaximizedWindow" Content="□" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="40" FontSize="24" Foreground="White" Background="#FF000142" BorderBrush="#FF00A8FF" Click="BtnMaximizedWindow_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,85,0" FontFamily="Consolas"/>
+        <Button Grid.Row="0" x:Name="BtnMinimizedWindow" Content="-" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="40" FontSize="24" Foreground="White" Background="#FF000142" BorderBrush="#FF00A8FF" Click="BtnMinimizedWindow_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,170,0" FontFamily="Consolas"/>
     </Grid>
 </Window>

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TCPServer.util;
+using bitkyFlashresUniversal.connClient.model.bean;
 
 namespace TCPServer.model
 {
@@ -30,10 +30,10 @@ namespace TCPServer.model
         /// <returns></returns>
         private byte[] IntToBytes(int i)
         {
-            int value;
-            value = i < 64
-                ? _random.Next(500, 4000)
-                : _random.Next(30, 98);
+            int value = 0;
+//            value = i < 64
+//                ? _random.Next(500, 4000)
+//                : _random.Next(30, 98);
 
 
             var src = new byte[3];
