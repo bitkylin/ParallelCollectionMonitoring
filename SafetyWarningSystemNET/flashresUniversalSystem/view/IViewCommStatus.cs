@@ -62,5 +62,6 @@ namespace bitkyFlashresUniversal.view
         void InitPoleSelection(List<int> badList);
 
         void SetElectrodeSuccessful(List<Electrode> list);
+        void DataOutlineShow(int v, int sumNun);
     }
 }

@@ -117,14 +117,13 @@ namespace bitkyFlashresUniversal.connClient.model
         /// <param name="data">获取的远程数据</param>
         public void GetReceivedData(byte[] data)
         {
-
             //--------挑战杯用，删除即可恢复-------------
-            List<byte> bytes = SendDataTZB.process(data);
-            if (bytes == null)
-            {
-                return;
-            }
-            data = bytes.ToArray();
+//            List<byte> bytes = SendDataTZB.process(data);
+//            if (bytes == null)
+//            {
+//                return;
+//            }
+//            data = bytes.ToArray();
             //--------挑战杯用，删除即可恢复-------------
 
             //接收到的数据显示
@@ -167,14 +166,14 @@ namespace bitkyFlashresUniversal.connClient.model
                         if (pole.IdOrigin <= 63)
                         {
                             //        pole.Value = (pole.Value * 5 / 16777216 - 2.5) * 2000;
-                            pole.Value = pole.Value + _random.NextDouble();
+                            pole.Value = pole.Value + _random.NextDouble() * 0.1;
                             _electrodes.Add(pole);
                         }
 
                         if (pole.IdOrigin == 64)
                         {
                             //            pole.Value = Math.Abs((pole.Value * 5 / 16777216 - 2.5) * 100 / 1.25);
-                            pole.Value = pole.Value + _random.NextDouble();
+                            pole.Value = pole.Value + _random.NextDouble() * 0.1;
                             _electrodes.Add(pole);
                         }
                     });

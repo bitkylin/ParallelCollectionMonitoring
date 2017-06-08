@@ -48,6 +48,8 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// </summary>
         /// <param name="message">输入所需显示的信息</param>
         void CommunicateMessageShow(string message);
+        void DataOutlineShow(int v, int sumNun);
+
         /// <summary>
         ///     发送帧信息的显示
         /// </summary>
@@ -63,7 +65,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
         /// 数据库数据轮廓信息显示
         /// </summary>
         /// <param name="message"></param>
-        void DataOutlineShow(string message);
+     //   void DataOutlineShow(string message);
 
         /// <summary>
         /// 检查数据表的正确性，并显示轮廓信息

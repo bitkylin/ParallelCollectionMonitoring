@@ -8,13 +8,17 @@ using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using bitkyFlashresUniversal.connClient;
+using System.Windows.Threading;
+using bitkyFlashresUniversal.cloud;
+using bitkyFlashresUniversal.cloud.bean;
 using bitkyFlashresUniversal.connClient.model;
 using bitkyFlashresUniversal.connClient.model.bean;
 using bitkyFlashresUniversal.connClient.presenter;
 using bitkyFlashresUniversal.dataExport;
 using bitkyFlashresUniversal.ElectrodeSelecter;
 using bitkyFlashresUniversal.poleInfoShow;
+using cn.bmob.api;
+using PresetInfo = bitkyFlashresUniversal.connClient.PresetInfo;
 
 namespace bitkyFlashresUniversal.view
 {
@@ -25,10 +29,22 @@ namespace bitkyFlashresUniversal.view
     {
         private readonly ICommPresenter _commPresenter;
         private BitkyPoleControl[] _bitkyPoleControls;
+        bool isWorking = false;
+
+        /// <summary>
+        /// 当前已采集的次数
+        /// </summary>
+        int currentCollectNum = 0;
+
+        /// <summary>
+        /// 当前已采集的总次数
+        /// </summary>
+        int currentCollectSumNum = 0;
 
         public BitkyMainWindow()
         {
             InitializeComponent();
+            Console.WriteLine("程序开启");
             _commPresenter = new CommPresenter(this);
             if (!_commPresenter.CheckTable())
                 LabelDataOutlineShow.Content = "请使用电极选择器选择待测电极";
@@ -277,6 +293,14 @@ namespace bitkyFlashresUniversal.view
             _commPresenter.EnabledPoleList = electrodes;
         }
 
+        public void DataOutlineShow(int v, int sumNun)
+        {
+            currentCollectNum = v;
+            currentCollectSumNum = sumNun;
+            string s = "已采集次数: " + (v - 1) + " 总次数: " + sumNun;
+            Dispatcher.Invoke(() => { LabelDataOutlineShow.Content = s; });
+        }
+
         /// <summary>
         /// 初始化TCP、串口相关环境配置
         /// </summary>
@@ -488,6 +512,78 @@ namespace bitkyFlashresUniversal.view
             {
                 WindowState = WindowState.Minimized;
             }
+        }
+
+        private DispatcherTimer mDataTimer = null;
+
+        /// <summary>
+        /// 开启 Bmob 云服务
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCloudBmob_Click(object sender, RoutedEventArgs e)
+        {
+            BmobWindows bmobWindows = CloudServiceHelper.BmobBuilder();
+            if (mDataTimer == null)
+            {
+                mDataTimer = new DispatcherTimer();
+                mDataTimer.Tick += new EventHandler(DataTimer_Tick);
+                mDataTimer.Interval = TimeSpan.FromSeconds(5);
+            }
+            if (mDataTimer.IsEnabled == false)
+            {
+                mDataTimer.Start();
+                BtnCloudBmob.Content = "云服务已开启";
+            }
+            else
+            {
+                mDataTimer.Stop();
+                BtnCloudBmob.Content = "云服务已关闭";
+            }
+        }
+
+        private void DataTimer_Tick(object sender, EventArgs e)
+        {
+            Console.WriteLine("定时器");
+            BmobWindows bmobWindows = CloudServiceHelper.BmobBuilder();
+
+            bmobWindows.Get<CloudControl>("CloudControl", "W2obDDDL", (result, ex) =>
+            {
+                if (ex == null)
+                {
+                    if (result.deployCollectOpened.Get())
+                    {
+                        PresetInfo.StartAutoCollect = true;
+                        if (!isWorking)
+                        {
+                            isWorking = true;
+                            _commPresenter.DeviceGatherStart(OperateType.Gather);
+                        }
+                        CloudControl cloudControl = new CloudControl();
+                        cloudControl.objectId = "W2obDDDL";
+                        cloudControl.cloudCollectOpened = true;
+
+                        if (currentCollectNum == 0)
+                        {
+                            cloudControl.cloudCollectProgress = 0;
+                        }
+                        else
+                        {
+                            int value = currentCollectNum * 100 / currentCollectSumNum;
+                            cloudControl.cloudCollectProgress = value;
+                            Console.WriteLine("当前进度：" + value);
+                        
+                        }
+                        bmobWindows.UpdateTaskAsync(cloudControl);
+                        Console.WriteLine("数据发送完毕");
+                    }
+                    else
+                    {
+                        PresetInfo.StartAutoCollect = false;
+                        isWorking = false;
+                    }
+                }
+            });
         }
     }
 }

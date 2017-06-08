@@ -251,9 +251,9 @@ namespace bitkyFlashresUniversal.connClient.presenter
         ///     数据库数据轮廓信息显示
         /// </summary>
         /// <param name="message"></param>
-        public void DataOutlineShow(string message)
+        public void DataOutlineShow(int v, int sumNun)
         {
-            _view.DataOutlineShow(message);
+            _view.DataOutlineShow( v,  sumNun);
         }
 
         /// <summary>

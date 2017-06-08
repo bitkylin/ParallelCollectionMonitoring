@@ -7,15 +7,16 @@ namespace bitkyFlashresUniversal.poleInfoShow
     /// </summary>
     public partial class BitkyPoleControl
     {
-        private readonly Color _colorBlue = Color.FromArgb(255, 0, 255, 200);
+        private readonly Color _colorBlue = Color.FromArgb(150, 0, 255, 200);
+
         //改变颜色
         private readonly Color _colorRed = Color.FromArgb(255, 255, 0, 0);
 
-        private readonly Color _colorGray = Color.FromArgb(255, 150, 150, 150);
+        private readonly Color _colorGray = Color.FromArgb(100, 0, 140, 255);//(255, 0, 255, 200);
 
-        private readonly Color _colorBlack = Color.FromArgb(255, 0, 0, 0);
+        private readonly Color _colorBlack = Color.FromArgb(150, 0, 255, 200);
 
-        public  bool isEnabled { get; set; } = true;
+        public bool isEnabled { get; set; } = true;
 
         public BitkyPoleControl()
         {
@@ -29,7 +30,7 @@ namespace bitkyFlashresUniversal.poleInfoShow
             isEnabled = false;
             LabelNum.Content = "失效";
             Background = new SolidColorBrush(_colorGray);
-            GridMain.Background=new SolidColorBrush(_colorGray);
+            GridMain.Background = new SolidColorBrush(_colorBlack);
         }
 
         public void SetVaild()
@@ -64,13 +65,13 @@ namespace bitkyFlashresUniversal.poleInfoShow
         /// <param name="i"></param>
         public void SetColor(int i)
         {
-            if (isEnabled)
-            {
-                if (i == 0)
-                    Background = new SolidColorBrush(_colorBlue);
-                if (i == 1)
-                    Background = new SolidColorBrush(_colorRed);
-            }
+//            if (isEnabled)
+//            {
+//                if (i == 0)
+//                    Background = new SolidColorBrush(_colorBlue);
+//                if (i == 1)
+//                    Background = new SolidColorBrush(_colorRed);
+//            }
         }
     }
 }

@@ -81,6 +81,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bmob-Windows">
+      <HintPath>..\..\..\ProjectCsharp\import\other\Bmob-Windows.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -126,6 +129,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="cloud\bean\CloudControl.cs" />
+    <Compile Include="cloud\CloudServiceHelper.cs" />
+    <Compile Include="cloud\PresetInfo.cs" />
     <Compile Include="connClient\model\bean\CommType.cs" />
     <Compile Include="connClient\model\bean\ElectrodeGroup.cs" />
     <Compile Include="connClient\model\bean\FrameData.cs" />

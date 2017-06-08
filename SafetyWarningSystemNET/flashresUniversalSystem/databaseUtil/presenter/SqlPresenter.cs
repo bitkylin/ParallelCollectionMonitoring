@@ -37,7 +37,7 @@ namespace bitkyFlashresUniversal.databaseUtil.presenter
         {
             _currentNum = preCollectRow;
             _sumNum = sumNun;
-            _commPresenter.DataOutlineShow("已采集次数: " + (preCollectRow - 1) + " 总次数: " + sumNun);
+            _commPresenter.DataOutlineShow( preCollectRow - 1 , sumNun);
         }
 
         /// <summary>
