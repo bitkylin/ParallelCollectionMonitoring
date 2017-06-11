@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context="cc.bitky.warningsystem.MainActivity">
+
+  <cc.bitky.warningsystem.utils.KyToolBar
+    android:id="@+id/mainActivity_kyToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/colorPrimary"
+    app:enableKyNavigationIcon="false"
+    app:setRightButton="@drawable/kytoobar_working"
+    app:title="「数据云」灾害预警系统" />
+
+  <FrameLayout
+    android:id="@+id/fragment"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+
+  <android.support.v4.app.FragmentTabHost
+    android:id="@+id/fragmentTabHost"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+  </android.support.v4.app.FragmentTabHost>
+</LinearLayout>
+

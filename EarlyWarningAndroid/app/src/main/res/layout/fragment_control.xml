@@ -1,0 +1,193 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="cc.bitky.warningsystem.controlview.ControlFragment">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/selector_list_item"
+      android:orientation="vertical"
+      android:padding="15dp">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+          style="@style/ware_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="10dp"
+          android:layout_marginTop="20dp"
+          android:maxLines="2"
+          android:text="节点："
+          android:textColor="@color/black"
+          android:textSize="18sp" />
+
+        <TextView
+          android:id="@+id/nodeControlFragment_textTitle"
+          style="@style/ware_title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="10dp"
+          android:layout_marginTop="20dp"
+          android:maxLines="2"
+          android:text="桂电草坪"
+          android:textColor="@color/black"
+          android:textSize="18sp" />
+
+      </LinearLayout>
+
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/lightgray" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="节点状态: "
+          android:textColor="@color/black" />
+
+        <TextView
+          android:id="@+id/nodeControlFragment_nodeStatus"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="正在获取" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="系统时间: "
+          android:textColor="@color/black" />
+
+        <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="2017-06-07" />
+
+      </LinearLayout>
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/lightgray" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="数据采集状态：" />
+
+        <TextView
+          android:id="@+id/nodeControlFragment_textCollectStatus"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="未采集" />
+
+        <Button
+          android:id="@+id/nodeControlFragment_btnCollect"
+          android:layout_width="100dp"
+          android:layout_height="40dp"
+          android:background="@drawable/bg_btn_style_blue"
+          android:enabled="false"
+          android:shadowRadius="50"
+          android:text="数据采集"
+          android:textColor="@color/white" />
+
+      </LinearLayout>
+
+      <ProgressBar
+        android:id="@+id/nodeControlFragment_progressBarCollect"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="20sp"
+        android:progress="0" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="数据反演状态：" />
+
+        <TextView
+          android:id="@+id/nodeControlFragment_textProcessStatus"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="未反演" />
+
+        <Button
+          android:id="@+id/nodeControlFragment_btnProcess"
+          android:layout_width="100dp"
+          android:layout_height="40dp"
+          android:background="@drawable/bg_btn_style_red"
+          android:enabled="false"
+          android:shadowRadius="50"
+          android:text="数据反演"
+          android:textColor="@color/white" />
+
+      </LinearLayout>
+
+      <ProgressBar
+        android:id="@+id/nodeControlFragment_progressBarProcess"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="20sp"
+        android:progress="0" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="查看已采数据的处理结果" />
+
+        <Button
+          android:id="@+id/nodeControlFragment_btnResult"
+          android:layout_width="100dp"
+          android:layout_height="50dp"
+          android:enabled="false"
+          android:shadowRadius="50"
+          android:text="显示结果" />
+
+      </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

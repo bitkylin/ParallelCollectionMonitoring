@@ -1,0 +1,24 @@
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorPrimary</item>
+  </style>
+
+  <style name="ware_title">
+    <item name="android:textColor">@color/gray</item>
+    <item name="android:textSize">12sp</item>
+    <item name="android:maxLines">3</item>
+  </style>
+
+  <declare-styleable name="KyToolbar">
+    <attr name="KyNavigationIcon" format="reference" />
+    <attr name="enableKyNavigationIcon" format="boolean" />
+    <attr name="enableKySearch" format="boolean" />
+    <attr name="setRightButton" format="reference" />
+    <attr name="setRightText" format="string|reference" />
+  </declare-styleable>
+</resources>

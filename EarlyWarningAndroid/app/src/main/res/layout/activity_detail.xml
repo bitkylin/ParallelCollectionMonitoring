@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context="cc.bitky.warningsystem.trial.control.DetailActivity">
+
+  <cc.bitky.warningsystem.utils.KyToolBar
+    android:id="@+id/detailActivity_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/colorPrimary"
+    app:enableKyNavigationIcon="true"
+    app:title="桂电草坪"
+    app:titleTextColor="@color/white" />
+
+  <LinearLayout
+    android:id="@+id/detailActivity_Layout_prepare"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_margin="20sp"
+      android:text="正在获取数据中 ..." />
+
+  </LinearLayout>
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:id="@+id/detailActivity_Layout_show"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/selector_list_item"
+      android:orientation="vertical"
+      android:padding="15dp">
+
+      <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/detailActivity_draweeview"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal" />
+
+      <TextView
+        android:id="@+id/detailActivity_textTitle"
+        style="@style/ware_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:maxLines="2"
+        android:text="桂林思安江水库"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/lightgray" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="监测状态: "
+          android:textColor="@color/black" />
+
+        <TextView
+          android:id="@+id/detailActivity_textStatus"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="正常" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="中心点坐标: "
+          android:textColor="@color/black" />
+
+        <TextView
+          android:id="@+id/detailActivity_coordinate"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="[]" />
+
+      </LinearLayout>
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/lightgray" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="状态详情"
+        android:textColor="@color/black" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp">
+
+        <TextView
+          android:id="@+id/detailActivity_textDetail"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n该地区状态一切正常\n" />
+      </LinearLayout>
+    </LinearLayout>
+
+
+  </ScrollView>
+</LinearLayout>

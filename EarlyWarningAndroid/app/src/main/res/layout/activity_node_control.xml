@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context="cc.bitky.warningsystem.controlview.NodeControlActivity">
+
+  <cc.bitky.warningsystem.utils.KyToolBar
+    android:id="@+id/nodeControlActivity_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/colorPrimary"
+    app:enableKyNavigationIcon="true"
+    app:setRightButton="@drawable/kytoolbar_clear"
+    app:title="节点控制"
+    app:titleTextColor="@color/white" />
+
+  <FrameLayout
+    android:id="@+id/fragment"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+
+  <android.support.v4.app.FragmentTabHost
+    android:id="@+id/fragmentTabHost"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+</LinearLayout>
