@@ -102,6 +102,8 @@ public class MapFragment extends Fragment implements CompoundButton.OnCheckedCha
     mapFragment_switchLocation.setOnCheckedChangeListener(this);
     mMapView = (TextureMapView) view.findViewById(R.id.bmapView);
     baiduMap = mMapView.getMap();
+    MapStatusUpdate u1 = MapStatusUpdateFactory.newLatLngZoom(new LatLng(25.53906, 110.30269), baiduMap.getMaxZoomLevel() - 6);
+    baiduMap.animateMapStatus(u1);//动画移动摄像头
     baiduMap.setMyLocationConfigeration(new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, false, null));
     // 开启定位图层
     baiduMap.setMyLocationEnabled(true);

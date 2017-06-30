@@ -76,7 +76,7 @@ public class DetailActivity extends AppCompatActivity {
     detailActivity_Layout_show.setVisibility(View.VISIBLE);
     if (data.getProcessBar() != null && data.getProcessBar() == 100) {
       detailActivity_textDetail.setText(data.getDetail());
-      detailActivity_textTitle.setText("桂电草坪");
+      detailActivity_textTitle.setText("测点「1」");
       if (data.getStatus()) {
         detailActivity_textStatus.setText("正常");
         detailActivity_textStatus.setTextColor(getResources().getColor(R.color.black));

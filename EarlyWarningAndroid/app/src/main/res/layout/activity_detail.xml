@@ -13,7 +13,7 @@
     android:layout_height="40dp"
     android:background="@color/colorPrimary"
     app:enableKyNavigationIcon="true"
-    app:title="桂电草坪"
+    app:title="测点「1」"
     app:titleTextColor="@color/white" />
 
   <LinearLayout
@@ -46,8 +46,8 @@
 
       <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/detailActivity_draweeview"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="300dp"
+        android:layout_height="168dp"
         android:layout_gravity="center_horizontal" />
 
       <TextView

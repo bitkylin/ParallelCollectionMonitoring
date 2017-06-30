@@ -17,7 +17,7 @@ import java.util.List;
 
 import cc.bitky.warningsystem.R;
 import cc.bitky.warningsystem.bean.CloudSuperArea;
-import cc.bitky.warningsystem.category.CategoryActivity;
+import cc.bitky.warningsystem.trial.TrialActivity;
 import cc.bitky.warningsystem.utils.KyBaseRecyclerAdapter;
 import cc.bitky.warningsystem.utils.KyBaseViewHolder;
 
@@ -69,11 +69,7 @@ public class RecyclerFragment extends Fragment {
 
   private void reloadCloudSuperAreaList() {
     List<CloudSuperArea> cloudSuperAreas = new ArrayList<>();
-    cloudSuperAreas.add(new CloudSuperArea("七百弄乡", "http://oqza83elq.bkt.clouddn.com/super4.jpg", true));
-    cloudSuperAreas.add(new CloudSuperArea("思安江水库", "http://oqza83elq.bkt.clouddn.com/super1.jpg", true));
-    cloudSuperAreas.add(new CloudSuperArea("内蒙古", "http://oqza83elq.bkt.clouddn.com/super5.jpg", true));
-    cloudSuperAreas.add(new CloudSuperArea("桂电草坪", "http://oqza83elq.bkt.clouddn.com/super3.jpg", false));
-    cloudSuperAreas.add(new CloudSuperArea("广西全州", "http://oqza83elq.bkt.clouddn.com/super6.jpg", false));
+    cloudSuperAreas.add(new CloudSuperArea("青狮潭水库", "http://oqza83elq.bkt.clouddn.com/super9.jpg", true));
     recyclerAdapter.reloadData(cloudSuperAreas);
   }
 
@@ -95,7 +91,7 @@ public class RecyclerFragment extends Fragment {
         new KyBaseRecyclerAdapter.KyRecyclerViewItemOnClickListener<CloudSuperArea>() {
           @Override
           public void Onclick(View v, int adapterPosition, CloudSuperArea data) {
-            Intent intent = new Intent(context, CategoryActivity.class);
+            Intent intent = new Intent(context, TrialActivity.class);
             intent.putExtra("areaName", data.getName());
             startActivity(intent);
           }

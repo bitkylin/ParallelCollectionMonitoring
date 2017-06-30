@@ -52,7 +52,10 @@ public class TrialActivity extends AppCompatActivity {
 
   private void reloadCloudSuperAreaList() {
     List<CloudSuperArea> cloudSuperAreas = new ArrayList<>();
-    cloudSuperAreas.add(new CloudSuperArea("桂电草坪", "http://oqza83elq.bkt.clouddn.com/super3.jpg", true));
+    cloudSuperAreas.add(new CloudSuperArea("测点「1」", "http://oqza83elq.bkt.clouddn.com/tancered.png", true));
+//    cloudSuperAreas.add(new CloudSuperArea("节点「2」", "http://oqza83elq.bkt.clouddn.com/tancered.png", true));
+//    cloudSuperAreas.add(new CloudSuperArea("节点「3」", "http://oqza83elq.bkt.clouddn.com/tancered.png", true));
+//    cloudSuperAreas.add(new CloudSuperArea("节点「4」", "http://oqza83elq.bkt.clouddn.com/tancered.png", true));
     recyclerAdapter.reloadData(cloudSuperAreas);
   }
   void initRecyclerAdapter(List<CloudSuperArea> list) {

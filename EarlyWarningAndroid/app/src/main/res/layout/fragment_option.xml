@@ -4,10 +4,114 @@
   android:layout_height="match_parent"
   tools:context="cc.bitky.warningsystem.controlview.OptionFragment">
 
-  <!-- TODO: Update blank fragment layout -->
-  <TextView
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="@string/hello_blank_fragment" />
+    android:orientation="vertical"
+    android:padding="15dp">
 
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+      <TextView
+        style="@style/ware_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:maxLines="2"
+        android:text="节点："
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/optionFragment_textTitle"
+        style="@style/ware_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:maxLines="2"
+        android:text="桂电草坪"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_vertical"
+      android:orientation="horizontal">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="监控周期：" />
+
+      <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="" />
+
+      <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="每天" />
+
+        <RadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="每周" />
+
+      </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:orientation="horizontal">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="监控时间：" />
+
+      <TextView
+        android:id="@+id/optionFragment_tvTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:text="点击设置时间" />
+
+    </LinearLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginBottom="20dp"
+      android:layout_marginTop="20dp"
+      android:background="@color/lightgray" />
+
+    <Button
+      android:id="@+id/optionFragment_btnConfirmConfig"
+      android:layout_width="100dp"
+      android:layout_height="40dp"
+      android:layout_gravity="end"
+      android:background="@drawable/bg_btn_style_blue"
+      android:shadowRadius="50"
+      android:text="确认设置"
+      android:textColor="@color/white" />
+
+  </LinearLayout>
 </FrameLayout>

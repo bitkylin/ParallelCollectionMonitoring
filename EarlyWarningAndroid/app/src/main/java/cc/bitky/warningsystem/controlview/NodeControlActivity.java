@@ -28,6 +28,7 @@ public class NodeControlActivity extends AppCompatActivity {
   Context context;
   List<KyTab> kyTabs = new ArrayList<>(2);
   public FragmentTabHost fragmentTabHost;
+  String areaName;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +38,15 @@ public class NodeControlActivity extends AppCompatActivity {
     initTab();
     initView();
     toastUtil = new ToastUtil(this);
+    areaName = getIntent().getStringExtra("areaName");
+
   }
 
   private void initTab() {
-    KyTab tab_home = new KyTab(OptionFragment.class, "配置", R.drawable.navigationbar_selector_option);
-    KyTab tab_hot = new KyTab(ControlFragment.class, "控制", R.drawable.navigationbar_selector_control);
-    kyTabs.add(tab_home);
-    kyTabs.add(tab_hot);
+    KyTab tab_control = new KyTab(ControlFragment.class, "控制", R.drawable.navigationbar_selector_control);
+    KyTab tab_option = new KyTab(OptionFragment.class, "配置", R.drawable.navigationbar_selector_option);
+    kyTabs.add(tab_control);
+    kyTabs.add(tab_option);
 
     fragmentTabHost = (FragmentTabHost) findViewById(R.id.fragmentTabHost);
     fragmentTabHost.setup(context, getSupportFragmentManager(), R.id.fragment);

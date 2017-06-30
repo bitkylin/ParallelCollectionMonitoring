@@ -69,6 +69,7 @@ public class CategoryActivity extends AppCompatActivity {
   private void initListByName(final String areaName, final boolean initView) {
     BmobQuery<CloudAreaItem> bmobQuery = new BmobQuery<>();
     bmobQuery.addWhereEqualTo("name", areaName);
+    bmobQuery.addWhereEqualTo("enabled", true);
     bmobQuery.order("time");
     bmobQuery.findObjects(new FindListener<CloudAreaItem>() {
       @Override

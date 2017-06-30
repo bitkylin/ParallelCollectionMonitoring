@@ -47,8 +47,10 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-
+    NodeControlActivity activity = (NodeControlActivity) getActivity();
     View view = inflater.inflate(R.layout.fragment_control, container, false);
+    TextView nodeControlFragment_textTitle = (TextView) view.findViewById(R.id.nodeControlFragment_textTitle);
+    nodeControlFragment_textTitle.setText(activity.areaName);
     nodeControlActivity_nodeStatus = (TextView) view.findViewById(R.id.nodeControlFragment_nodeStatus);
     nodeControlActivity_btnCollect = (Button) view.findViewById(R.id.nodeControlFragment_btnCollect);
     nodeControlActivity_textCollectStatus = (TextView) view.findViewById(R.id.nodeControlFragment_textCollectStatus);
@@ -62,7 +64,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
     nodeControlActivity_btnProcess.setOnClickListener(this);
     nodeControlActivity_btnCollect.setOnClickListener(this);
 
-    ThreadStoped = true;
+    ThreadStoped = false;
     new Thread(new Runnable() {
       @Override
       public void run() {
@@ -192,7 +194,7 @@ public class ControlFragment extends Fragment implements View.OnClickListener {
         break;
       case R.id.nodeControlFragment_btnResult:
         Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra("objectId", "EtIj3335");
+        intent.putExtra("objectId", "Cxq8P77P");
         startActivity(intent);
         break;
     }

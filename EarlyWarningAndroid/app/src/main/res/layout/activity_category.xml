@@ -74,7 +74,7 @@
           <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/categoryActivity_draweeview"
             android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_height="140dp"
             android:layout_gravity="center_horizontal" />
 
           <TextView

@@ -14,7 +14,7 @@
     android:background="@color/colorPrimary"
     app:enableKyNavigationIcon="false"
     app:setRightButton="@drawable/kytoobar_working"
-    app:title="「数据云」灾害预警系统" />
+    app:title="监测预警系统" />
 
   <FrameLayout
     android:id="@+id/fragment"

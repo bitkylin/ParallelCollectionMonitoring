@@ -16,6 +16,7 @@ public class CloudAreaItem extends BmobObject {
    * 当前监测状态
    */
   private Boolean status;
+  private Boolean enabled;
   /**
    * 生成时间
    */
@@ -91,5 +92,13 @@ public class CloudAreaItem extends BmobObject {
 
   public void setProcessBar(Integer processBar) {
     this.processBar = processBar;
+  }
+
+  public Boolean getEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(Boolean enabled) {
+    this.enabled = enabled;
   }
 }

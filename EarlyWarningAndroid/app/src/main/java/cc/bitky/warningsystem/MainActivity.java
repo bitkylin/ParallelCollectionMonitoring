@@ -32,10 +32,8 @@ public class MainActivity extends AppCompatActivity {
   Context context;
   List<KyTab> kyTabs = new ArrayList<>(2);
   public FragmentTabHost fragmentTabHost;
-
   public LocationClient mLocationClient = null;
   private LocationListener locationListener;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +69,9 @@ public class MainActivity extends AppCompatActivity {
     mLocationClient.start();
   }
 
-
   private void initTab() {
     KyTab tab_home = new KyTab(MapFragment.class, "地图", R.drawable.navigationbar_selector_category);
-    KyTab tab_hot = new KyTab(RecyclerFragment.class, "分类", R.drawable.navigationbar_selector_hot);
+    KyTab tab_hot = new KyTab(RecyclerFragment.class, "活跃", R.drawable.navigationbar_selector_hot);
     kyTabs.add(tab_home);
     kyTabs.add(tab_hot);
 
@@ -104,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     this.locationListener = locationListener;
   }
 
-  public class MyLocationListener implements BDLocationListener {
+  private class MyLocationListener implements BDLocationListener {
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
       if (locationListener != null) locationListener.locate(bdLocation);
