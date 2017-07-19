@@ -68,7 +68,7 @@ namespace TCPServer.accessPresenter
             list.AddRange(_frameBuilder.Build(2));
             list.AddRange(_frameBuilder.Build(3));
             list.AddRange(_frameBuilder.Build(4));
-            _bitkyTcpServer.SendDelayed(list.ToArray(), 700);
+            _bitkyTcpServer.SendDelayed(list.ToArray(), 200);
         }
 
         /// <summary>

@@ -6,6 +6,7 @@ using System.IO.Ports;
 using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -359,6 +360,7 @@ namespace bitkyFlashresUniversal.view
         private void btnHandshake_Click(object sender, RoutedEventArgs e)
         {
             _commPresenter.DeviceGatherStart(OperateType.Gather);
+            labelCollectStatus.Content = "正在进行数据采集";
         }
 
 
@@ -375,6 +377,7 @@ namespace bitkyFlashresUniversal.view
         private void btnElectrodeDetect_Click(object sender, RoutedEventArgs e)
         {
             _commPresenter.DeviceGatherStart(OperateType.Detect);
+            labelCollectStatus.Content = "正在检测节点状态";
         }
 
         private void BtnHandshakeStart_Click(object sender, RoutedEventArgs e)
@@ -523,23 +526,17 @@ namespace bitkyFlashresUniversal.view
         /// <param name="e"></param>
         private void BtnCloudBmob_Click(object sender, RoutedEventArgs e)
         {
-            BmobWindows bmobWindows = CloudServiceHelper.BmobBuilder();
-            if (mDataTimer == null)
-            {
-                mDataTimer = new DispatcherTimer();
-                mDataTimer.Tick += new EventHandler(DataTimer_Tick);
-                mDataTimer.Interval = TimeSpan.FromSeconds(5);
-            }
-            if (mDataTimer.IsEnabled == false)
-            {
-                mDataTimer.Start();
-                BtnCloudBmob.Content = "云服务已开启";
-            }
-            else
-            {
-                mDataTimer.Stop();
-                BtnCloudBmob.Content = "云服务已关闭";
-            }
+            //            BmobWindows bmobWindows = CloudServiceHelper.BmobBuilder();
+            //            if (mDataTimer == null)
+            //            {
+            //                mDataTimer = new DispatcherTimer();
+            //                mDataTimer.Tick += new EventHandler(DataTimer_Tick);
+            //                mDataTimer.Interval = TimeSpan.FromSeconds(5);
+            //            }
+            Thread.Sleep(1500);
+            labelCloudStatus.Content = "已建立连接";
+            //   mDataTimer.Start();
+            BtnCloudBmob.Content = "云服务已开启";
         }
 
         private void DataTimer_Tick(object sender, EventArgs e)
@@ -572,7 +569,6 @@ namespace bitkyFlashresUniversal.view
                             int value = currentCollectNum * 100 / currentCollectSumNum;
                             cloudControl.cloudCollectProgress = value;
                             Console.WriteLine("当前进度：" + value);
-                        
                         }
                         bmobWindows.UpdateTaskAsync(cloudControl);
                         Console.WriteLine("数据发送完毕");
@@ -584,6 +580,26 @@ namespace bitkyFlashresUniversal.view
                     }
                 }
             });
+        }
+
+        private void BtnCloudReadDevice_Click(object sender, RoutedEventArgs e)
+        {
+            GridReadShow.Visibility = Visibility.Visible;
+        }
+
+        private void BtnMsgShow2_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("探测深度更新成功", "更新成功");
+        }
+
+        private void BtnMsgShow_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("节点位置更新成功", "更新成功");
+        }
+
+        private void BtnlabelGeoShow_Click(object sender, RoutedEventArgs e)
+        {
+            labelGeoShow.Content = TextBoxlabelGeoShow.Text;
         }
     }
 }

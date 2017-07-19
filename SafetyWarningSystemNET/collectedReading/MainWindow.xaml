@@ -22,8 +22,8 @@
                         <ColumnDefinition Width="170*" />
                         <ColumnDefinition Width="223*" />
                     </Grid.ColumnDefinitions>
-                    <GroupBox x:Name="groupBox" Grid.Column="1" Header="数据设置" Margin="24,13,9.4,0"
-                              VerticalAlignment="Top" Height="181" BorderBrush="#7F696ADF" />
+                    <GroupBox x:Name="groupBox" Grid.Column="1" Header="数据设置" Margin="23,13,10.4,0"
+                              VerticalAlignment="Top" Height="259" BorderBrush="#7F696ADF" />
                     <Label x:Name="label1" Content="采集时间：" HorizontalAlignment="Left" Margin="11,60,0,0"
                            VerticalAlignment="Top" Height="30" Width="142" VerticalContentAlignment="Center" />
                     <Label x:Name="label2" Content="操作者：" HorizontalAlignment="Left" Margin="11,90,0,0"
@@ -55,37 +55,37 @@
                     <Label x:Name="label1_Copy" Content="A线电极范围：" HorizontalAlignment="Left" Margin="46,47,0,0"
                            VerticalAlignment="Top" Height="30" Width="112" Grid.Column="1"
                            VerticalContentAlignment="Center" />
-                    <Label x:Name="label2_Copy" Content="B线电极范围：" HorizontalAlignment="Left" Margin="46,83,0,0"
+                    <Label x:Name="label2_Copy" Content="B线电极范围：" HorizontalAlignment="Left" Margin="46,100,0,0"
                            VerticalAlignment="Top" Height="30" Width="112" Grid.Column="1"
                            VerticalContentAlignment="Center" />
-                    <Label x:Name="label5_Copy" Content="电极间距：" HorizontalAlignment="Left" Margin="46,115,0,0"
+                    <Label x:Name="label5_Copy" Content="电极间距：" HorizontalAlignment="Left" Margin="46,153,0,0"
                            VerticalAlignment="Top" Height="30" Width="112" Grid.Column="1"
                            VerticalContentAlignment="Center" />
-                    <Label x:Name="label6_Copy" Content="两线间距：" HorizontalAlignment="Left" Margin="46,150,0,0"
+                    <Label x:Name="label6_Copy" Content="两线间距：" HorizontalAlignment="Left" Margin="46,221,0,0"
                            VerticalAlignment="Top" Height="30" Width="112" Grid.Column="1"
-                           VerticalContentAlignment="Center" />
+                           VerticalContentAlignment="Center" Visibility="Hidden" />
                     <TextBox x:Name="textBoxLeftStart" Grid.Column="1" HorizontalAlignment="Left" Height="30"
-                             Margin="168,47,0,0" TextWrapping="Wrap" Text="59" VerticalAlignment="Top" Width="100"
+                             Margin="168,47,0,0" TextWrapping="Wrap" Text="63" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                     <TextBox x:Name="textBoxLeftEnd" Grid.Column="1" HorizontalAlignment="Left" Height="30"
                              Margin="315,47,0,0" TextWrapping="Wrap" Text="32" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                     <TextBox x:Name="textBoxRightStart" Grid.Column="1" HorizontalAlignment="Left" Height="30"
-                             Margin="168,81,0,0" TextWrapping="Wrap" Text="27" VerticalAlignment="Top" Width="100"
+                             Margin="168,98,0,0" TextWrapping="Wrap" Text="31" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                     <TextBox x:Name="textBoxRightEnd" Grid.Column="1" HorizontalAlignment="Left" Height="30"
-                             Margin="315,82,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="100"
+                             Margin="315,98,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                     <TextBox x:Name="textBoxPoleInterval" Grid.Column="1" HorizontalAlignment="Left" Height="30"
-                             Margin="168,115,0,0" TextWrapping="Wrap" Text="6" VerticalAlignment="Top" Width="100"
+                             Margin="168,153,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="100"
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                              RenderTransformOrigin="0.006,0.469" />
                     <TextBox x:Name="textBoxLineInterval" Grid.Column="1" HorizontalAlignment="Left" Height="30"
-                             Margin="168,150,0,0" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Width="100"
-                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                    <Button x:Name="btnOutputData" Content="正反演预备" Grid.Column="1" Margin="316,131,0,0"
+                             Margin="168,221,0,0" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Width="100"
+                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Visibility="Hidden" />
+                    <Button x:Name="btnOutputData" Content="正反演预备" Grid.Column="1" Margin="315,153,0,0"
                             VerticalAlignment="Top" Height="49" Click="btnOutputData_Click" HorizontalAlignment="Left" Width="100" />
-                    <Image x:Name="image" Margin="25,199,10.4,10.2" Source="poleLocation.png" Grid.Column="1" />
+                    <Image x:Name="image" Margin="25,199,10.4,10.2" Source="poleLocation.png" Grid.Column="1" Visibility="Hidden" />
                     <Button x:Name="button" Content="打开已采数据" HorizontalAlignment="Left" Margin="11,10,0,0"
                 VerticalAlignment="Top" Width="140" Height="40" Click="button_Click" />
                     <Label x:Name="labelJsonFileName" Content="" Margin="168,13,437.4,0" VerticalAlignment="Top" Height="40"
@@ -97,8 +97,11 @@
                     <Button x:Name="btnExecReversal" Content="进行正反演" Margin="10,10,0,0"
             VerticalAlignment="Top" Height="40" Click="btnExecReversal_Click"
             HorizontalAlignment="Left" Width="140" />
-                    <ProgressBar x:Name="ProgressBarInversionStatusShow" Height="30" Margin="169,14,10.4,0" VerticalAlignment="Top" Visibility="Visible"/>
+                    <ProgressBar x:Name="ProgressBarInversionStatusShow" Height="30" Margin="169,14,175.4,0" VerticalAlignment="Top" Visibility="Visible"/>
                     <Image x:Name="imageInversionShow" Margin="10,59,10.4,10.2"/>
+                    <Button x:Name="btnUpload" Content="上传至云服务器" Margin="0,10,10.4,0"
+                        VerticalAlignment="Top" Height="40"
+                        HorizontalAlignment="Right" Width="140" Click="btnUpload_Click" />
 
 
                 </Grid>
@@ -119,7 +122,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label x:Name="label7" Content="已采数据正反演" Margin="0,0,70.6,0" VerticalAlignment="Top" Height="40" HorizontalContentAlignment="Center" FontSize="18" Padding="0" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Center"/>
+        <Label x:Name="label7" Content="已采数据正反演及云同步" Margin="0,0,70.6,0" VerticalAlignment="Top" Height="40" HorizontalContentAlignment="Center" FontSize="18" Padding="0" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Center"/>
         <Button x:Name="btnClose" Content="X" Margin="723,0,0.6,0" Background="Red" Click="btnClose_Click" FontSize="18" Padding="1,0" Height="40" VerticalAlignment="Top"/>
 
     </Grid>

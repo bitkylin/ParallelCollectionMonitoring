@@ -1,10 +1,43 @@
-# 基于 WPF 的自定义帧控制演示项目
+# 堤坝渗透地质数据采集及云端监控系统
 
 [![GitHub stars](https://img.shields.io/github/stars/bitkylin/InteractionByFrames.svg)](https://github.com/bitkylin/InteractionByFrames/stargazers)
-![技术](https://img.shields.io/badge/%E6%8A%80%E6%9C%AF-WPF%7CTCP%7CSQLite-brightgreen.svg)
+![技术](https://img.shields.io/badge/%E6%8A%80%E6%9C%AF-Bmob%7C%E4%B8%83%E7%89%9B%7CAndroid%7CWPF-brightgreen.svg)
 [![GitHub license](https://img.shields.io/badge/许可证-Apache_2-blue.svg)](https://github.com/bitkylin/InteractionByFrames/blob/master/LICENSE)
 
-## 功能说明
+使用数十台设备对堤坝渗漏灾害进行全天候、全方位的数据采集及分析处理，管理人员通过
+Android 应用实时控制各设备的工作，该系统可通过 Android 应用对工作人员进行灾害预警。
+
+## 项目成果
+
+- 第十二届中国研究生电子设计竞赛华南赛区一等奖
+
+- 第十五届“挑战杯”全国大学生课外学术科技作品竞赛华南赛区一等奖
+
+**参赛并获奖的作品视频展示已上传至优酷，请点击观看：**
+
+[![中国研究生电子设计竞赛 - 华南赛区一等奖](./mdphoto/1.jpg)](http://v.youku.com/v_show/id_XMjkwMjg2ODcxNg==.html)
+
+[中国研究生电子设计竞赛 - 华南赛区一等奖 - 堤坝渗透安全监测系统](http://v.youku.com/v_show/id_XMjkwMjg2ODcxNg==.html)
+
+## 系统整体设计
+
+![系统整体设计](./mdphoto/2.jpg)
+
+## 技术特点
+
+- 单个硬件设备通过 64 个采集电极，采集大地电压、电流数据， PC 机、 .NET 客户端实时读取这些数据，通过正反演算法生成大地电阻率信息，自动分析地质状况并生成直观展示图。
+
+- .NET 客户端与硬件设备通过局域网或串口进行通信， 通信方式可自由切换。
+
+- .NET 客户端生成数据采集策略，并控制硬件设备进行数据采集，并实时分析已采数据。
+
+- .NET 客户端将算法运算结果上传至 Bmob 后端云，直观展示图上传至七牛云存储。
+
+- Android 应用通过 Bmob 后端云和七牛云存储， 实时获取地质监测结果， 实时获取各
+个 .NET 客户端的工作状态，并远程控制各客户端进行工作。
+
+
+## PC 服务端和设备模拟客户端
 
 基于 WPF 框架和 C# 的 .NET 演示程序，分为客户端和服务端：
 
@@ -14,7 +47,7 @@
 
 - 客户端通过自定义帧控制服务端程序生成自定义数据并进行回传，同时客户端同步将数据存储在本地，方便后续的处理使用。
 
-## 技术特点
+### 技术特点
 
 - 支持「TCP」和「串口」两种通信方式，TCP协议可用于建立客户端和服务端的连接进行演示。
 
@@ -26,6 +59,21 @@
 
 - 一次工作结束后，客户端软件可将这些数据通过 Json 格式导出为本地文件进行持久化存储。
 
+## 基于 Android 的远程控制应用
+
+### 技术及作品展示
+
+- 采用百度地图 SDK
+
+![采用百度地图 SDK](./mdphoto/21.jpg)
+
+- 通过 Bmob 后端云控制各个设备进行工作
+
+![通过 Bmob 后端云控制各个设备进行工作](./mdphoto/22.jpg)
+
+- 实时展示远端设备的工作状态及数据处理结果
+
+![实时展示远端设备的工作状态及数据处理结果](./mdphoto/23.jpg)
 
 ## 相关文章
 

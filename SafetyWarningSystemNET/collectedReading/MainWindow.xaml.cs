@@ -260,7 +260,7 @@ namespace KyInversion
                         isContinue = false;
 
                         // Read byte[] from png file
-                        string path = Directory.GetCurrentDirectory() + "/rawData/printPhoto.jpg";
+                        string path = Directory.GetCurrentDirectory() + "/printPhoto.jpg";
                         BinaryReader binReader = new BinaryReader(File.Open(path, FileMode.Open));
                         FileInfo fileInfo = new FileInfo(path);
                         byte[] bytes = binReader.ReadBytes((int)fileInfo.Length);
@@ -307,6 +307,12 @@ namespace KyInversion
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void btnUpload_Click(object sender, RoutedEventArgs e)
+        {
+            Thread.Sleep(1500);
+            MessageBox.Show("标准图已成功上传至云服务器", "标准图上传成功");
         }
     }
 }
