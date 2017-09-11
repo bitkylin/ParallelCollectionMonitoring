@@ -57,7 +57,7 @@
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="广西区灵川县青狮潭水库附近"
+        android:text="广东省惠州市北湖公园附近"
         android:textSize="10sp" />
     </LinearLayout>
   </LinearLayout>

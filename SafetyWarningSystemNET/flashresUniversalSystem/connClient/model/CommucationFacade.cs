@@ -118,12 +118,12 @@ namespace bitkyFlashresUniversal.connClient.model
         public void GetReceivedData(byte[] data)
         {
             //--------挑战杯用，删除即可恢复-------------
-//            List<byte> bytes = SendDataTZB.process(data);
-//            if (bytes == null)
-//            {
-//                return;
-//            }
-//            data = bytes.ToArray();
+            List<byte> bytes = SendDataTZB.process(data);
+            if (bytes == null)
+            {
+                return;
+            }
+            data = bytes.ToArray();
             //--------挑战杯用，删除即可恢复-------------
 
             //接收到的数据显示

@@ -50,7 +50,7 @@
                     </Grid>
                     <Button x:Name="BtnMsgShow" Content="节点位置设置" HorizontalAlignment="Right" Margin="0,23,305.4,0" VerticalAlignment="Top" Width="110" Height="40" Click="BtnMsgShow_Click" Foreground="White" FontSize="16" IsTabStop="False" Background="#3F0000FF"/>
                     <Button x:Name="BtnMsgShow2" Content="探测深度设置" HorizontalAlignment="Right" Margin="0,91,305.4,0" VerticalAlignment="Top" Width="110" Height="40" Foreground="White" FontSize="16" IsTabStop="False" Background="#3F0000FF" Click="BtnMsgShow2_Click"/>
-                    <TextBox HorizontalAlignment="Right" Height="40" Margin="0,23,86.4,0" TextWrapping="Wrap" Text="青狮潭水库" VerticalAlignment="Top" Width="164" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    <TextBox HorizontalAlignment="Right" Height="40" Margin="0,23,86.4,0" TextWrapping="Wrap" Text="惠州" VerticalAlignment="Top" Width="164" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                     <TextBox x:Name="textBox_Copy" HorizontalAlignment="Right" Height="40" Margin="0,91,86.4,0" TextWrapping="Wrap" Text="80" VerticalAlignment="Top" Width="164" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 </Grid>
             </TabItem>
