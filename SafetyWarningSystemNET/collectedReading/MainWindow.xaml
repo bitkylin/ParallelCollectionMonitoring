@@ -22,8 +22,8 @@
                         <ColumnDefinition Width="170*" />
                         <ColumnDefinition Width="223*" />
                     </Grid.ColumnDefinitions>
-                    <GroupBox x:Name="groupBox" Grid.Column="1" Header="数据设置" Margin="23,13,10.4,0"
-                              VerticalAlignment="Top" Height="259" BorderBrush="#7F696ADF" />
+                    <GroupBox x:Name="groupBox" Grid.Column="1" Header="数据设置" Margin="23,13,10,0"
+                              VerticalAlignment="Top" Height="199" BorderBrush="#7F696ADF" />
                     <Label x:Name="label1" Content="采集时间：" HorizontalAlignment="Left" Margin="11,60,0,0"
                            VerticalAlignment="Top" Height="30" Width="142" VerticalContentAlignment="Center" />
                     <Label x:Name="label2" Content="操作者：" HorizontalAlignment="Left" Margin="11,90,0,0"
@@ -85,7 +85,7 @@
                              VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Visibility="Hidden" />
                     <Button x:Name="btnOutputData" Content="正反演预备" Grid.Column="1" Margin="315,153,0,0"
                             VerticalAlignment="Top" Height="49" Click="btnOutputData_Click" HorizontalAlignment="Left" Width="100" />
-                    <Image x:Name="image" Margin="25,199,10.4,10.2" Source="poleLocation.png" Grid.Column="1" Visibility="Hidden" />
+                    <Image x:Name="image" Margin="25,199,10.4,10.2" Source="poleLocation.png" Grid.Column="1" Visibility="Visible" />
                     <Button x:Name="button" Content="打开已采数据" HorizontalAlignment="Left" Margin="11,10,0,0"
                 VerticalAlignment="Top" Width="140" Height="40" Click="button_Click" />
                     <Label x:Name="labelJsonFileName" Content="" Margin="168,13,437.4,0" VerticalAlignment="Top" Height="40"
@@ -123,7 +123,7 @@
             </TabItem>
         </TabControl>
         <Label x:Name="label7" Content="已采数据正反演及云同步" Margin="0,0,70.6,0" VerticalAlignment="Top" Height="40" HorizontalContentAlignment="Center" FontSize="18" Padding="0" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Center"/>
-        <Button x:Name="btnClose" Content="X" Margin="723,0,0.6,0" Background="Red" Click="btnClose_Click" FontSize="18" Padding="1,0" Height="40" VerticalAlignment="Top"/>
+        <Button x:Name="btnClose" Content="X" Margin="0,0,1,0" Background="Red" Click="btnClose_Click" FontSize="18" Padding="1,0" HorizontalAlignment="Right" Width="68" Height="40" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

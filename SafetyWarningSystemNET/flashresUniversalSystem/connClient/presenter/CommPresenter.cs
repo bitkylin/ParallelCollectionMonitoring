@@ -155,7 +155,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                                 electrodeInspect.BadList.ForEach(id => { builder.Append(id + " "); });
                                 _view.CommunicateMessageShow(string.Format("电极检测完毕,坏电极个数为:{0},结果如下:",
                                     electrodeInspect.BadList.Count));
-                                _view.CommunicateMessageShow("好电极:" + electrodeInspect.NiceId + " 坏电极:" + builder);
+                                _view.CommunicateMessageShow("状态最佳电极:" + electrodeInspect.NiceId);// + " 坏电极:" + builder
                                 if (electrodeInspect.BadList.Count > 32)
                                 {
                                     _view.CommunicateMessageShow("电极检测完毕,坏电极较多，程序终止");
