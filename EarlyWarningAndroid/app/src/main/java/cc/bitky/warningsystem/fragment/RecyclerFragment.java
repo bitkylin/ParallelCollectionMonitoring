@@ -69,7 +69,7 @@ public class RecyclerFragment extends Fragment {
 
   private void reloadCloudSuperAreaList() {
     List<CloudSuperArea> cloudSuperAreas = new ArrayList<>();
-    cloudSuperAreas.add(new CloudSuperArea("青狮潭水库", "http://oqza83elq.bkt.clouddn.com/super9.jpg", true));
+    cloudSuperAreas.add(new CloudSuperArea("桂林电子科技大学", "http://oqza83elq.bkt.clouddn.com/super9.jpg", true));
     recyclerAdapter.reloadData(cloudSuperAreas);
   }
 
@@ -90,7 +90,7 @@ public class RecyclerFragment extends Fragment {
     recyclerAdapter.setOnClickListener(
         new KyBaseRecyclerAdapter.KyRecyclerViewItemOnClickListener<CloudSuperArea>() {
           @Override
-          public void Onclick(View v, int adapterPosition, CloudSuperArea data) {
+          public void onclick(View v, int adapterPosition, CloudSuperArea data) {
             Intent intent = new Intent(context, TrialActivity.class);
             intent.putExtra("areaName", data.getName());
             startActivity(intent);

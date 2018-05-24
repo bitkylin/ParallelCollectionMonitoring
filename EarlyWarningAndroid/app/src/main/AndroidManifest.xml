@@ -1,57 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="cc.bitky.warningsystem">
+    package="cc.bitky.warningsystem">
 
-  <!-- 允许联网 -->
-  <uses-permission android:name="android.permission.INTERNET" />
-  <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-  <!-- 获取sd卡写的权限，用于文件上传和下载 -->
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-  <!-- 允许读取手机状态 用于创建BmobInstallation -->
-  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-  <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-  <uses-permission android:name="android.permission.GET_TASKS" />
-  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-  <!-- 这个权限用于进行网络定位-->
-  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-  <!-- 这个权限用于访问GPS定位-->
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-  <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
-  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-  <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
-  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-  <!-- SD卡读取权限，用户写入离线定位数据-->
-  <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-  <application
-    android:name=".BitkyApplication"
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme">
-    <meta-data
-      android:name="com.baidu.lbsapi.API_KEY"
-      android:value="SlGWPGpWTRC6ij9pAKEntjHrvxxCl3DN" />
+    <!--获取设备网络状态，禁用后无法获取网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--网络权限，当禁用后，无法进行检索等相关业务-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--读取设备硬件信息，统计数据-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--读取系统信息，包含系统版本等信息，用作统计-->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <!--允许sd卡写权限，需写入地图数据，禁用后无法显示地图-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--获取统计数据-->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--鉴权所需该权限获取进程列表-->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!--使用步行AR导航，配置Camera权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <activity android:name=".category.CategoryActivity" />
-    <activity android:name=".MainActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-    <activity android:name=".trial.TrialActivity" />
-    <activity android:name=".controlview.NodeControlActivity" />
-    <activity android:name=".trial.control.DetailActivity" />
+    <!-- 这个权限用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- SD卡读取权限，用户写入离线定位数据-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <application
+        android:name=".BitkyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="你的 KEY" />
 
-    <service
-      android:name="com.baidu.location.f"
-      android:enabled="true"
-      android:process=":remote"/>
-  </application>
+        <activity android:name=".category.CategoryActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".trial.TrialActivity" />
+        <activity android:name=".controlview.NodeControlActivity" />
+        <activity android:name=".trial.control.DetailActivity" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+    </application>
 
 </manifest>

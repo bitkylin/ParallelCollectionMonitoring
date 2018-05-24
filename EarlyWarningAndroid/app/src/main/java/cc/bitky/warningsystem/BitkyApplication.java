@@ -9,7 +9,7 @@ import cn.bmob.v3.Bmob;
 
 public class BitkyApplication extends Application {
 
-  final String Bmob_application_ID = "d8600d6f5011f0bc2e9650d4d8e32711";
+  final String Bmob_application_ID = "你的 ID";
 
   @Override
   public void onCreate() {

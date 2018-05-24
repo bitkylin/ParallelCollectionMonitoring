@@ -57,7 +57,7 @@
       <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="广东省惠州市北湖公园附近"
+        android:text="桂林电子科技大学金鸡岭校区图书馆附近"
         android:textSize="10sp" />
     </LinearLayout>
   </LinearLayout>

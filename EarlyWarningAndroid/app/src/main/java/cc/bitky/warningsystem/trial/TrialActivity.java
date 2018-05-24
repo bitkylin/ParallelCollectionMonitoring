@@ -71,7 +71,7 @@ public class TrialActivity extends AppCompatActivity {
     recyclerAdapter.setOnClickListener(
         new KyBaseRecyclerAdapter.KyRecyclerViewItemOnClickListener<CloudSuperArea>() {
           @Override
-          public void Onclick(View v, int adapterPosition, CloudSuperArea data) {
+          public void onclick(View v, int adapterPosition, CloudSuperArea data) {
             Intent intent = new Intent(context, NodeControlActivity.class);
             intent.putExtra("areaName", data.getName());
             startActivity(intent);
