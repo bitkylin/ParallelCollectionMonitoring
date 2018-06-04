@@ -1,4 +1,6 @@
-﻿using bitkyFlashresUniversal.connClient.model.bean;
+﻿using bitkyFlashresUniversal.cloud;
+using bitkyFlashresUniversal.connClient.model.bean;
+using cn.bmob.api;
 
 namespace bitkyFlashresUniversal.connClient
 {
@@ -29,5 +31,11 @@ namespace bitkyFlashresUniversal.connClient
 
         //---------电极检测模式--------------
         public static double ElectricThreshold = 10;
+
+
+        //---------Bmob云服务--------------
+        public static string currentObjectId = null;
+        public static BmobWindows bmobWindows = CloudServiceHelper.BmobBuilder();
+
     }
 }

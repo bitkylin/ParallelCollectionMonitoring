@@ -30,7 +30,6 @@ namespace bitkyFlashresUniversal.view
     {
         private readonly ICommPresenter _commPresenter;
         private BitkyPoleControl[] _bitkyPoleControls;
-        bool isWorking = false;
 
         /// <summary>
         /// 当前已采集的次数
@@ -245,20 +244,20 @@ namespace bitkyFlashresUniversal.view
             GridPoleStatusShow.Children.Clear();
             var id = 0;
             for (var i = 0; i < 8; i++)
-            for (var j = 0; j < 8; j++)
-            {
-                var bitkyPoleControl = new BitkyPoleControl();
-                //在Grid中动态添加控件
-                GridPoleStatusShow.Children.Add(bitkyPoleControl);
-                //设定控件在Grid中的位置
-                Grid.SetRow(bitkyPoleControl, i);
-                Grid.SetColumn(bitkyPoleControl, j);
-                //将控件添加到集合中，方便下一步的使用
-                controls.Add(bitkyPoleControl);
-                //对控件使用自定义方法进行初始化
-                bitkyPoleControl.SetContent(id);
-                id++;
-            }
+                for (var j = 0; j < 8; j++)
+                {
+                    var bitkyPoleControl = new BitkyPoleControl();
+                    //在Grid中动态添加控件
+                    GridPoleStatusShow.Children.Add(bitkyPoleControl);
+                    //设定控件在Grid中的位置
+                    Grid.SetRow(bitkyPoleControl, i);
+                    Grid.SetColumn(bitkyPoleControl, j);
+                    //将控件添加到集合中，方便下一步的使用
+                    controls.Add(bitkyPoleControl);
+                    //对控件使用自定义方法进行初始化
+                    bitkyPoleControl.SetContent(id);
+                    id++;
+                }
             _bitkyPoleControls = controls.ToArray();
 
             //初始化已启用的电极，并将信息保存在presenter中
@@ -292,6 +291,7 @@ namespace bitkyFlashresUniversal.view
             _commPresenter.CheckTable();
             //初始化已启用的电极，并将信息保存在presenter中
             _commPresenter.EnabledPoleList = electrodes;
+            PresetInfo.currentObjectId = null;
         }
 
         public void DataOutlineShow(int v, int sumNun)
@@ -359,8 +359,42 @@ namespace bitkyFlashresUniversal.view
 
         private void btnHandshake_Click(object sender, RoutedEventArgs e)
         {
-            _commPresenter.DeviceGatherStart(OperateType.Gather);
-            labelCollectStatus.Content = "正在进行数据采集";
+            if (PresetInfo.currentObjectId != null)
+            {
+                _commPresenter.DeviceGatherStart(OperateType.Gather);
+                labelCollectStatus.Content = "正在进行数据采集";
+                return;
+            }
+
+            CloudAreaItem item = new CloudAreaItem()
+            {
+                time = DateTime.Now,
+                status = true,
+                processStatus = 1,
+                processBar = 0,
+                photoUri = "http://img.bitlight.cc/printPhoto1.jpg",
+                name = "测点「1」",
+                enabled = true,
+                detail = "未发现任何异常",
+                coordinate = "110.343317,25.28906",
+            };
+
+            PresetInfo.bmobWindows.Create("CloudAreaItem", item, (result, ex) =>
+            {
+                if (ex == null)
+                {
+                    PresetInfo.currentObjectId = result.objectId;
+                    Dispatcher.Invoke(() =>
+                    {
+                        _commPresenter.DeviceGatherStart(OperateType.Gather);
+                        labelCollectStatus.Content = "正在进行数据采集";
+                    });
+                }
+                else
+                {
+                    CloudDisconnected();
+                }
+            });
         }
 
 
@@ -484,7 +518,7 @@ namespace bitkyFlashresUniversal.view
         private void checkBox_Clicked(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("change");
-            PresetInfo.StartAutoCollect = CheckBoxStartAutoCollect.IsChecked != false;
+            PresetInfo.StartAutoCollect = CheckBoxStartAutoCollect.IsChecked.GetValueOrDefault(false);
         }
 
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)
@@ -526,61 +560,109 @@ namespace bitkyFlashresUniversal.view
         /// <param name="e"></param>
         private void BtnCloudBmob_Click(object sender, RoutedEventArgs e)
         {
-            //            BmobWindows bmobWindows = CloudServiceHelper.BmobBuilder();
-            //            if (mDataTimer == null)
-            //            {
-            //                mDataTimer = new DispatcherTimer();
-            //                mDataTimer.Tick += new EventHandler(DataTimer_Tick);
-            //                mDataTimer.Interval = TimeSpan.FromSeconds(5);
-            //            }
-            Thread.Sleep(1500);
+            if (BtnCloudBmob.Content.Equals("云服务已开启"))
+            {
+                CloudDisconnected();
+                return;
+            }
+            PresetInfo.bmobWindows.Update("CloudDevice", "L3fM2226", new CloudDevice() { enabled = true }, (result2, exUpdate) => { });
+            CheckBoxStartAutoCollect.IsChecked = true;
+            PresetInfo.StartAutoCollect = true;
+            mDataTimer = new DispatcherTimer();
+            mDataTimer.Tick += new EventHandler(DataTimer_Tick);
+            mDataTimer.Interval = TimeSpan.FromSeconds(5);
+            mDataTimer.Start();
             labelCloudStatus.Content = "已建立连接";
-            //   mDataTimer.Start();
             BtnCloudBmob.Content = "云服务已开启";
         }
 
         private void DataTimer_Tick(object sender, EventArgs e)
         {
             Console.WriteLine("定时器");
-            BmobWindows bmobWindows = CloudServiceHelper.BmobBuilder();
+            if (PresetInfo.currentObjectId == null) { return; }
+            PresetInfo.bmobWindows.Get<CloudAreaItem>("CloudAreaItem", PresetInfo.currentObjectId, (result, ex) =>
+             {
+                 if (ex == null)
+                 {
+                     CloudAreaItem item = new CloudAreaItem() { };
+                     int statusCode = result.processStatus.Get();
+                     int value = 0;
+                     string statusShow = "";
+                     if (statusCode == 1)
+                     {
+                         if (currentCollectSumNum > 0)
+                             value = currentCollectNum * 100 / currentCollectSumNum;
+                         item.processBar = value;
+                         if (value == 100)
+                         {
+                             statusCode = 2;
+                             value = 0;
+                         }
+                     }
+                     else if (statusCode == 2)
+                     {
+                         value = result.processBar.Get() + new Random().Next(8, 15);
+                         if (value >= 100) { statusCode = 3; value = 0; }
+                     }
+                     else
+                     {
+                         PresetInfo.currentObjectId = null;
+                         return;
+                     }
 
-            bmobWindows.Get<CloudControl>("CloudControl", "W2obDDDL", (result, ex) =>
+                     item.processStatus = statusCode;
+                     item.processBar = value;
+                     switch (statusCode)
+                     {
+                         case 1: statusShow = "正在数据采集「" + value + "%」"; break;
+                         case 2: statusShow = "正在数据处理「" + value + "%」"; break;
+                         default: statusShow = "任务执行完毕"; break;
+                     }
+
+                     Dispatcher.Invoke(() => { labelCollectStatus.Content = statusShow; });
+                     PresetInfo.bmobWindows.Update("CloudDevice", "L3fM2226", new CloudDevice() { status = statusCode * 100 + value }, (result2, exUpdate) => { });
+                     PresetInfo.bmobWindows.Update("CloudAreaItem", PresetInfo.currentObjectId, item, (result2, exUpdate) =>
+                     {
+                         if (exUpdate == null)
+                         {
+                             if (statusCode == 3)
+                             {
+                                 PresetInfo.currentObjectId = null;
+                             }
+                         }
+                         else
+                         {
+                             CloudDisconnected();
+                         }
+                     });
+                 }
+                 else
+                 {
+                     CloudDisconnected();
+                     PresetInfo.currentObjectId = null;
+                 }
+             });
+        }
+
+        private void CloudDisconnected()
+        {
+            PresetInfo.bmobWindows.Update("CloudDevice", "L3fM2226", new CloudDevice() { enabled = false }, (result2, exUpdate) => { });
+            if (mDataTimer != null)
             {
-                if (ex == null)
-                {
-                    if (result.deployCollectOpened.Get())
-                    {
-                        PresetInfo.StartAutoCollect = true;
-                        if (!isWorking)
-                        {
-                            isWorking = true;
-                            _commPresenter.DeviceGatherStart(OperateType.Gather);
-                        }
-                        CloudControl cloudControl = new CloudControl();
-                        cloudControl.objectId = "W2obDDDL";
-                        cloudControl.cloudCollectOpened = true;
-
-                        if (currentCollectNum == 0)
-                        {
-                            cloudControl.cloudCollectProgress = 0;
-                        }
-                        else
-                        {
-                            int value = currentCollectNum * 100 / currentCollectSumNum;
-                            cloudControl.cloudCollectProgress = value;
-                            Console.WriteLine("当前进度：" + value);
-                        }
-                        bmobWindows.UpdateTaskAsync(cloudControl);
-                        Console.WriteLine("数据发送完毕");
-                    }
-                    else
-                    {
-                        PresetInfo.StartAutoCollect = false;
-                        isWorking = false;
-                    }
-                }
+                mDataTimer.Stop();
+                mDataTimer = null;
+            }
+            Dispatcher.Invoke(() =>
+            {
+                CheckBoxStartAutoCollect.IsChecked = false;
+                PresetInfo.StartAutoCollect = false;
+                labelCloudStatus.Content = "未建立连接";
+                labelCollectStatus.Content = "数据采集已停止";
+                BtnCloudBmob.Content = "云服务已关闭";
+                CommunicateMessageShow("云服务器已断开连接");
             });
         }
+
 
         private void BtnCloudReadDevice_Click(object sender, RoutedEventArgs e)
         {

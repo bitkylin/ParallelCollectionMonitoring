@@ -122,7 +122,7 @@ namespace bitkyFlashresUniversal.connClient.presenter
                     {
                         case FrameType.None:
                             _view.CommunicateMessageShow("数据库检索已完成");
-                            MessageBox.Show("数据采集已完成！", "提示");
+                       //     MessageBox.Show("数据采集已完成！", "提示");
                             break;
                         case FrameType.ControlGather:
                             _timerSendDelay.Interval = PresetInfo.FrameSendDelay;

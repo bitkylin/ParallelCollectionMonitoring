@@ -15,7 +15,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
         private Socket _socketTcp;
 
 
-        public BitkyTcpClient(ICommucationFacade commucationFacade) 
+        public BitkyTcpClient(ICommucationFacade commucationFacade)
         {
             _commucationFacade = commucationFacade;
         }
@@ -35,7 +35,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
             }
         }
 
-        public  void Send(byte[] bytes)
+        public void Send(byte[] bytes)
         {
             try
             {
@@ -69,6 +69,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
                 int bufLen;
                 try
                 {
+                    if (_socketTcp == null) return;
                     bufLen = _socketTcp.Available;
                     if (bufLen == 0)
                         continue;
@@ -108,7 +109,7 @@ namespace bitkyFlashresUniversal.connClient.model.commtUtil.ConnClient
             new Thread(ReceiveData).Start(); //新建接收数据线程
         }
 
-        public  void Close()
+        public void Close()
         {
             _socketTcp?.Close();
             _client?.Close();
