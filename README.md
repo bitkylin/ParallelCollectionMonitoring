@@ -1,4 +1,4 @@
-# 堤坝渗透地质数据采集及云端监控系统
+# 数据采集及云端监控系统
 
 [![GitHub stars](https://img.shields.io/github/stars/bitkylin/InteractionByFrames.svg)](https://github.com/bitkylin/InteractionByFrames/stargazers)
 ![技术](https://img.shields.io/badge/%E6%8A%80%E6%9C%AF-Bmob%7C%E4%B8%83%E7%89%9B%7CAndroid%7CWPF-brightgreen.svg)
@@ -13,11 +13,11 @@ Android 应用实时控制各设备的工作，该系统可通过 Android 应用
 
 - 第十五届“挑战杯”全国大学生课外学术科技作品竞赛华南赛区一等奖
 
-**参赛并获奖的作品视频展示已上传至优酷，请点击观看：**
+**参赛并获奖的作品视频展示已上传至B站，请点击观看：**
 
-[![中国研究生电子设计竞赛 - 华南赛区一等奖](./mdphoto/1.jpg)](http://v.youku.com/v_show/id_XMjkwMjg2ODcxNg==.html)
+[![中国研究生电子设计竞赛 - 华南赛区一等奖](./mdphoto/1.jpg)](https://www.bilibili.com/video/BV1Ay4y1b7aw/)
 
-[中国研究生电子设计竞赛 - 华南赛区一等奖 - 堤坝渗透安全监测系统](http://v.youku.com/v_show/id_XMjkwMjg2ODcxNg==.html)
+[中国研究生电子设计竞赛 - 华南赛区一等奖 - 数据采集及云端监控系统](https://www.bilibili.com/video/BV1Ay4y1b7aw/)
 
 ## 系统整体设计
 
