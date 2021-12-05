@@ -91,7 +91,7 @@ Android 应用实时控制各设备的工作，该系统可通过 Android 应用
 
 ### 1. 我的主页
 
-名称|二级域名|原始地址
+名称|域名|原始地址
 ---|---|---
 主页|http://bitky.cc|https://bitkylin.github.io
 GitHub|http://github.bitky.cc|https://github.com/bitkylin
